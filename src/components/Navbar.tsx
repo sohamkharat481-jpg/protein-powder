@@ -1,154 +1,197 @@
 import React, { useState, useEffect } from 'react';
-import { ShoppingBag, Menu, X, ShieldCheck, Zap } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Menu, X, Zap, Phone, ChevronRight } from 'lucide-react';
 import { BRAND_CONFIG } from '../data/productData';
 
 interface NavbarProps {
-  cartCount: number;
-  onOpenCart: () => void;
-  onBuyNow: () => void;
+  onOrderNow: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ cartCount, onOpenCart, onBuyNow }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
+const NAV_LINKS = [
+  { label: 'Home', href: '#hero' },
+  { label: 'Product', href: '#product' },
+  { label: 'Benefits', href: '#benefits' },
+  { label: 'Why CoreFuel', href: '#why-corefuel' },
+  { label: 'FAQ', href: '#faq' },
+  { label: 'Contact', href: '#contact' },
+];
+
+export const Navbar: React.FC<NavbarProps> = ({ onOrderNow }) => {
+  const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('hero');
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 40);
+      setScrolled(window.scrollY > 30);
+
+      // Determine active section based on scroll position
+      const sections = ['hero', 'product', 'benefits', 'why-corefuel', 'faq', 'contact'];
+      for (const sectionId of sections.slice().reverse()) {
+        const el = document.getElementById(sectionId);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 200) {
+            setActiveSection(sectionId);
+            break;
+          }
+        }
+      }
     };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { label: 'Shop', href: '#hero' },
-    { label: 'Benefits', href: '#benefits' },
-    { label: 'Formula', href: '#formula' },
-    { label: 'Showcase', href: '#showcase' },
-    { label: 'How To Use', href: '#how-to-use' },
-    { label: 'Flavors', href: '#flavors' },
-    { label: 'Reviews', href: '#reviews' },
-    { label: 'FAQ', href: '#faq' },
-  ];
+  const handleNavClick = (href: string) => {
+    setMobileMenuOpen(false);
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <>
-      {/* Top Banner */}
-      <div className="bg-[#111216] border-b border-white/5 py-2 px-4 text-center text-xs font-mono-code text-zinc-400 tracking-wider flex items-center justify-center gap-2">
-        <span className="w-1.5 h-1.5 rounded-full bg-[#ccff00] animate-pulse"></span>
-        <span>FREE EXPRESS AIR SHIPPING ACROSS INDIA ON ORDERS OVER ₹{BRAND_CONFIG.shippingThreshold.toLocaleString('en-IN')}</span>
-        <span className="hidden sm:inline text-zinc-600">•</span>
-        <span className="hidden sm:inline text-zinc-400">FSSAI CERTIFIED • 100% VEG • COD AVAILABLE</span>
-      </div>
-
       <header
-        className={`sticky top-0 z-40 transition-all duration-300 ${
-          isScrolled
-            ? 'bg-[#080809]/95 backdrop-blur-md border-b border-white/10 shadow-2xl shadow-black/80 py-3.5'
-            : 'bg-transparent py-5'
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+          scrolled
+            ? 'py-3 bg-[#07080a]/85 backdrop-blur-xl border-b border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.8)]'
+            : 'py-5 bg-transparent border-b border-transparent'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Brand Logo */}
+          
+          {/* LEFT: CoreFuel Logo */}
           <a
             href="#hero"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavClick('#hero');
+            }}
             className="flex items-center gap-2.5 group cursor-pointer"
-            id="brand-logo-link"
           >
-            <div className="w-9 h-9 bg-black border border-[#ccff00]/40 rounded flex items-center justify-center font-display text-xl font-extrabold text-[#ccff00] tracking-tighter group-hover:border-[#ccff00] group-hover:shadow-[0_0_15px_rgba(204,255,0,0.3)] transition-all">
-              A
+            <div className="w-9 h-9 bg-black border border-[#00d2ff]/60 rounded-lg flex items-center justify-center font-display text-xl font-black text-[#00d2ff] tracking-tighter group-hover:border-[#00d2ff] group-hover:shadow-[0_0_15px_rgba(0,210,255,0.4)] transition-all">
+              CF
             </div>
             <div className="flex flex-col">
-              <span className="font-display text-2xl font-black tracking-tight text-white group-hover:text-zinc-200 leading-none">
-                {BRAND_CONFIG.brandLogoText}
+              <span className="font-display text-2xl font-black tracking-tight text-white leading-none">
+                CORE<span className="text-[#00d2ff]">FUEL</span>
               </span>
-              <span className="text-[9px] font-mono-code text-zinc-400 tracking-widest uppercase">
-                {BRAND_CONFIG.brandLogoSubtitle}
+              <span className="text-[10px] font-mono-code text-zinc-400 tracking-widest leading-none mt-0.5">
+                NUTRITION
               </span>
             </div>
           </a>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-7">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="text-sm font-medium tracking-wide text-zinc-300 hover:text-[#ccff00] transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-[#ccff00] hover:after:w-full after:transition-all"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
+          {/* CENTER: Desktop Navigation Links */}
+          <nav className="hidden md:flex items-center gap-1 lg:gap-2 p-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
+            {NAV_LINKS.map((link) => {
+              const sectionId = link.href.replace('#', '');
+              const isActive = activeSection === sectionId;
 
-          {/* Actions: Buy Now + Cart */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={onOpenCart}
-              className="relative p-2.5 rounded-lg border border-white/10 bg-[#121316] hover:border-[#ccff00]/40 hover:bg-[#18191f] transition-all text-white cursor-pointer"
-              aria-label="View Cart"
-              id="navbar-cart-button"
-            >
-              <ShoppingBag className="w-5 h-5 text-zinc-200" />
-              {cartCount > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 bg-[#ccff00] text-black text-[11px] font-mono-code font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-lg">
-                  {cartCount}
-                </span>
-              )}
-            </button>
-
-            <button
-              onClick={onBuyNow}
-              className="hidden sm:inline-flex items-center justify-center gap-2 bg-[#ccff00] hover:bg-[#d9ff33] text-black font-display text-lg font-bold px-5 py-2 rounded tracking-wide transition-all duration-200 active:scale-95 shadow-[0_0_20px_rgba(204,255,0,0.25)] hover:shadow-[0_0_25px_rgba(204,255,0,0.4)] cursor-pointer"
-              id="navbar-buy-button"
-            >
-              <Zap className="w-4 h-4 fill-black" />
-              <span>BUY NOW</span>
-              <span className="text-black/60 font-mono-code text-xs ml-1">• {BRAND_CONFIG.formattedPrice}</span>
-            </button>
-
-            {/* Mobile menu trigger */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2.5 rounded-lg border border-white/10 bg-[#121316] text-white hover:border-zinc-500 cursor-pointer"
-              aria-label="Toggle navigation"
-              id="mobile-nav-toggle"
-            >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile dropdown menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden bg-[#0e0f12] border-b border-white/10 px-6 py-5 mt-3 space-y-4">
-            <div className="grid grid-cols-2 gap-2">
-              {navLinks.map((link) => (
+              return (
                 <a
                   key={link.label}
                   href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="px-3 py-2.5 text-sm font-medium text-zinc-300 hover:text-[#ccff00] bg-zinc-900/60 rounded border border-white/5"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(link.href);
+                  }}
+                  className={`px-4 py-1.5 rounded-full text-xs font-mono-code font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+                    isActive
+                      ? 'bg-[#00d2ff] text-black shadow-[0_0_15px_rgba(0,210,255,0.4)]'
+                      : 'text-zinc-300 hover:text-white hover:bg-white/10'
+                  }`}
                 >
                   {link.label}
                 </a>
-              ))}
+              );
+            })}
+          </nav>
+
+          {/* RIGHT: ORDER NOW Button & Mobile Menu Toggle */}
+          <div className="flex items-center gap-3">
+            {/* Direct ORDER NOW CTA */}
+            <button
+              onClick={onOrderNow}
+              id="navbar-order-now-btn"
+              className="relative group bg-[#00d2ff] hover:bg-[#33dbff] text-black font-display text-base sm:text-lg font-black tracking-wide py-2 px-4 sm:px-6 rounded-xl transition-all duration-200 shadow-[0_0_20px_rgba(0,210,255,0.35)] hover:shadow-[0_0_25px_rgba(0,210,255,0.55)] cursor-pointer flex items-center gap-2 active:scale-95"
+            >
+              <Zap className="w-4 h-4 fill-black" />
+              <span>ORDER NOW</span>
+            </button>
+
+            {/* Mobile Hamburger Toggle */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 cursor-pointer transition-colors"
+              aria-label="Toggle navigation menu"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+
+        </div>
+      </header>
+
+      {/* Mobile Animated Slide-down Menu */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed top-[65px] left-0 right-0 z-30 bg-[#090b10]/95 backdrop-blur-2xl border-b border-white/10 md:hidden overflow-hidden shadow-2xl px-4 py-6"
+          >
+            <div className="space-y-3 mb-6">
+              {NAV_LINKS.map((link) => {
+                const sectionId = link.href.replace('#', '');
+                const isActive = activeSection === sectionId;
+
+                return (
+                  <button
+                    key={link.label}
+                    onClick={() => handleNavClick(link.href)}
+                    className={`w-full text-left py-3 px-4 rounded-xl font-display text-xl font-bold uppercase tracking-wider transition-all flex items-center justify-between cursor-pointer ${
+                      isActive
+                        ? 'bg-[#00d2ff]/15 text-[#00d2ff] border border-[#00d2ff]/40'
+                        : 'text-zinc-300 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    <span>{link.label}</span>
+                    <ChevronRight className="w-4 h-4 opacity-50" />
+                  </button>
+                );
+              })}
             </div>
-            <div className="pt-2 border-t border-white/10 flex flex-col gap-3">
+
+            {/* Mobile Call CTA */}
+            <div className="pt-4 border-t border-white/10 flex flex-col gap-3">
+              <a
+                href={`tel:${BRAND_CONFIG.ownerPhoneRaw}`}
+                className="w-full py-3 px-4 rounded-xl bg-white/5 border border-white/10 text-white font-mono-code text-xs font-bold flex items-center justify-center gap-2"
+              >
+                <Phone className="w-4 h-4 text-[#00d2ff]" />
+                <span>Call Owner: {BRAND_CONFIG.ownerPhoneDisplay}</span>
+              </a>
+
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  onBuyNow();
+                  onOrderNow();
                 }}
-                className="w-full bg-[#ccff00] text-black font-display text-xl font-bold py-3 rounded flex items-center justify-center gap-2"
+                className="w-full bg-[#00d2ff] text-black font-display text-xl font-black py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,210,255,0.4)] cursor-pointer"
               >
                 <Zap className="w-4 h-4 fill-black" />
-                BUY NOW • {BRAND_CONFIG.formattedPrice}
+                <span>ORDER NOW — {BRAND_CONFIG.priceDisplay}</span>
               </button>
             </div>
-          </div>
+          </motion.div>
         )}
-      </header>
+      </AnimatePresence>
     </>
   );
 };

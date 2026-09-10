@@ -1,6 +1,6 @@
 {
-  "name": "APEX // High-Performance Pre-Workout",
-  "description": "A premium, cinematic single-product e-commerce experience for an elite pre-workout supplement designed for athletes and gym-goers.",
+  "name": "CoreFuel Nutrition",
+  "description": "CoreFuel Nutrition – Micronized Creatine Monohydrate (Orange & Flavorless, 100 Servings). Built for your daily training. Direct order available.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
