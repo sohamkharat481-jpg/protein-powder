@@ -1,0 +1,7 @@
+{
+  "name": "APEX // High-Performance Pre-Workout",
+  "description": "A premium, cinematic single-product e-commerce experience for an elite pre-workout supplement designed for athletes and gym-goers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
