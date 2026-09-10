@@ -133,11 +133,19 @@ export const DirectOrderModal: React.FC<DirectOrderModalProps> = ({
             </div>
           </div>
 
-          {/* Pricing Highlight */}
-          <div className="p-4 rounded-2xl bg-gradient-to-r from-[#11141c] to-[#0c0e15] border border-white/10 mb-6 flex items-center justify-between">
-            <div>
+          {/* Pricing & Product Preview Highlight */}
+          <div className="p-4 rounded-2xl bg-gradient-to-r from-[#11141c] to-[#0c0e15] border border-white/10 mb-6 flex items-center gap-4">
+            <div className="w-16 h-16 rounded-xl overflow-hidden bg-black/60 border border-white/10 shrink-0 p-1">
+              <img
+                src={currentVariant.image}
+                alt={currentVariant.name}
+                referrerPolicy="no-referrer"
+                className="w-full h-full object-cover rounded-lg"
+              />
+            </div>
+            <div className="flex-1">
               <span className="text-xs font-mono-code text-zinc-400 block uppercase tracking-wider">
-                Price for {currentVariant.name}
+                {currentVariant.name} Variant
               </span>
               <span className="font-display text-3xl font-black text-white">
                 {BRAND_CONFIG.priceDisplay}
@@ -148,7 +156,7 @@ export const DirectOrderModal: React.FC<DirectOrderModalProps> = ({
                 {BRAND_CONFIG.shippingNote}
               </span>
               <span className="text-[10px] font-mono-code text-zinc-500 mt-1 block">
-                100 Full Servings (Micronized)
+                100 Full Servings
               </span>
             </div>
           </div>

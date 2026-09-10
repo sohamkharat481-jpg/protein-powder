@@ -1,13 +1,22 @@
 import { Benefit, FaqItem, FlavorVariant, UsageStep } from '../types';
 
+// Direct ES Module imports for guaranteed production bundling in Vite & Vercel
+import orangeTubImg from '../assets/images/corefuel_creatine_tub_1789060180499.jpg';
+import flavorlessTubImg from '../assets/images/corefuel_flavorless_tub_1789060523404.jpg';
+import heroBannerDuoImg from '../assets/images/corefuel_hero_banner_1789060898239.jpg';
+import duoShowcaseImg from '../assets/images/corefuel_duo_showcase_1789060920236.jpg';
+import cinematicGymDuoImg from '../assets/images/corefuel_cinematic_gym_1789060942971.jpg';
+import gymAthleteImg from '../assets/images/corefuel_gym_athlete_1789060195318.jpg';
+import orangeScoopImg from '../assets/images/corefuel_orange_scoop_1789060208528.jpg';
+
 export const PRODUCT_IMAGES = {
-  orangeTub: '/src/assets/images/corefuel_creatine_tub_1789060180499.jpg',
-  flavorlessTub: '/src/assets/images/corefuel_flavorless_tub_1789060523404.jpg',
-  heroBannerDuo: '/src/assets/images/corefuel_hero_banner_1789060898239.jpg',
-  duoShowcase: '/src/assets/images/corefuel_duo_showcase_1789060920236.jpg',
-  cinematicGymDuo: '/src/assets/images/corefuel_cinematic_gym_1789060942971.jpg',
-  gymAthlete: '/src/assets/images/corefuel_gym_athlete_1789060195318.jpg',
-  orangeScoop: '/src/assets/images/corefuel_orange_scoop_1789060208528.jpg',
+  orangeTub: orangeTubImg || '/images/corefuel_creatine_tub_1789060180499.jpg',
+  flavorlessTub: flavorlessTubImg || '/images/corefuel_flavorless_tub_1789060523404.jpg',
+  heroBannerDuo: heroBannerDuoImg || '/images/corefuel_hero_banner_1789060898239.jpg',
+  duoShowcase: duoShowcaseImg || '/images/corefuel_duo_showcase_1789060920236.jpg',
+  cinematicGymDuo: cinematicGymDuoImg || '/images/corefuel_cinematic_gym_1789060942971.jpg',
+  gymAthlete: gymAthleteImg || '/images/corefuel_gym_athlete_1789060195318.jpg',
+  orangeScoop: orangeScoopImg || '/images/corefuel_orange_scoop_1789060208528.jpg',
 };
 
 export const BRAND_CONFIG = {
