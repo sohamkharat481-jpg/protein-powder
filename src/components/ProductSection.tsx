@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { Sparkles, Check, Zap, Flame, Droplets, ArrowRight } from 'lucide-react';
 import { BRAND_CONFIG, FLAVOR_VARIANTS, PRODUCT_INFO_GRID } from '../data/productData';
 import { FlavorId } from '../types';
+import { BrandLogo } from './BrandLogo';
 
 interface ProductSectionProps {
   selectedFlavorId: FlavorId;
@@ -46,14 +47,14 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
         
         {/* Section Headline */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#00d2ff]/10 border border-[#00d2ff]/30 text-[#00d2ff] text-xs font-mono-code font-bold uppercase tracking-widest mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#00d2ff]/10 border border-[#00d2ff]/30 text-[#00d2ff] text-xs font-label-pkg uppercase tracking-widest mb-4">
             <Sparkles className="w-3.5 h-3.5" />
             PURE PERFORMANCE SPECIFICATION
           </div>
-          <h2 className="font-display text-4xl sm:text-6xl lg:text-7xl font-black uppercase text-white tracking-tight leading-none mb-4">
+          <h2 className="font-creatine text-4xl sm:text-6xl lg:text-7xl text-white leading-none mb-4">
             YOUR DAILY CREATINE. <span className="text-[#00d2ff]">SIMPLIFIED.</span>
           </h2>
-          <p className="text-zinc-400 text-base sm:text-lg">
+          <p className="font-body text-zinc-400 text-base sm:text-lg leading-relaxed">
             A transparent, uncompromised formula engineered for lifters and athletes. No fillers, no exaggerated hype. Just 100 pure servings built for your daily training.
           </p>
         </div>
@@ -74,13 +75,14 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
                 className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700"
               />
 
-              <div className="absolute top-6 left-6 bg-black/80 backdrop-blur-md border border-white/10 px-3.5 py-1 rounded-full text-xs font-mono-code">
-                <span className={isOrange ? 'text-amber-400 font-bold' : 'text-[#00d2ff] font-bold'}>
+              <div className="absolute top-6 left-6 bg-black/80 backdrop-blur-md border border-white/10 px-3.5 py-1.5 rounded-full text-xs font-label-pkg flex items-center gap-2">
+                <BrandLogo variant="symbol" size="xs" />
+                <span className={isOrange ? 'text-amber-400 font-semibold' : 'text-[#00d2ff] font-semibold'}>
                   {currentVariant.name.toUpperCase()} VARIANT
                 </span>
               </div>
 
-              <div className="absolute bottom-6 right-6 bg-black/80 backdrop-blur-md border border-white/10 px-3.5 py-1 rounded-full text-xs font-mono-code text-white">
+              <div className="absolute bottom-6 right-6 bg-black/80 backdrop-blur-md border border-white/10 px-3.5 py-1 rounded-full text-xs font-label-pkg text-white tracking-wider">
                 100 SERVINGS • 200-MESH
               </div>
             </motion.div>
@@ -89,18 +91,21 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
           {/* RIGHT: Detailed Authentic Specifications */}
           <div className="lg:col-span-6 space-y-6">
             <div>
-              <span className="text-xs font-mono-code text-[#00d2ff] font-bold uppercase tracking-widest block mb-1">
-                COREFUEL NUTRITION
-              </span>
-              <h3 className="font-display text-4xl sm:text-5xl font-black uppercase text-white tracking-tight leading-none mb-2">
-                CREATINE MONOHYDRATE
+              <BrandLogo variant="full" size="sm" showSubtitle className="mb-3" />
+              <h3 className="flex flex-col mb-2">
+                <span className="font-creatine text-4xl sm:text-6xl text-white leading-[0.9]">
+                  CREATINE
+                </span>
+                <span className="font-monohydrate text-xl sm:text-2xl text-zinc-300 tracking-[0.22em] mt-1">
+                  MONOHYDRATE
+                </span>
               </h3>
-              <div className="text-base font-mono-code font-bold text-zinc-400 uppercase tracking-wide">
+              <div className="text-xs font-micronized text-zinc-400 tracking-[0.2em] uppercase font-semibold">
                 MICRONIZED • 100 SERVINGS • {BRAND_CONFIG.priceDisplay} ({BRAND_CONFIG.shippingNote})
               </div>
             </div>
 
-            <p className="text-zinc-300 text-base leading-relaxed">
+            <p className="font-body text-zinc-300 text-base leading-relaxed">
               CoreFuel Creatine Monohydrate is micronized to an ultra-fine 200-mesh powder for rapid dispersion in liquid. Designed specifically to replenish cellular ATP stores during high-intensity training.
             </p>
 
@@ -111,8 +116,8 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
                   <Check className="w-3.5 h-3.5 text-[#00d2ff]" />
                 </div>
                 <div>
-                  <span className="text-sm font-bold text-white block">100 Full Servings per Container</span>
-                  <span className="text-xs text-zinc-400">Generous pack size giving you over 3 months of consistent daily supplementation.</span>
+                  <span className="text-base font-athletic text-white tracking-wide block">100 Full Servings per Container</span>
+                  <span className="text-xs font-body text-zinc-400">Generous pack size giving you over 3 months of consistent daily supplementation.</span>
                 </div>
               </div>
 
@@ -121,8 +126,8 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
                   <Flame className="w-3.5 h-3.5 text-[#ff7700]" />
                 </div>
                 <div>
-                  <span className="text-sm font-bold text-white block">900 mg L-Taurine on Orange Packaging</span>
-                  <span className="text-xs text-zinc-400">The Orange variant includes 900 mg L-Taurine as shown directly on the product label claim.</span>
+                  <span className="text-base font-athletic text-white tracking-wide block">900 mg L-Taurine on Orange Packaging</span>
+                  <span className="text-xs font-body text-zinc-400">The Orange variant includes 900 mg L-Taurine as shown directly on the product label claim.</span>
                 </div>
               </div>
 
@@ -131,8 +136,8 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
                   <Droplets className="w-3.5 h-3.5 text-white" />
                 </div>
                 <div>
-                  <span className="text-sm font-bold text-white block">Two Distinct Flavors: Orange & Flavorless</span>
-                  <span className="text-xs text-zinc-400">Choose between refreshing citrus orange or 100% pure neutral powder for mixing into whey.</span>
+                  <span className="text-base font-athletic text-white tracking-wide block">Two Distinct Flavors: Orange & Flavorless</span>
+                  <span className="text-xs font-body text-zinc-400">Choose between refreshing citrus orange or 100% pure neutral powder for mixing into whey.</span>
                 </div>
               </div>
             </div>
@@ -141,7 +146,7 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
             <div className="pt-3">
               <button
                 onClick={() => onOrderNow(selectedFlavorId)}
-                className="inline-flex items-center gap-2 bg-[#00d2ff] hover:bg-[#33dbff] text-black font-display text-xl font-bold py-3.5 px-7 rounded-xl transition-all shadow-[0_0_20px_rgba(0,210,255,0.35)] cursor-pointer active:scale-95"
+                className="inline-flex items-center gap-2.5 bg-[#00d2ff] hover:bg-[#33dbff] text-black font-athletic text-xl tracking-wider py-3.5 px-7 rounded-xl transition-all shadow-[0_0_20px_rgba(0,210,255,0.35)] cursor-pointer active:scale-95"
               >
                 <Zap className="w-5 h-5 fill-black" />
                 <span>ORDER {currentVariant.name.toUpperCase()} NOW — {BRAND_CONFIG.priceDisplay}</span>
@@ -169,18 +174,18 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
               className="p-6 sm:p-7 rounded-2xl bg-[#0c0e14] border border-white/10 hover:border-[#00d2ff]/40 transition-all group flex flex-col justify-between"
             >
               <div>
-                <div className="font-display text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-none tracking-tight group-hover:text-[#00d2ff] transition-colors mb-1">
+                <div className="font-creatine text-3xl sm:text-4xl lg:text-5xl text-white leading-none tracking-tight group-hover:text-[#00d2ff] transition-colors mb-1">
                   {item.kicker}
                 </div>
-                <div className="font-display text-xl sm:text-2xl font-bold text-zinc-300 uppercase tracking-wide mb-3">
+                <div className="font-athletic text-xl sm:text-2xl text-zinc-200 tracking-wider mb-3">
                   {item.label}
                 </div>
-                <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+                <p className="font-body text-zinc-400 text-xs sm:text-sm leading-relaxed">
                   {item.subtext}
                 </p>
               </div>
 
-              <div className="pt-4 mt-4 border-t border-white/5 text-[10px] font-mono-code text-zinc-500 uppercase">
+              <div className="pt-4 mt-4 border-t border-white/5 text-[10px] font-label-pkg text-zinc-500 tracking-widest">
                 COREFUEL SPECIFICATION
               </div>
             </motion.div>

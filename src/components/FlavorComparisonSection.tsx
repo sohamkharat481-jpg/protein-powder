@@ -21,16 +21,16 @@ export const FlavorComparisonSection: React.FC<FlavorComparisonSectionProps> = (
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-mono-code font-bold text-[#00d2ff] tracking-widest uppercase block mb-3">
+          <span className="text-xs font-label-pkg text-[#00d2ff] tracking-widest uppercase block mb-3">
             CHOOSE YOUR EXPERIENCE
           </span>
-          <h2 className="font-display text-4xl sm:text-6xl lg:text-7xl font-black uppercase text-white tracking-tight leading-none mb-4">
+          <h2 className="font-creatine text-4xl sm:text-6xl lg:text-7xl text-white leading-none mb-4">
             ONE FORMULA.<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff7700] via-white to-[#00d2ff]">
               TWO WAYS TO TAKE IT.
             </span>
           </h2>
-          <p className="text-zinc-400 text-base sm:text-lg">
+          <p className="font-body text-zinc-400 text-base sm:text-lg leading-relaxed">
             Both powered by pure micronized creatine monohydrate with 100 full servings. Same performance, two versatile experiences.
           </p>
         </div>
@@ -49,11 +49,11 @@ export const FlavorComparisonSection: React.FC<FlavorComparisonSectionProps> = (
             <div>
               {/* Variant Badge & Icon */}
               <div className="flex items-center justify-between mb-6">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ff7700]/15 border border-[#ff7700]/40 text-amber-400 text-xs font-mono-code font-bold uppercase">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ff7700]/15 border border-[#ff7700]/40 text-amber-400 text-xs font-label-pkg">
                   <Flame className="w-3.5 h-3.5 text-[#ff7700]" />
                   900 MG L-TAURINE
                 </div>
-                <span className="text-xs font-mono-code text-zinc-500">100 SERVINGS</span>
+                <span className="text-xs font-label-pkg text-zinc-500 tracking-wider">100 SERVINGS</span>
               </div>
 
               {/* Product Visual */}
@@ -67,15 +67,15 @@ export const FlavorComparisonSection: React.FC<FlavorComparisonSectionProps> = (
               </div>
 
               {/* Title & Copy as requested */}
-              <h3 className="font-display text-4xl font-black uppercase text-white tracking-wide mb-2">
+              <h3 className="font-creatine text-4xl sm:text-5xl text-white tracking-tight mb-2">
                 ORANGE
               </h3>
-              <p className="text-zinc-300 text-base leading-relaxed mb-6">
+              <p className="font-body text-zinc-300 text-base leading-relaxed mb-6">
                 Bold orange flavor for a refreshing creatine routine.
               </p>
 
               {/* Key Highlights */}
-              <ul className="space-y-2.5 mb-8 text-sm text-zinc-400">
+              <ul className="space-y-2.5 mb-8 text-sm text-zinc-400 font-body">
                 <li className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-[#ff7700]" />
                   <span>Crisp, thirst-quenching citrus taste with chilled water</span>
@@ -94,18 +94,18 @@ export const FlavorComparisonSection: React.FC<FlavorComparisonSectionProps> = (
             {/* Price & CTA */}
             <div className="pt-6 border-t border-white/10 flex items-center justify-between gap-4">
               <div>
-                <span className="text-xs font-mono-code text-zinc-500 block uppercase">Price</span>
-                <div className="font-display text-3xl font-black text-white">
+                <span className="text-xs font-label-pkg text-zinc-500 block uppercase tracking-wider">Price</span>
+                <div className="font-creatine text-3xl sm:text-4xl text-white tracking-tight">
                   {BRAND_CONFIG.priceDisplay}
                 </div>
-                <span className="text-[10px] font-mono-code text-[#ff7700]">
+                <span className="text-[11px] font-label-pkg text-[#ff7700] tracking-wider">
                   {BRAND_CONFIG.shippingNote}
                 </span>
               </div>
 
               <button
                 onClick={() => onOrderFlavor('orange')}
-                className="bg-[#ff7700] hover:bg-[#ff8c26] text-black font-display text-lg font-black px-6 py-3.5 rounded-xl transition-all shadow-[0_0_20px_rgba(255,119,0,0.35)] cursor-pointer flex items-center gap-2 active:scale-95"
+                className="bg-[#ff7700] hover:bg-[#ff8c26] text-black font-athletic text-lg tracking-wider px-6 py-3.5 rounded-xl transition-all shadow-[0_0_20px_rgba(255,119,0,0.35)] cursor-pointer flex items-center gap-2 active:scale-95"
               >
                 <span>ORDER ORANGE</span>
                 <ArrowRight className="w-4 h-4" />
@@ -124,11 +124,11 @@ export const FlavorComparisonSection: React.FC<FlavorComparisonSectionProps> = (
             <div>
               {/* Variant Badge & Icon */}
               <div className="flex items-center justify-between mb-6">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00d2ff]/15 border border-[#00d2ff]/40 text-[#00d2ff] text-xs font-mono-code font-bold uppercase">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00d2ff]/15 border border-[#00d2ff]/40 text-[#00d2ff] text-xs font-label-pkg">
                   <Droplets className="w-3.5 h-3.5 text-[#00d2ff]" />
                   100% UNFLAVORED
                 </div>
-                <span className="text-xs font-mono-code text-zinc-500">100 SERVINGS</span>
+                <span className="text-xs font-label-pkg text-zinc-500 tracking-wider">100 SERVINGS</span>
               </div>
 
               {/* Product Visual */}
@@ -142,15 +142,15 @@ export const FlavorComparisonSection: React.FC<FlavorComparisonSectionProps> = (
               </div>
 
               {/* Title & Copy as requested */}
-              <h3 className="font-display text-4xl font-black uppercase text-white tracking-wide mb-2">
+              <h3 className="font-creatine text-4xl sm:text-5xl text-white tracking-tight mb-2">
                 FLAVORLESS
               </h3>
-              <p className="text-zinc-300 text-base leading-relaxed mb-6">
+              <p className="font-body text-zinc-300 text-base leading-relaxed mb-6">
                 Simple and versatile for your preferred drink or shake.
               </p>
 
               {/* Key Highlights */}
-              <ul className="space-y-2.5 mb-8 text-sm text-zinc-400">
+              <ul className="space-y-2.5 mb-8 text-sm text-zinc-400 font-body">
                 <li className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-[#00d2ff]" />
                   <span>100% pure micronized creatine monohydrate powder</span>
@@ -169,18 +169,18 @@ export const FlavorComparisonSection: React.FC<FlavorComparisonSectionProps> = (
             {/* Price & CTA */}
             <div className="pt-6 border-t border-white/10 flex items-center justify-between gap-4">
               <div>
-                <span className="text-xs font-mono-code text-zinc-500 block uppercase">Price</span>
-                <div className="font-display text-3xl font-black text-white">
+                <span className="text-xs font-label-pkg text-zinc-500 block uppercase tracking-wider">Price</span>
+                <div className="font-creatine text-3xl sm:text-4xl text-white tracking-tight">
                   {BRAND_CONFIG.priceDisplay}
                 </div>
-                <span className="text-[10px] font-mono-code text-[#00d2ff]">
+                <span className="text-[11px] font-label-pkg text-[#00d2ff] tracking-wider">
                   {BRAND_CONFIG.shippingNote}
                 </span>
               </div>
 
               <button
                 onClick={() => onOrderFlavor('flavorless')}
-                className="bg-[#00d2ff] hover:bg-[#33dbff] text-black font-display text-lg font-black px-6 py-3.5 rounded-xl transition-all shadow-[0_0_20px_rgba(0,210,255,0.35)] cursor-pointer flex items-center gap-2 active:scale-95"
+                className="bg-[#00d2ff] hover:bg-[#33dbff] text-black font-athletic text-lg tracking-wider px-6 py-3.5 rounded-xl transition-all shadow-[0_0_20px_rgba(0,210,255,0.35)] cursor-pointer flex items-center gap-2 active:scale-95"
               >
                 <span>ORDER FLAVORLESS</span>
                 <ArrowRight className="w-4 h-4" />

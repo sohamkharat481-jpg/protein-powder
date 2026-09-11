@@ -1,6 +1,7 @@
 import React from 'react';
 import { Phone, Instagram, ArrowUp } from 'lucide-react';
 import { BRAND_CONFIG } from '../data/productData';
+import { BrandLogo } from './BrandLogo';
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -25,31 +26,26 @@ export const Footer: React.FC = () => {
           
           {/* Brand Column */}
           <div className="md:col-span-5 space-y-4">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 bg-black border border-[#00d2ff]/60 rounded-lg flex items-center justify-center font-display text-lg font-black text-[#00d2ff]">
-                CF
-              </div>
-              <span className="font-display text-2xl font-black tracking-tight text-white">
-                CORE<span className="text-[#00d2ff]">FUEL</span>
-              </span>
-            </div>
+            <a href="#hero" className="inline-block" aria-label="CoreFuel Nutrition Home">
+              <BrandLogo variant="full" size="md" showSubtitle />
+            </a>
             
             {/* Tagline as requested */}
-            <p className="font-display text-xl font-bold text-zinc-200 uppercase tracking-wide">
+            <p className="font-athletic text-xl text-zinc-200 tracking-wider">
               "{BRAND_CONFIG.brandTagline}"
             </p>
 
-            <p className="text-zinc-400 text-xs leading-relaxed max-w-sm">
+            <p className="font-body text-zinc-400 text-xs leading-relaxed max-w-sm">
               CoreFuel Nutrition supplies pure, micronized creatine monohydrate built for disciplined, everyday training. 100 servings in refreshing Orange and versatile Flavorless.
             </p>
           </div>
 
           {/* Quick Links Column */}
           <div className="md:col-span-3 space-y-3">
-            <span className="text-xs font-mono-code font-bold uppercase tracking-wider text-white block mb-2">
+            <span className="text-xs font-label-pkg uppercase tracking-wider text-white block mb-2">
               NAVIGATION
             </span>
-            <ul className="space-y-2 text-xs font-mono-code">
+            <ul className="space-y-2 text-xs font-body">
               {navLinks.map((link) => (
                 <li key={link.label}>
                   <a
@@ -65,14 +61,14 @@ export const Footer: React.FC = () => {
 
           {/* Contact Details Column */}
           <div className="md:col-span-4 space-y-3">
-            <span className="text-xs font-mono-code font-bold uppercase tracking-wider text-white block mb-2">
+            <span className="text-xs font-label-pkg uppercase tracking-wider text-white block mb-2">
               DIRECT OWNER CONTACT
             </span>
             
             {/* Phone Link with Icon */}
             <a
               href={`tel:${BRAND_CONFIG.ownerPhoneRaw}`}
-              className="flex items-center gap-2.5 text-zinc-300 hover:text-[#00d2ff] transition-colors text-sm font-medium"
+              className="flex items-center gap-2.5 text-zinc-300 hover:text-[#00d2ff] transition-colors text-sm font-body font-medium"
             >
               <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-[#00d2ff] shrink-0">
                 <Phone className="w-4 h-4" />
@@ -85,7 +81,7 @@ export const Footer: React.FC = () => {
               href={BRAND_CONFIG.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2.5 text-zinc-300 hover:text-amber-400 transition-colors text-sm font-medium"
+              className="flex items-center gap-2.5 text-zinc-300 hover:text-amber-400 transition-colors text-sm font-body font-medium"
             >
               <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-pink-400 shrink-0">
                 <Instagram className="w-4 h-4" />
@@ -93,7 +89,7 @@ export const Footer: React.FC = () => {
               <span>{BRAND_CONFIG.instagramHandle}</span>
             </a>
 
-            <div className="pt-2 text-[11px] font-mono-code text-zinc-500">
+            <div className="pt-2 text-[11px] font-body text-zinc-500">
               Orders placed directly via Phone or WhatsApp. No cart or automated checkout required.
             </div>
           </div>
@@ -101,9 +97,9 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono-code text-zinc-500">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-label-pkg text-zinc-500 tracking-wider">
           <div>
-            © {new Date().getFullYear()} {BRAND_CONFIG.brandName}. All rights reserved.
+            © {new Date().getFullYear()} {BRAND_CONFIG.brandName}. ALL RIGHTS RESERVED.
           </div>
 
           <button

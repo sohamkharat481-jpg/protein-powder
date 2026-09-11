@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { X, Phone, MessageSquare, Flame, Droplets, CheckCircle2, ShieldCheck, Sparkles, ExternalLink } from 'lucide-react';
 import { BRAND_CONFIG, FLAVOR_VARIANTS } from '../data/productData';
 import { FlavorId } from '../types';
+import { BrandLogo } from './BrandLogo';
 
 interface DirectOrderModalProps {
   isOpen: boolean;
@@ -61,12 +62,15 @@ export const DirectOrderModal: React.FC<DirectOrderModalProps> = ({
 
           {/* Header */}
           <div className="mb-6 pr-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00d2ff]/10 border border-[#00d2ff]/30 text-[#00d2ff] text-xs font-mono-code font-bold uppercase tracking-widest mb-3">
-              <Sparkles className="w-3.5 h-3.5" />
-              DIRECT OWNER DISPATCH
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
+              <BrandLogo variant="full" size="sm" showSubtitle />
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00d2ff]/10 border border-[#00d2ff]/30 text-[#00d2ff] text-[11px] font-label-pkg uppercase tracking-wider">
+                <Sparkles className="w-3 h-3" />
+                <span>DIRECT DISPATCH</span>
+              </div>
             </div>
-            <h3 className="font-display text-3xl sm:text-4xl font-black uppercase text-white tracking-tight leading-none">
-              PLACE YOUR COREFUEL ORDER
+            <h3 className="font-creatine text-3xl sm:text-4xl text-white tracking-tight leading-none mt-2">
+              PLACE YOUR ORDER
             </h3>
           </div>
 

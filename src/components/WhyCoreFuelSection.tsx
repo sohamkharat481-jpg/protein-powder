@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { PRODUCT_IMAGES } from '../data/productData';
 import { ShieldCheck, Target, Zap, Clock, Sparkles } from 'lucide-react';
+import { BrandLogo } from './BrandLogo';
 
 const PILLARS = [
   {
@@ -58,10 +59,13 @@ export const WhyCoreFuelSection: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-xs font-mono-code font-bold uppercase tracking-widest text-[#00d2ff] mb-6"
+            className="flex flex-col items-center gap-4 mb-6"
           >
-            <Sparkles className="w-3.5 h-3.5" />
-            COREFUEL PHILOSOPHY
+            <BrandLogo variant="full" size="md" showSubtitle />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-xs font-label-pkg uppercase tracking-widest text-[#00d2ff]">
+              <Sparkles className="w-3.5 h-3.5" />
+              COREFUEL PHILOSOPHY
+            </div>
           </motion.div>
 
           <motion.h2
@@ -69,10 +73,10 @@ export const WhyCoreFuelSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="font-display text-5xl sm:text-7xl lg:text-8xl font-black uppercase text-white tracking-tight leading-[0.92] mb-6"
+            className="font-creatine text-5xl sm:text-7xl lg:text-8xl text-white leading-[0.92] mb-6"
           >
             BUILT FOR PEOPLE<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00d2ff] via-[#5ce0ff] to-white">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00d2ff] via-[#5ce0ff] to-white drop-shadow-[0_0_30px_rgba(0,210,255,0.3)]">
               WHO SHOW UP.
             </span>
           </motion.h2>
@@ -82,10 +86,10 @@ export const WhyCoreFuelSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="space-y-2 text-xl sm:text-2xl text-zinc-200 font-medium leading-relaxed max-w-2xl mx-auto"
+            className="space-y-2 font-body text-xl sm:text-2xl text-zinc-200 font-normal leading-relaxed max-w-2xl mx-auto"
           >
             <p>Consistency isn't built in a day.</p>
-            <p className="text-[#00d2ff] font-semibold">
+            <p className="text-[#00d2ff] font-medium">
               It's built every time you choose to show up.
             </p>
           </motion.div>
@@ -107,10 +111,10 @@ export const WhyCoreFuelSection: React.FC = () => {
                 <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#00d2ff] mb-3 group-hover:scale-110 transition-transform">
                   <Icon className="w-4 h-4" />
                 </div>
-                <h4 className="font-display text-xl font-bold uppercase text-white tracking-wide mb-1.5">
+                <h4 className="font-athletic text-xl text-white tracking-wider mb-1.5">
                   {pillar.title}
                 </h4>
-                <p className="text-zinc-400 text-xs leading-relaxed">
+                <p className="font-body text-zinc-400 text-xs leading-relaxed">
                   {pillar.desc}
                 </p>
               </motion.div>

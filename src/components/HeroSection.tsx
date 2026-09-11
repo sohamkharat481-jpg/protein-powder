@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Zap, ArrowRight, ShieldCheck, ChevronDown, Sparkles, Flame, Droplets, CheckCircle2 } from 'lucide-react';
 import { BRAND_CONFIG, FLAVOR_VARIANTS, PRODUCT_IMAGES } from '../data/productData';
 import { FlavorId, FlavorVariant } from '../types';
+import { BrandLogo } from './BrandLogo';
 
 interface HeroSectionProps {
   selectedFlavorId: FlavorId;
@@ -77,21 +78,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           {/* LEFT: Typography & Order Direct Actions */}
           <div className="lg:col-span-7 flex flex-col justify-center">
             
-            {/* Top Brand Pill */}
+            {/* Top Brand Pill with Official CF Symbol */}
             <motion.div
               initial={{ opacity: 0, y: -15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md w-fit mb-5"
+              className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md w-fit mb-5 shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
             >
-              <span className="w-2 h-2 rounded-full bg-[#00d2ff] animate-pulse" />
-              <span className="font-mono-code text-xs uppercase tracking-widest text-zinc-300 font-bold">
+              <BrandLogo variant="symbol" size="xs" />
+              <span className="font-micronized text-xs uppercase text-zinc-200 font-semibold tracking-[0.25em]">
                 {BRAND_CONFIG.brandName} • 100 SERVINGS
               </span>
             </motion.div>
 
-            {/* Headline with Word-by-Word Reveal */}
-            <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl font-black uppercase tracking-tight text-white leading-[0.92] mb-4 flex flex-wrap gap-x-3">
+            {/* Headline with Word-by-Word Reveal - Matching CREATINE on packaging */}
+            <h1 className="font-creatine text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white leading-[0.88] mb-4 flex flex-wrap gap-x-3 sm:gap-x-4">
               {headlineWords.map((word, idx) => (
                 <motion.span
                   key={word}
@@ -100,7 +101,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   transition={{ duration: 0.5, delay: 0.15 * idx, ease: 'easeOut' }}
                   className={
                     idx === 2
-                      ? 'text-transparent bg-clip-text bg-gradient-to-r from-[#00d2ff] via-[#5ce0ff] to-white'
+                      ? 'text-transparent bg-clip-text bg-gradient-to-r from-[#00d2ff] via-[#5ce0ff] to-white drop-shadow-[0_0_35px_rgba(0,210,255,0.4)]'
                       : 'text-white'
                   }
                 >
@@ -109,12 +110,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               ))}
             </h1>
 
-            {/* Subheadline */}
+            {/* Subheadline - Clean modern readable sans-serif */}
             <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.55 }}
-              className="text-xl sm:text-2xl text-zinc-200 font-medium leading-snug mb-4 max-w-2xl"
+              className="font-body text-xl sm:text-2xl text-zinc-300 font-normal leading-relaxed mb-6 max-w-2xl"
             >
               {BRAND_CONFIG.subheadline}
             </motion.p>
@@ -124,18 +125,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.65 }}
-              className="flex items-baseline gap-3 mb-6 p-3.5 rounded-2xl bg-[#0e1118]/80 border border-white/10 w-fit backdrop-blur-md"
+              className="flex items-baseline gap-3 mb-6 p-3.5 rounded-2xl bg-[#0e1118]/90 border border-white/10 w-fit backdrop-blur-md shadow-lg"
             >
-              <div className="flex items-baseline gap-2">
-                <span className="font-display text-4xl sm:text-5xl font-black text-white">
+              <div className="flex items-baseline gap-2.5">
+                <span className="font-creatine text-4xl sm:text-5xl text-white tracking-tight">
                   {BRAND_CONFIG.priceDisplay}
                 </span>
-                <span className="text-xs font-mono-code font-bold uppercase text-[#00d2ff] bg-[#00d2ff]/15 px-2.5 py-1 rounded border border-[#00d2ff]/30">
+                <span className="text-xs font-label-pkg uppercase text-[#00d2ff] bg-[#00d2ff]/15 px-2.5 py-1 rounded border border-[#00d2ff]/30 tracking-wider">
                   {BRAND_CONFIG.shippingNote}
                 </span>
               </div>
-              <span className="text-xs font-mono-code text-zinc-400 hidden sm:inline">
-                • 100 Servings Tub
+              <span className="text-xs font-label-pkg text-zinc-400 tracking-wider hidden sm:inline">
+                • 100 SERVINGS TUB
               </span>
             </motion.div>
 
@@ -149,12 +150,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               transition={{ duration: 0.5, delay: 0.75 }}
               className="p-4 rounded-2xl bg-[#0d0f15] border border-white/15 max-w-xl mb-8 shadow-xl"
             >
-              <div className="flex items-center justify-between mb-3 text-xs font-mono-code">
-                <span className="text-zinc-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
+              <div className="flex items-center justify-between mb-3 text-xs font-label-pkg">
+                <span className="text-zinc-400 uppercase tracking-widest flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5 text-[#00d2ff]" />
                   CHOOSE YOUR FLAVOR
                 </span>
-                <span className="text-white font-bold">
+                <span className="text-white tracking-wider">
                   {currentVariant.name}: {BRAND_CONFIG.priceDisplay}
                 </span>
               </div>
@@ -173,11 +174,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   <div className="flex items-center gap-2.5">
                     <div className={`w-3.5 h-3.5 rounded-full ${isOrange ? 'bg-[#ff7700] shadow-[0_0_10px_#ff7700]' : 'bg-zinc-600'}`} />
                     <div>
-                      <div className="font-display text-lg font-bold tracking-wide uppercase leading-tight">
+                      <div className="font-athletic text-xl tracking-wider uppercase leading-tight">
                         ORANGE
                       </div>
-                      <div className="text-[10px] font-mono-code text-amber-300">
-                        900mg Taurine
+                      <div className="text-[11px] font-label-pkg text-amber-300 tracking-wider">
+                        900mg TAURINE
                       </div>
                     </div>
                   </div>
@@ -197,15 +198,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   <div className="flex items-center gap-2.5">
                     <div className={`w-3.5 h-3.5 rounded-full ${!isOrange ? 'bg-white shadow-[0_0_10px_white]' : 'bg-zinc-600'}`} />
                     <div>
-                      <div className="font-display text-lg font-bold tracking-wide uppercase leading-tight">
+                      <div className="font-athletic text-xl tracking-wider uppercase leading-tight">
                         FLAVORLESS
                       </div>
-                      <div className="text-[10px] font-mono-code text-zinc-300">
-                        100% Pure
+                      <div className="text-[11px] font-label-pkg text-zinc-300 tracking-wider">
+                        100% PURE
                       </div>
                     </div>
                   </div>
-                  {!isOrange && <CheckCircle2 className="w-4 h-4 text-white]" />}
+                  {!isOrange && <CheckCircle2 className="w-4 h-4 text-white" />}
                 </button>
               </div>
             </motion.div>
@@ -221,7 +222,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <button
                 onClick={onOrderNow}
                 id="hero-order-now-btn"
-                className="group relative flex-1 bg-[#00d2ff] hover:bg-[#33dbff] text-black font-display text-2xl font-black tracking-wide py-4 px-8 rounded-xl transition-all duration-200 shadow-[0_0_30px_rgba(0,210,255,0.4)] hover:shadow-[0_0_40px_rgba(0,210,255,0.6)] active:scale-[0.98] flex items-center justify-center gap-3 cursor-pointer"
+                className="group relative flex-1 bg-[#00d2ff] hover:bg-[#33dbff] text-black font-athletic text-2xl tracking-wider py-4 px-8 rounded-xl transition-all duration-200 shadow-[0_0_30px_rgba(0,210,255,0.4)] hover:shadow-[0_0_40px_rgba(0,210,255,0.6)] active:scale-[0.98] flex items-center justify-center gap-3 cursor-pointer"
               >
                 <Zap className="w-5 h-5 fill-black" />
                 <span>ORDER NOW</span>
@@ -232,7 +233,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <button
                 onClick={onExploreProduct}
                 id="hero-explore-product-btn"
-                className="flex-1 bg-[#12141a] hover:bg-[#181b24] text-white font-display text-xl font-bold tracking-wide py-4 px-6 rounded-xl border border-white/15 hover:border-[#00d2ff]/40 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                className="flex-1 bg-[#12141a] hover:bg-[#181b24] text-white font-athletic text-xl tracking-wider py-4 px-6 rounded-xl border border-white/15 hover:border-[#00d2ff]/40 transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>EXPLORE PRODUCT</span>
                 <ChevronDown className="w-4 h-4 text-zinc-400" />
@@ -240,14 +241,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </motion.div>
 
             {/* Direct Order Trust Strip */}
-            <div className="flex flex-wrap items-center gap-5 text-xs text-zinc-400 font-mono-code">
+            <div className="flex flex-wrap items-center gap-5 text-xs text-zinc-400 font-label-pkg tracking-wider">
               <span className="flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-[#00d2ff]" />
-                Direct Owner Contact ({BRAND_CONFIG.ownerPhoneDisplay})
+                DIRECT OWNER CONTACT ({BRAND_CONFIG.ownerPhoneDisplay})
               </span>
               <span className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                WhatsApp Quick Order Available
+                WHATSAPP QUICK ORDER AVAILABLE
               </span>
             </div>
 
@@ -272,7 +273,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             >
               {/* Floating Badge */}
               <div
-                className={`absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 px-4 py-1 rounded-full text-[11px] font-mono-code font-bold tracking-widest uppercase shadow-lg flex items-center gap-1.5 border transition-all ${
+                className={`absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 px-4 py-1 rounded-full text-xs font-label-pkg tracking-widest uppercase shadow-lg flex items-center gap-1.5 border transition-all ${
                   isOrange
                     ? 'bg-[#090b10] border-[#ff7700]/60 text-amber-400'
                     : 'bg-[#090b10] border-[#00d2ff]/60 text-[#00d2ff]'
@@ -304,10 +305,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 {/* Bottom Overlay Info Tag */}
                 <div className="absolute bottom-3 left-3 right-3 bg-[#0c0e14]/90 backdrop-blur-md border border-white/15 p-3 rounded-xl shadow-2xl flex items-center justify-between">
                   <div>
-                    <div className="text-[10px] font-mono-code text-zinc-400 uppercase tracking-wider">
+                    <div className="text-[10px] font-micronized text-zinc-400 uppercase tracking-widest">
                       SELECTED VARIANT
                     </div>
-                    <div className="text-base font-display font-black text-white tracking-wide flex items-center gap-1.5">
+                    <div className="text-lg font-creatine text-white tracking-tight flex items-center gap-1.5">
                       <span>COREFUEL</span>
                       <span className={isOrange ? 'text-amber-400' : 'text-[#00d2ff]'}>
                         {currentVariant.name.toUpperCase()}
@@ -315,10 +316,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-sm font-display font-black text-white">
+                    <div className="text-base font-creatine text-white tracking-tight">
                       {BRAND_CONFIG.priceDisplay}
                     </div>
-                    <div className="text-[10px] font-mono-code text-[#00d2ff]">
+                    <div className="text-[10px] font-label-pkg text-[#00d2ff] tracking-wider">
                       {BRAND_CONFIG.shippingNote}
                     </div>
                   </div>

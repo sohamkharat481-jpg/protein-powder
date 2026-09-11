@@ -19,14 +19,14 @@ export const FaqSection: React.FC = () => {
         
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono-code font-bold uppercase tracking-widest text-[#00d2ff] mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-label-pkg uppercase tracking-widest text-[#00d2ff] mb-4">
             <HelpCircle className="w-3.5 h-3.5" />
             CLEAR ANSWERS
           </div>
-          <h2 className="font-display text-5xl sm:text-7xl font-black uppercase text-white tracking-tight leading-none mb-4">
+          <h2 className="font-creatine text-5xl sm:text-7xl text-white leading-none mb-4">
             FREQUENTLY ASKED <span className="text-[#00d2ff]">QUESTIONS.</span>
           </h2>
-          <p className="text-zinc-400 text-base sm:text-lg">
+          <p className="font-body text-zinc-400 text-base sm:text-lg leading-relaxed">
             Everything you need to know about CoreFuel Creatine Monohydrate, dosing, and ordering.
           </p>
         </div>
@@ -47,7 +47,7 @@ export const FaqSection: React.FC = () => {
                   className="w-full px-6 py-5 sm:px-8 sm:py-6 text-left flex items-center justify-between gap-4 cursor-pointer focus:outline-none"
                   aria-expanded={isOpen}
                 >
-                  <span className="font-display text-xl sm:text-2xl font-bold uppercase text-white tracking-wide">
+                  <span className="font-athletic text-xl sm:text-2xl text-white tracking-wider">
                     {item.question}
                   </span>
                   <div
@@ -67,7 +67,7 @@ export const FaqSection: React.FC = () => {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: 'easeInOut' }}
                     >
-                      <div className="px-6 pb-6 sm:px-8 sm:pb-6 text-zinc-300 text-sm sm:text-base leading-relaxed border-t border-white/5 pt-4">
+                      <div className="px-6 pb-6 sm:px-8 sm:pb-6 font-body text-zinc-300 text-sm sm:text-base leading-relaxed border-t border-white/5 pt-4">
                         {item.answer}
                       </div>
                     </motion.div>
@@ -80,14 +80,14 @@ export const FaqSection: React.FC = () => {
 
         {/* Direct Contact Prompt under FAQ */}
         <div className="mt-12 text-center p-6 rounded-2xl bg-white/5 border border-white/10">
-          <p className="text-zinc-300 text-sm mb-3">
+          <p className="font-body text-zinc-300 text-sm mb-3">
             Have a specific question about your routine or bulk orders?
           </p>
           <a
             href={BRAND_CONFIG.generateWhatsAppLink('General Inquiry')}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-xs font-mono-code font-bold uppercase text-[#00d2ff] hover:underline"
+            className="inline-flex items-center gap-2 text-xs font-label-pkg uppercase tracking-wider text-[#00d2ff] hover:underline"
           >
             <MessageSquare className="w-4 h-4 text-[#25D366]" />
             Ask CoreFuel directly on WhatsApp ({BRAND_CONFIG.ownerPhoneDisplay})

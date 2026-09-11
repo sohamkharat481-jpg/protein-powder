@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Phone, MessageSquare, Instagram, ExternalLink, Sparkles, Zap, ShieldCheck } from 'lucide-react';
 import { BRAND_CONFIG } from '../data/productData';
+import { BrandLogo } from './BrandLogo';
 
 export const ContactSection: React.FC = () => {
   return (
@@ -11,10 +12,13 @@ export const ContactSection: React.FC = () => {
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
         
-        {/* Top Tag */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#00d2ff]/10 border border-[#00d2ff]/30 text-[#00d2ff] text-xs font-mono-code font-bold uppercase tracking-widest mb-6">
-          <Sparkles className="w-3.5 h-3.5" />
-          DIRECT HUMAN SUPPORT
+        {/* Brand Logo Presentation */}
+        <div className="flex flex-col items-center gap-3 mb-6">
+          <BrandLogo variant="full" size="md" showSubtitle />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#00d2ff]/10 border border-[#00d2ff]/30 text-[#00d2ff] text-xs font-mono-code font-bold uppercase tracking-widest">
+            <Sparkles className="w-3.5 h-3.5" />
+            DIRECT HUMAN SUPPORT
+          </div>
         </div>
 
         {/* Headline as requested */}

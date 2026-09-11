@@ -18,14 +18,14 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onPlaceOrder }) 
         
         {/* Section Heading as requested */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#00d2ff]/10 border border-[#00d2ff]/30 text-[#00d2ff] text-xs font-mono-code font-bold uppercase tracking-widest mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#00d2ff]/10 border border-[#00d2ff]/30 text-[#00d2ff] text-xs font-label-pkg uppercase tracking-widest mb-4">
             TRANSPARENT DIRECT PURCHASE
           </div>
-          <h2 className="font-display text-5xl sm:text-7xl font-black uppercase text-white tracking-tight leading-none mb-4">
+          <h2 className="font-creatine text-5xl sm:text-7xl text-white leading-none mb-4">
             SIMPLE PRICING.<br />
             <span className="text-[#00d2ff]">NO CONFUSION.</span>
           </h2>
-          <p className="text-zinc-400 text-base sm:text-lg">
+          <p className="font-body text-zinc-400 text-base sm:text-lg leading-relaxed">
             No middleman markups, fake coupon games, or confusing subscriptions. Pure formula at an honest price.
           </p>
         </div>
@@ -46,29 +46,29 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onPlaceOrder }) 
             <div>
               {/* Header */}
               <div className="flex items-center justify-between mb-4">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ff7700]/15 text-[#ff7700] text-xs font-mono-code font-bold uppercase">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ff7700]/15 text-[#ff7700] text-xs font-label-pkg">
                   <Flame className="w-3.5 h-3.5" />
                   CITRUS ORANGE
                 </div>
-                <span className="text-xs font-mono-code text-zinc-500">100 SERVINGS</span>
+                <span className="text-xs font-label-pkg text-zinc-500 tracking-wider">100 SERVINGS</span>
               </div>
 
-              <h3 className="font-display text-4xl sm:text-5xl font-black uppercase text-white tracking-tight mb-4">
+              <h3 className="font-creatine text-4xl sm:text-5xl text-white tracking-tight mb-4">
                 ORANGE
               </h3>
 
               {/* Price Tag as requested */}
               <div className="mb-6 p-4 rounded-2xl bg-black/40 border border-white/5">
-                <div className="font-display text-5xl sm:text-6xl font-black text-white tracking-tight leading-none mb-1">
+                <div className="font-creatine text-5xl sm:text-6xl text-white tracking-tight leading-none mb-1">
                   {BRAND_CONFIG.priceDisplay}
                 </div>
-                <div className="text-xs font-mono-code font-bold text-amber-400">
+                <div className="text-xs font-label-pkg text-amber-400 tracking-wider">
                   {BRAND_CONFIG.shippingNote}
                 </div>
               </div>
 
               {/* Inclusions */}
-              <ul className="space-y-3 mb-8 text-sm text-zinc-300">
+              <ul className="space-y-3 mb-8 text-sm text-zinc-300 font-body">
                 <li className="flex items-center gap-2.5">
                   <Check className="w-4 h-4 text-[#ff7700]" />
                   <span>100 full servings of micronized creatine</span>
@@ -91,7 +91,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onPlaceOrder }) 
             {/* PLACE ORDER Button */}
             <button
               onClick={() => onPlaceOrder('orange')}
-              className="w-full bg-[#ff7700] hover:bg-[#ff8c26] text-black font-display text-xl font-black py-4 px-6 rounded-xl transition-all shadow-[0_0_20px_rgba(255,119,0,0.35)] cursor-pointer flex items-center justify-center gap-2 active:scale-95"
+              className="w-full bg-[#ff7700] hover:bg-[#ff8c26] text-black font-athletic text-xl tracking-wider py-4 px-6 rounded-xl transition-all shadow-[0_0_20px_rgba(255,119,0,0.35)] cursor-pointer flex items-center justify-center gap-2 active:scale-95"
             >
               <Zap className="w-5 h-5 fill-black" />
               <span>PLACE ORDER</span>
@@ -112,29 +112,29 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onPlaceOrder }) 
             <div>
               {/* Header */}
               <div className="flex items-center justify-between mb-4">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00d2ff]/15 text-[#00d2ff] text-xs font-mono-code font-bold uppercase">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00d2ff]/15 text-[#00d2ff] text-xs font-label-pkg">
                   <Droplets className="w-3.5 h-3.5" />
                   100% UNFLAVORED
                 </div>
-                <span className="text-xs font-mono-code text-zinc-500">100 SERVINGS</span>
+                <span className="text-xs font-label-pkg text-zinc-500 tracking-wider">100 SERVINGS</span>
               </div>
 
-              <h3 className="font-display text-4xl sm:text-5xl font-black uppercase text-white tracking-tight mb-4">
+              <h3 className="font-creatine text-4xl sm:text-5xl text-white tracking-tight mb-4">
                 FLAVORLESS
               </h3>
 
               {/* Price Tag as requested */}
               <div className="mb-6 p-4 rounded-2xl bg-black/40 border border-white/5">
-                <div className="font-display text-5xl sm:text-6xl font-black text-white tracking-tight leading-none mb-1">
+                <div className="font-creatine text-5xl sm:text-6xl text-white tracking-tight leading-none mb-1">
                   {BRAND_CONFIG.priceDisplay}
                 </div>
-                <div className="text-xs font-mono-code font-bold text-[#00d2ff]">
+                <div className="text-xs font-label-pkg text-[#00d2ff] tracking-wider">
                   {BRAND_CONFIG.shippingNote}
                 </div>
               </div>
 
               {/* Inclusions */}
-              <ul className="space-y-3 mb-8 text-sm text-zinc-300">
+              <ul className="space-y-3 mb-8 text-sm text-zinc-300 font-body">
                 <li className="flex items-center gap-2.5">
                   <Check className="w-4 h-4 text-[#00d2ff]" />
                   <span>100 full servings of micronized creatine</span>
@@ -157,7 +157,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onPlaceOrder }) 
             {/* PLACE ORDER Button */}
             <button
               onClick={() => onPlaceOrder('flavorless')}
-              className="w-full bg-[#00d2ff] hover:bg-[#33dbff] text-black font-display text-xl font-black py-4 px-6 rounded-xl transition-all shadow-[0_0_20px_rgba(0,210,255,0.35)] cursor-pointer flex items-center justify-center gap-2 active:scale-95"
+              className="w-full bg-[#00d2ff] hover:bg-[#33dbff] text-black font-athletic text-xl tracking-wider py-4 px-6 rounded-xl transition-all shadow-[0_0_20px_rgba(0,210,255,0.35)] cursor-pointer flex items-center justify-center gap-2 active:scale-95"
             >
               <Zap className="w-5 h-5 fill-black" />
               <span>PLACE ORDER</span>
@@ -173,26 +173,26 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onPlaceOrder }) 
               <ShieldCheck className="w-5 h-5 text-[#00d2ff]" />
             </div>
             <div>
-              <div className="font-bold text-white text-sm">Direct Order Guarantee</div>
-              <div className="text-xs text-zinc-400">Owner Contact: {BRAND_CONFIG.ownerPhoneDisplay} • Fast Dispatch Across India</div>
+              <div className="font-athletic text-white text-base tracking-wider">DIRECT ORDER GUARANTEE</div>
+              <div className="font-body text-xs text-zinc-400">Owner Contact: {BRAND_CONFIG.ownerPhoneDisplay} • Fast Dispatch Across India</div>
             </div>
           </div>
           <div className="flex items-center gap-3">
             <a
               href={`tel:${BRAND_CONFIG.ownerPhoneRaw}`}
-              className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-xs font-mono-code text-zinc-200 flex items-center gap-1.5 transition-colors"
+              className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-xs font-label-pkg text-zinc-200 flex items-center gap-1.5 transition-colors"
             >
               <Phone className="w-3.5 h-3.5 text-[#00d2ff]" />
-              Call Owner
+              CALL OWNER
             </a>
             <a
               href={BRAND_CONFIG.generateWhatsAppLink('Orange or Flavorless')}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 rounded-xl bg-[#25D366]/20 hover:bg-[#25D366]/30 border border-[#25D366]/40 text-xs font-mono-code text-[#25D366] flex items-center gap-1.5 transition-colors"
+              className="px-4 py-2 rounded-xl bg-[#25D366]/20 hover:bg-[#25D366]/30 border border-[#25D366]/40 text-xs font-label-pkg text-[#25D366] flex items-center gap-1.5 transition-colors"
             >
               <MessageSquare className="w-3.5 h-3.5" />
-              WhatsApp
+              WHATSAPP
             </a>
           </div>
         </div>

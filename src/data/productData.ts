@@ -8,6 +8,8 @@ import duoShowcaseImg from '../assets/images/corefuel_duo_showcase_1789060920236
 import cinematicGymDuoImg from '../assets/images/corefuel_cinematic_gym_1789060942971.jpg';
 import gymAthleteImg from '../assets/images/corefuel_gym_athlete_1789060195318.jpg';
 import orangeScoopImg from '../assets/images/corefuel_orange_scoop_1789060208528.jpg';
+import corefuelLogoWhiteSvg from '../assets/images/corefuel_logo_white.svg';
+import corefuelSymbolWhiteSvg from '../assets/images/corefuel_symbol_white.svg';
 
 export const PRODUCT_IMAGES = {
   orangeTub: orangeTubImg || '/images/corefuel_creatine_tub_1789060180499.jpg',
@@ -17,6 +19,8 @@ export const PRODUCT_IMAGES = {
   cinematicGymDuo: cinematicGymDuoImg || '/images/corefuel_cinematic_gym_1789060942971.jpg',
   gymAthlete: gymAthleteImg || '/images/corefuel_gym_athlete_1789060195318.jpg',
   orangeScoop: orangeScoopImg || '/images/corefuel_orange_scoop_1789060208528.jpg',
+  logoWhite: corefuelLogoWhiteSvg || '/images/corefuel_logo_white.svg',
+  symbolWhite: corefuelSymbolWhiteSvg || '/images/corefuel_symbol_white.svg',
 };
 
 export const BRAND_CONFIG = {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, Zap, Phone, ChevronRight } from 'lucide-react';
 import { BRAND_CONFIG } from '../data/productData';
+import { BrandLogo } from './BrandLogo';
 
 interface NavbarProps {
   onOrderNow: () => void;
@@ -63,25 +64,23 @@ export const Navbar: React.FC<NavbarProps> = ({ onOrderNow }) => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           
-          {/* LEFT: CoreFuel Logo */}
+          {/* LEFT: Official CoreFuel Logo */}
           <a
             href="#hero"
             onClick={(e) => {
               e.preventDefault();
               handleNavClick('#hero');
             }}
-            className="flex items-center gap-2.5 group cursor-pointer"
+            className="flex items-center group cursor-pointer focus:outline-none"
+            aria-label="CoreFuel Nutrition Home"
           >
-            <div className="w-9 h-9 bg-black border border-[#00d2ff]/60 rounded-lg flex items-center justify-center font-display text-xl font-black text-[#00d2ff] tracking-tighter group-hover:border-[#00d2ff] group-hover:shadow-[0_0_15px_rgba(0,210,255,0.4)] transition-all">
-              CF
+            {/* Desktop / Tablet: Full Official Logo */}
+            <div className="hidden sm:block">
+              <BrandLogo variant="full" size="sm" showSubtitle className="group-hover:opacity-90 transition-opacity" />
             </div>
-            <div className="flex flex-col">
-              <span className="font-display text-2xl font-black tracking-tight text-white leading-none">
-                CORE<span className="text-[#00d2ff]">FUEL</span>
-              </span>
-              <span className="text-[10px] font-mono-code text-zinc-400 tracking-widest leading-none mt-0.5">
-                NUTRITION
-              </span>
+            {/* Mobile: Compact Clean Official Logo */}
+            <div className="block sm:hidden">
+              <BrandLogo variant="compact" size="xs" className="group-hover:opacity-90 transition-opacity" />
             </div>
           </a>
 
@@ -99,9 +98,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOrderNow }) => {
                     e.preventDefault();
                     handleNavClick(link.href);
                   }}
-                  className={`px-4 py-1.5 rounded-full text-xs font-mono-code font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+                  className={`px-4 py-1.5 rounded-full text-xs font-label-pkg uppercase tracking-wider transition-all duration-200 cursor-pointer ${
                     isActive
-                      ? 'bg-[#00d2ff] text-black shadow-[0_0_15px_rgba(0,210,255,0.4)]'
+                      ? 'bg-[#00d2ff] text-black shadow-[0_0_15px_rgba(0,210,255,0.4)] font-bold'
                       : 'text-zinc-300 hover:text-white hover:bg-white/10'
                   }`}
                 >
@@ -117,7 +116,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOrderNow }) => {
             <button
               onClick={onOrderNow}
               id="navbar-order-now-btn"
-              className="relative group bg-[#00d2ff] hover:bg-[#33dbff] text-black font-display text-base sm:text-lg font-black tracking-wide py-2 px-4 sm:px-6 rounded-xl transition-all duration-200 shadow-[0_0_20px_rgba(0,210,255,0.35)] hover:shadow-[0_0_25px_rgba(0,210,255,0.55)] cursor-pointer flex items-center gap-2 active:scale-95"
+              className="relative group bg-[#00d2ff] hover:bg-[#33dbff] text-black font-athletic text-base sm:text-lg font-black tracking-wider py-2 px-4 sm:px-6 rounded-xl transition-all duration-200 shadow-[0_0_20px_rgba(0,210,255,0.35)] hover:shadow-[0_0_25px_rgba(0,210,255,0.55)] cursor-pointer flex items-center gap-2 active:scale-95"
             >
               <Zap className="w-4 h-4 fill-black" />
               <span>ORDER NOW</span>
@@ -146,6 +145,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOrderNow }) => {
             transition={{ duration: 0.3 }}
             className="fixed top-[65px] left-0 right-0 z-30 bg-[#090b10]/95 backdrop-blur-2xl border-b border-white/10 md:hidden overflow-hidden shadow-2xl px-4 py-6"
           >
+            {/* Mobile Menu Official Brand Header */}
+            <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/10">
+              <BrandLogo variant="full" size="xs" showSubtitle />
+              <span className="text-[10px] font-label-pkg text-[#00d2ff] uppercase tracking-widest bg-white/5 px-2.5 py-1 rounded-md border border-white/10">
+                100 SERVINGS
+              </span>
+            </div>
+
             <div className="space-y-3 mb-6">
               {NAV_LINKS.map((link) => {
                 const sectionId = link.href.replace('#', '');
@@ -155,7 +162,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOrderNow }) => {
                   <button
                     key={link.label}
                     onClick={() => handleNavClick(link.href)}
-                    className={`w-full text-left py-3 px-4 rounded-xl font-display text-xl font-bold uppercase tracking-wider transition-all flex items-center justify-between cursor-pointer ${
+                    className={`w-full text-left py-3 px-4 rounded-xl font-athletic text-xl tracking-wider transition-all flex items-center justify-between cursor-pointer ${
                       isActive
                         ? 'bg-[#00d2ff]/15 text-[#00d2ff] border border-[#00d2ff]/40'
                         : 'text-zinc-300 hover:text-white hover:bg-white/5'
@@ -172,7 +179,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOrderNow }) => {
             <div className="pt-4 border-t border-white/10 flex flex-col gap-3">
               <a
                 href={`tel:${BRAND_CONFIG.ownerPhoneRaw}`}
-                className="w-full py-3 px-4 rounded-xl bg-white/5 border border-white/10 text-white font-mono-code text-xs font-bold flex items-center justify-center gap-2"
+                className="w-full py-3 px-4 rounded-xl bg-white/5 border border-white/10 text-white font-label-pkg text-sm tracking-wider flex items-center justify-center gap-2"
               >
                 <Phone className="w-4 h-4 text-[#00d2ff]" />
                 <span>Call Owner: {BRAND_CONFIG.ownerPhoneDisplay}</span>
@@ -183,7 +190,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOrderNow }) => {
                   setMobileMenuOpen(false);
                   onOrderNow();
                 }}
-                className="w-full bg-[#00d2ff] text-black font-display text-xl font-black py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,210,255,0.4)] cursor-pointer"
+                className="w-full bg-[#00d2ff] text-black font-athletic text-xl py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,210,255,0.4)] cursor-pointer tracking-wider"
               >
                 <Zap className="w-4 h-4 fill-black" />
                 <span>ORDER NOW — {BRAND_CONFIG.priceDisplay}</span>

@@ -20,14 +20,14 @@ export const BenefitsSection: React.FC = () => {
         
         {/* Section Heading */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#00d2ff]/10 border border-[#00d2ff]/30 text-[#00d2ff] text-xs font-mono-code font-bold uppercase tracking-widest mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#00d2ff]/10 border border-[#00d2ff]/30 text-[#00d2ff] text-xs font-label-pkg uppercase tracking-widest mb-4">
             <Sparkles className="w-3.5 h-3.5" />
             EVIDENCE-BASED PRINCIPLES
           </div>
-          <h2 className="font-display text-5xl sm:text-7xl font-black uppercase text-white tracking-tight leading-none mb-4">
+          <h2 className="font-creatine text-5xl sm:text-7xl text-white leading-none mb-4">
             BUILT FOR THE <span className="text-[#00d2ff]">WORK.</span>
           </h2>
-          <p className="text-zinc-400 text-base sm:text-lg max-w-2xl mx-auto">
+          <p className="font-body text-zinc-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
             Responsible performance nutrition designed to support your athletic dedication without exaggerated claims.
           </p>
         </div>
@@ -53,7 +53,7 @@ export const BenefitsSection: React.FC = () => {
                 <div>
                   {/* Top Row: Large Number & Minimal Icon */}
                   <div className="flex items-center justify-between mb-8">
-                    <span className="font-display text-5xl font-black text-white/20 group-hover:text-[#00d2ff] transition-colors duration-300">
+                    <span className="font-creatine text-5xl text-white/20 group-hover:text-[#00d2ff] transition-colors duration-300">
                       {benefit.step}
                     </span>
                     <div className="w-12 h-12 rounded-2xl bg-black/60 border border-white/10 group-hover:border-[#00d2ff]/40 flex items-center justify-center text-zinc-300 group-hover:text-[#00d2ff] transition-all group-hover:scale-110">
@@ -62,18 +62,18 @@ export const BenefitsSection: React.FC = () => {
                   </div>
 
                   {/* Title */}
-                  <h3 className="font-display text-2xl sm:text-3xl font-black uppercase text-white tracking-wide mb-3 leading-tight">
+                  <h3 className="font-athletic text-2xl sm:text-3xl text-white tracking-wide mb-3 leading-tight">
                     {benefit.title}
                   </h3>
 
                   {/* Short Description */}
-                  <p className="text-zinc-400 text-sm leading-relaxed">
+                  <p className="font-body text-zinc-400 text-sm leading-relaxed">
                     {benefit.description}
                   </p>
                 </div>
 
                 {/* Bottom Tag */}
-                <div className="pt-6 mt-6 border-t border-white/5 text-[11px] font-mono-code text-zinc-500 uppercase tracking-wider group-hover:text-zinc-400 transition-colors">
+                <div className="pt-6 mt-6 border-t border-white/5 text-[11px] font-label-pkg text-zinc-500 tracking-widest group-hover:text-zinc-400 transition-colors">
                   COREFUEL ESSENTIAL
                 </div>
               </motion.div>

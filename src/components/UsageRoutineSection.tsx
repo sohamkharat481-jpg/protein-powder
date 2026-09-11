@@ -19,14 +19,14 @@ export const UsageRoutineSection: React.FC = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono-code font-bold uppercase tracking-widest text-zinc-300 mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-label-pkg uppercase tracking-widest text-zinc-300 mb-4">
             <Sparkles className="w-3.5 h-3.5 text-[#00d2ff]" />
             SIMPLE THREE-STEP PROTOCOL
           </div>
-          <h2 className="font-display text-5xl sm:text-7xl font-black uppercase text-white tracking-tight leading-none mb-4">
+          <h2 className="font-creatine text-5xl sm:text-7xl text-white leading-none mb-4">
             HOW TO <span className="text-[#00d2ff]">USE.</span>
           </h2>
-          <p className="text-zinc-400 text-base sm:text-lg">
+          <p className="font-body text-zinc-400 text-base sm:text-lg leading-relaxed">
             No complicated cycling regimens required. Integrate into your daily schedule consistently.
           </p>
         </div>
@@ -54,7 +54,7 @@ export const UsageRoutineSection: React.FC = () => {
                   <div>
                     {/* Step Number & Icon */}
                     <div className="flex items-center justify-between mb-8">
-                      <span className="font-display text-4xl font-black text-[#00d2ff] tracking-tight">
+                      <span className="font-creatine text-4xl text-[#00d2ff] tracking-tight">
                         {step.stepNumber}
                       </span>
                       <div className="w-12 h-12 rounded-2xl bg-black/60 border border-white/10 group-hover:border-[#00d2ff]/40 flex items-center justify-center text-zinc-300 group-hover:text-[#00d2ff] transition-all">
@@ -63,17 +63,17 @@ export const UsageRoutineSection: React.FC = () => {
                     </div>
 
                     {/* Step Title as requested: 01 — SCOOP, 02 — MIX, 03 — TRAIN */}
-                    <h3 className="font-display text-3xl font-black uppercase text-white tracking-wide mb-3">
+                    <h3 className="font-athletic text-3xl text-white tracking-wider mb-3">
                       {step.title}
                     </h3>
 
                     {/* Step Description as requested */}
-                    <p className="text-zinc-400 text-sm leading-relaxed">
+                    <p className="font-body text-zinc-400 text-sm leading-relaxed">
                       {step.description}
                     </p>
                   </div>
 
-                  <div className="pt-6 mt-6 border-t border-white/5 text-[10px] font-mono-code text-zinc-500 uppercase">
+                  <div className="pt-6 mt-6 border-t border-white/5 text-[10px] font-label-pkg text-zinc-500 tracking-widest uppercase">
                     STEP {step.stepNumber} OF 03
                   </div>
                 </motion.div>
