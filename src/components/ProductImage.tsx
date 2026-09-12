@@ -16,8 +16,8 @@ export const ProductImage: React.FC<ProductImageProps> = ({
 }) => {
   const isOrange = variant === 'orange';
   const primarySrc = isOrange ? PRODUCT_IMAGES.orangeTub : PRODUCT_IMAGES.flavorlessTub;
-  const directPath = isOrange ? '/images/corefuel_orange.jpeg' : '/images/corefuel_unflavoured.jpeg';
-  const alternateDirectPath = isOrange ? '/images/Corefuel 3.jpeg' : '/images/Corefuel 2.jpeg';
+  const directPath = isOrange ? '/images/corefuel_orange.jpeg' : '/images/corefuel_unflavoured.png';
+  const alternateDirectPath = isOrange ? '/images/Corefuel 3.jpeg' : '/images/corefuel_unflavoured.png';
 
   const [currentSrc, setCurrentSrc] = useState<string>(primarySrc);
   const [retryCount, setRetryCount] = useState<number>(0);

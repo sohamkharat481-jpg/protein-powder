@@ -2,7 +2,7 @@ import { Benefit, FaqItem, FlavorVariant, UsageStep } from '../types';
 
 // Direct ES Module imports for guaranteed production bundling in Vite & Vercel
 import orangeTubUploadedImg from '../assets/images/corefuel_orange.jpeg';
-import flavorlessTubUploadedImg from '../assets/images/corefuel_unflavoured.jpeg';
+const flavorlessTubUploadedImg = '/images/corefuel_unflavoured.png';
 import heroBannerDuoImg from '../assets/images/corefuel_hero_banner_1789060898239.jpg';
 import duoShowcaseImg from '../assets/images/corefuel_duo_showcase_1789060920236.jpg';
 import cinematicGymDuoImg from '../assets/images/corefuel_cinematic_gym_1789060942971.jpg';
@@ -14,9 +14,9 @@ import corefuelSymbolWhiteSvg from '../assets/images/corefuel_symbol_white.svg';
 export const PRODUCT_IMAGES = {
   // Permanent uploaded product photos for Orange & Unflavoured variants
   orangeTub: orangeTubUploadedImg || '/images/corefuel_orange.jpeg',
-  flavorlessTub: flavorlessTubUploadedImg || '/images/corefuel_unflavoured.jpeg',
+  flavorlessTub: flavorlessTubUploadedImg || '/images/corefuel_unflavoured.png',
   orangeTubDirectUrl: '/images/corefuel_orange.jpeg',
-  flavorlessTubDirectUrl: '/images/corefuel_unflavoured.jpeg',
+  flavorlessTubDirectUrl: '/images/corefuel_unflavoured.png',
   heroBannerDuo: heroBannerDuoImg || '/images/corefuel_hero_banner_1789060898239.jpg',
   duoShowcase: duoShowcaseImg || '/images/corefuel_duo_showcase_1789060920236.jpg',
   cinematicGymDuo: cinematicGymDuoImg || '/images/corefuel_cinematic_gym_1789060942971.jpg',

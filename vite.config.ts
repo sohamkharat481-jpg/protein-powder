@@ -40,13 +40,18 @@ function aistudioMediaPlugin(): Plugin {
                 const imagesDir = path.resolve(__dirname, 'public', 'images');
                 if (!fs.existsSync(imagesDir)) fs.mkdirSync(imagesDir, { recursive: true });
                 
-                const targetName = variant === 'orange' ? 'Corefuel 3.jpeg' : 'Corefuel 2.jpeg';
-                const aliasName = variant === 'orange' ? 'corefuel_orange.jpeg' : 'corefuel_unflavoured.jpeg';
-                fs.writeFileSync(path.join(imagesDir, targetName), buffer);
-                fs.writeFileSync(path.join(imagesDir, aliasName), buffer);
+                if (variant === 'orange') {
+                  fs.writeFileSync(path.join(imagesDir, 'Corefuel 3.jpeg'), buffer);
+                  fs.writeFileSync(path.join(imagesDir, 'corefuel_orange.jpeg'), buffer);
+                  res.setHeader('Content-Type', 'application/json');
+                  res.end(JSON.stringify({ success: true, filename: 'Corefuel 3.jpeg' }));
+                  return;
+                }
+
+                fs.writeFileSync(path.join(imagesDir, 'corefuel_unflavoured.png'), buffer);
                 
                 res.setHeader('Content-Type', 'application/json');
-                res.end(JSON.stringify({ success: true, filename: targetName }));
+                res.end(JSON.stringify({ success: true, filename: 'corefuel_unflavoured.png' }));
               } catch (err: any) {
                 res.statusCode = 500;
                 res.end(JSON.stringify({ error: err.message }));
@@ -57,7 +62,7 @@ function aistudioMediaPlugin(): Plugin {
           if (req.method === 'GET' && req.url.startsWith('/api/product-photos-status')) {
             const imagesDir = path.resolve(__dirname, 'public', 'images');
             const hasOrange = fs.existsSync(path.join(imagesDir, 'Corefuel 3.jpeg')) || fs.existsSync(path.join(imagesDir, 'corefuel_orange.jpeg'));
-            const hasUnflavoured = fs.existsSync(path.join(imagesDir, 'Corefuel 2.jpeg')) || fs.existsSync(path.join(imagesDir, 'corefuel_unflavoured.jpeg'));
+            const hasUnflavoured = fs.existsSync(path.join(imagesDir, 'corefuel_unflavoured.png'));
             res.setHeader('Content-Type', 'application/json');
             res.end(JSON.stringify({ hasOrange, hasUnflavoured }));
             return;
