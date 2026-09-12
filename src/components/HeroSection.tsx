@@ -4,6 +4,7 @@ import { Zap, ArrowRight, ShieldCheck, ChevronDown, Sparkles, Flame, Droplets, C
 import { BRAND_CONFIG, FLAVOR_VARIANTS, PRODUCT_IMAGES } from '../data/productData';
 import { FlavorId, FlavorVariant } from '../types';
 import { BrandLogo } from './BrandLogo';
+import { ProductImage } from './ProductImage';
 
 interface HeroSectionProps {
   selectedFlavorId: FlavorId;
@@ -241,14 +242,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </motion.div>
 
             {/* Direct Order Trust Strip */}
-            <div className="flex flex-wrap items-center gap-5 text-xs text-zinc-400 font-label-pkg tracking-wider">
-              <span className="flex items-center gap-1.5">
+            <div className="flex flex-wrap items-center gap-4 text-xs text-zinc-400 font-label-pkg tracking-wider">
+              <span className="flex items-center gap-1.5 text-zinc-300">
                 <ShieldCheck className="w-4 h-4 text-[#00d2ff]" />
-                DIRECT OWNER CONTACT ({BRAND_CONFIG.ownerPhoneDisplay})
+                ORDER DESK: {BRAND_CONFIG.secondaryPhoneDisplay} / {BRAND_CONFIG.ownerPhoneDisplay}
               </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                WHATSAPP QUICK ORDER AVAILABLE
+              <span className="flex items-center gap-1.5 text-emerald-400">
+                <CheckCircle2 className="w-4 h-4" />
+                WHATSAPP & CALL DIRECT DISPATCH
               </span>
             </div>
 
@@ -286,17 +287,20 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               {/* Product Visual Container with Crossfade & Luxury Transition */}
               <div className="w-full h-full rounded-2xl overflow-hidden bg-[#07090c] relative flex items-center justify-center p-2">
                 <AnimatePresence mode="wait">
-                  <motion.img
+                  <motion.div
                     key={currentVariant.id}
-                    src={currentVariant.image}
-                    alt={`${BRAND_CONFIG.productName} - ${currentVariant.name}`}
-                    referrerPolicy="no-referrer"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 1.05 }}
                     transition={{ duration: 0.4 }}
-                    className="w-full h-full object-cover object-center rounded-xl group-hover:scale-105 transition-transform duration-700"
-                  />
+                    className="w-full h-full flex items-center justify-center"
+                  >
+                    <ProductImage
+                      variant={currentVariant.id === 'orange' ? 'orange' : 'flavorless'}
+                      alt={`${BRAND_CONFIG.productName} - ${currentVariant.name}`}
+                      className="w-full h-full object-contain object-center p-2 rounded-xl group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </motion.div>
                 </AnimatePresence>
 
                 {/* Subtle bottom lighting overlay */}

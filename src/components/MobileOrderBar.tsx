@@ -13,21 +13,21 @@ export const MobileOrderBar: React.FC<MobileOrderBarProps> = ({
   onOpenOrderModal,
 }) => {
   const currentVariant = FLAVOR_VARIANTS[selectedFlavorId];
-  const whatsAppUrl = BRAND_CONFIG.generateWhatsAppLink(currentVariant.name);
+  const whatsAppUrl = BRAND_CONFIG.generateWhatsAppLink(currentVariant.name, 'secondary');
 
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 p-3 bg-[#07080a]/90 backdrop-blur-xl border-t border-white/10 shadow-[0_-10px_30px_rgba(0,0,0,0.9)]">
       <div className="flex items-center gap-2 max-w-md mx-auto">
-        {/* Quick Call Button */}
+        {/* Quick Call Button (Line 2: 91454 78524) */}
         <a
-          href={`tel:${BRAND_CONFIG.ownerPhoneRaw}`}
-          aria-label="Call CoreFuel owner directly"
+          href={`tel:${BRAND_CONFIG.secondaryPhoneRaw}`}
+          aria-label="Call CoreFuel Order Desk directly"
           className="p-3 rounded-xl bg-white/10 border border-white/20 text-[#00d2ff] hover:bg-white/20 transition-colors flex items-center justify-center shrink-0"
         >
           <Phone className="w-5 h-5" />
         </a>
 
-        {/* Quick WhatsApp Button */}
+        {/* Quick WhatsApp Button (Line 2: 91454 78524) */}
         <a
           href={whatsAppUrl}
           target="_blank"

@@ -33,19 +33,39 @@ export const ContactSection: React.FC = () => {
         </p>
 
         {/* Direct Contact Info Highlight Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-10 text-left">
-          {/* Phone Card */}
-          <div className="p-5 rounded-2xl bg-[#0e1118] border border-white/10 flex items-center gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mb-10 text-left">
+          {/* Phone Card 1: Line 2 (91454 78524) */}
+          <div className="p-5 rounded-2xl bg-[#0e1118] border border-[#00d2ff]/30 flex items-center gap-4 relative overflow-hidden group">
             <div className="w-12 h-12 rounded-xl bg-[#00d2ff]/15 border border-[#00d2ff]/30 flex items-center justify-center text-[#00d2ff] shrink-0">
               <Phone className="w-6 h-6" />
             </div>
             <div>
-              <span className="text-[10px] font-mono-code text-zinc-400 uppercase tracking-wider block">
-                Direct Owner Line
+              <div className="flex items-center gap-1.5 mb-0.5">
+                <span className="text-[10px] font-mono-code text-[#00d2ff] uppercase tracking-wider font-bold">
+                  Order Line (Instant)
+                </span>
+              </div>
+              <a
+                href={`tel:${BRAND_CONFIG.secondaryPhoneRaw}`}
+                className="font-display text-xl sm:text-2xl font-bold text-white hover:text-[#00d2ff] transition-colors"
+              >
+                {BRAND_CONFIG.secondaryPhoneDisplay}
+              </a>
+            </div>
+          </div>
+
+          {/* Phone Card 2: Line 1 (97021 53668) */}
+          <div className="p-5 rounded-2xl bg-[#0e1118] border border-white/10 flex items-center gap-4">
+            <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-zinc-300 shrink-0">
+              <Phone className="w-6 h-6" />
+            </div>
+            <div>
+              <span className="text-[10px] font-mono-code text-zinc-400 uppercase tracking-wider block mb-0.5">
+                Founder Direct Line
               </span>
               <a
                 href={`tel:${BRAND_CONFIG.ownerPhoneRaw}`}
-                className="font-display text-2xl font-bold text-white hover:text-[#00d2ff] transition-colors"
+                className="font-display text-xl sm:text-2xl font-bold text-white hover:text-[#00d2ff] transition-colors"
               >
                 {BRAND_CONFIG.ownerPhoneDisplay}
               </a>
@@ -58,14 +78,14 @@ export const ContactSection: React.FC = () => {
               <Instagram className="w-6 h-6" />
             </div>
             <div>
-              <span className="text-[10px] font-mono-code text-zinc-400 uppercase tracking-wider block">
+              <span className="text-[10px] font-mono-code text-zinc-400 uppercase tracking-wider block mb-0.5">
                 Official Instagram
               </span>
               <a
                 href={BRAND_CONFIG.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-display text-xl font-bold text-white hover:text-amber-400 transition-colors"
+                className="font-display text-lg font-bold text-white hover:text-amber-400 transition-colors"
               >
                 {BRAND_CONFIG.instagramHandle}
               </a>
@@ -73,27 +93,23 @@ export const ContactSection: React.FC = () => {
           </div>
         </div>
 
-        {/* The 3 Buttons as requested:
-            "CALL TO ORDER"
-            "WHATSAPP TO ORDER"
-            "FOLLOW ON INSTAGRAM"
-        */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-2xl mx-auto">
-          {/* CALL TO ORDER */}
+        {/* Action Buttons as requested */}
+        <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 max-w-3xl mx-auto">
+          {/* CALL TO ORDER (Line 2: 91454 78524) */}
           <a
-            href={`tel:${BRAND_CONFIG.ownerPhoneRaw}`}
-            className="w-full sm:w-auto flex-1 bg-white/10 hover:bg-white/20 text-white font-display text-xl font-black py-4 px-6 rounded-2xl border border-white/20 hover:border-white/40 transition-all flex items-center justify-center gap-2.5 cursor-pointer shadow-lg active:scale-95"
+            href={`tel:${BRAND_CONFIG.secondaryPhoneRaw}`}
+            className="w-full sm:w-auto flex-1 min-w-[200px] bg-white/10 hover:bg-white/20 text-white font-display text-lg sm:text-xl font-black py-4 px-6 rounded-2xl border border-white/20 hover:border-white/40 transition-all flex items-center justify-center gap-2.5 cursor-pointer shadow-lg active:scale-95"
           >
             <Phone className="w-5 h-5 text-[#00d2ff]" />
-            <span>CALL TO ORDER</span>
+            <span>CALL ({BRAND_CONFIG.secondaryPhoneDisplay})</span>
           </a>
 
-          {/* WHATSAPP TO ORDER */}
+          {/* WHATSAPP TO ORDER (Line 2: 91454 78524) */}
           <a
-            href={BRAND_CONFIG.generateWhatsAppLink('Orange or Flavorless')}
+            href={BRAND_CONFIG.generateWhatsAppLink('Orange or Flavorless', 'secondary')}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto flex-1 bg-[#25D366] hover:bg-[#20bd5a] text-black font-display text-xl font-black py-4 px-6 rounded-2xl transition-all shadow-[0_0_25px_rgba(37,211,102,0.35)] hover:shadow-[0_0_35px_rgba(37,211,102,0.5)] flex items-center justify-center gap-2.5 cursor-pointer active:scale-95"
+            className="w-full sm:w-auto flex-1 min-w-[220px] bg-[#25D366] hover:bg-[#20bd5a] text-black font-display text-lg sm:text-xl font-black py-4 px-6 rounded-2xl transition-all shadow-[0_0_25px_rgba(37,211,102,0.35)] hover:shadow-[0_0_35px_rgba(37,211,102,0.5)] flex items-center justify-center gap-2.5 cursor-pointer active:scale-95"
           >
             <MessageSquare className="w-5 h-5 fill-black" />
             <span>WHATSAPP TO ORDER</span>
@@ -104,10 +120,10 @@ export const ContactSection: React.FC = () => {
             href={BRAND_CONFIG.instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto flex-1 bg-gradient-to-r from-[#bc1888] to-[#e6683c] hover:opacity-90 text-white font-display text-xl font-black py-4 px-6 rounded-2xl transition-all shadow-[0_0_25px_rgba(230,104,60,0.35)] flex items-center justify-center gap-2.5 cursor-pointer active:scale-95"
+            className="w-full sm:w-auto flex-1 min-w-[200px] bg-gradient-to-r from-[#bc1888] to-[#e6683c] hover:opacity-90 text-white font-display text-lg sm:text-xl font-black py-4 px-6 rounded-2xl transition-all shadow-[0_0_25px_rgba(230,104,60,0.35)] flex items-center justify-center gap-2.5 cursor-pointer active:scale-95"
           >
             <Instagram className="w-5 h-5" />
-            <span>FOLLOW ON INSTAGRAM</span>
+            <span>INSTAGRAM</span>
           </a>
         </div>
 

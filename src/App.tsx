@@ -17,12 +17,30 @@ import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { DirectOrderModal } from './components/DirectOrderModal';
 import { MobileOrderBar } from './components/MobileOrderBar';
-import { FlavorId } from './types';
+import { GoogleLoginPage } from './components/GoogleLoginPage';
+import { FlavorId, UserProfile } from './types';
+
+const STORAGE_KEY_USER = 'corefuel_athlete_user_v1';
 
 export default function App() {
   // Global selected flavor state: 'orange' | 'flavorless'
   const [selectedFlavorId, setSelectedFlavorId] = useState<FlavorId>('orange');
   const [isOrderModalOpen, setIsOrderModalOpen] = useState<boolean>(false);
+
+  // View state: 'store' | 'login'
+  const [currentView, setCurrentView] = useState<'store' | 'login'>(() => {
+    return window.location.hash === '#login' ? 'login' : 'store';
+  });
+
+  // User state
+  const [currentUser, setCurrentUser] = useState<UserProfile | null>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY_USER);
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
 
   // Desktop subtle cursor-following glow
   const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
@@ -35,6 +53,49 @@ export default function App() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  // Sync hash changes for easy browser back/forward and direct links
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash === '#login') {
+        setCurrentView('login');
+      } else if (currentView === 'login' && window.location.hash !== '#login') {
+        setCurrentView('store');
+      }
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, [currentView]);
+
+  const handleLoginSuccess = (user: UserProfile) => {
+    setCurrentUser(user);
+    try {
+      localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(user));
+    } catch {
+      // ignore storage errors
+    }
+  };
+
+  const handleLogout = () => {
+    setCurrentUser(null);
+    try {
+      localStorage.removeItem(STORAGE_KEY_USER);
+    } catch {
+      // ignore
+    }
+  };
+
+  const handleOpenLogin = () => {
+    window.location.hash = '#login';
+    setCurrentView('login');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleBackToStore = () => {
+    window.location.hash = '#hero';
+    setCurrentView('store');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleOpenOrderModal = (flavorId?: FlavorId) => {
     if (flavorId) {
       setSelectedFlavorId(flavorId);
@@ -43,6 +104,15 @@ export default function App() {
   };
 
   const handleScrollToSection = (sectionId: string) => {
+    if (currentView === 'login') {
+      setCurrentView('store');
+      window.location.hash = `#${sectionId}`;
+      setTimeout(() => {
+        const el = document.getElementById(sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+      return;
+    }
     const el = document.getElementById(sectionId);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
@@ -62,53 +132,71 @@ export default function App() {
       />
 
       {/* 1. Minimal Sticky Navbar */}
-      <Navbar onOrderNow={() => handleOpenOrderModal()} />
+      <Navbar
+        onOrderNow={() => handleOpenOrderModal()}
+        onOpenLogin={handleOpenLogin}
+        currentUser={currentUser}
+        currentView={currentView}
+      />
 
-      {/* Main Landing Page Content */}
-      <main className="pb-16 md:pb-0">
-        {/* 2. Hero Section — Cinematic with Interactive Flavor Selector & Particles */}
-        <HeroSection
-          selectedFlavorId={selectedFlavorId}
-          onSelectFlavor={(id) => setSelectedFlavorId(id)}
-          onOrderNow={() => handleOpenOrderModal()}
-          onExploreProduct={() => handleScrollToSection('product')}
+      {/* Conditional View Rendering */}
+      {currentView === 'login' ? (
+        <GoogleLoginPage
+          onBackToStore={handleBackToStore}
+          currentUser={currentUser}
+          onLoginSuccess={handleLoginSuccess}
+          onLogout={handleLogout}
+          onOrderNow={(flavorId) => {
+            if (flavorId) setSelectedFlavorId(flavorId);
+            setIsOrderModalOpen(true);
+          }}
         />
+      ) : (
+        <main className="pb-16 md:pb-0">
+          {/* 2. Hero Section — Cinematic with Interactive Flavor Selector & Particles */}
+          <HeroSection
+            selectedFlavorId={selectedFlavorId}
+            onSelectFlavor={(id) => setSelectedFlavorId(id)}
+            onOrderNow={() => handleOpenOrderModal()}
+            onExploreProduct={() => handleScrollToSection('product')}
+          />
 
-        {/* 3. Product Section: "YOUR DAILY CREATINE. SIMPLIFIED." with 4-Item Grid */}
-        <ProductSection
-          selectedFlavorId={selectedFlavorId}
-          onSelectFlavor={(id) => setSelectedFlavorId(id)}
-          onOrderNow={(id) => handleOpenOrderModal(id)}
-        />
+          {/* 3. Product Section: "YOUR DAILY CREATINE. SIMPLIFIED." with 4-Item Grid */}
+          <ProductSection
+            selectedFlavorId={selectedFlavorId}
+            onSelectFlavor={(id) => setSelectedFlavorId(id)}
+            onOrderNow={(id) => handleOpenOrderModal(id)}
+          />
 
-        {/* 4. Benefits Section: "BUILT FOR THE WORK." (4 Interactive Cards) */}
-        <BenefitsSection />
+          {/* 4. Benefits Section: "BUILT FOR THE WORK." (4 Interactive Cards) */}
+          <BenefitsSection />
 
-        {/* 5. "ONE FORMULA. TWO WAYS TO TAKE IT." Comparison Section */}
-        <FlavorComparisonSection
-          onOrderFlavor={(flavorId) => handleOpenOrderModal(flavorId)}
-        />
+          {/* 5. "ONE FORMULA. TWO WAYS TO TAKE IT." Comparison Section */}
+          <FlavorComparisonSection
+            onOrderFlavor={(flavorId) => handleOpenOrderModal(flavorId)}
+          />
 
-        {/* 6. How To Use: 01 SCOOP, 02 MIX, 03 TRAIN Animated Timeline */}
-        <UsageRoutineSection />
+          {/* 6. How To Use: 01 SCOOP, 02 MIX, 03 TRAIN Animated Timeline */}
+          <UsageRoutineSection />
 
-        {/* 7. Why CoreFuel: "BUILT FOR PEOPLE WHO SHOW UP." with Gym Imagery & 5 Pillars */}
-        <WhyCoreFuelSection />
+          {/* 7. Why CoreFuel: "BUILT FOR PEOPLE WHO SHOW UP." with Gym Imagery & 5 Pillars */}
+          <WhyCoreFuelSection />
 
-        {/* 8. Pricing Section: "SIMPLE PRICING. NO CONFUSION." (Direct Place Order) */}
-        <PricingSection
-          onPlaceOrder={(flavorId) => handleOpenOrderModal(flavorId)}
-        />
+          {/* 8. Pricing Section: "SIMPLE PRICING. NO CONFUSION." (Direct Place Order) */}
+          <PricingSection
+            onPlaceOrder={(flavorId) => handleOpenOrderModal(flavorId)}
+          />
 
-        {/* 9. FAQ: 6 Accordion Items */}
-        <FaqSection />
+          {/* 9. FAQ: 6 Accordion Items */}
+          <FaqSection />
 
-        {/* 10. Contact Section: "READY TO FUEL YOUR TRAINING?" with Call, WhatsApp, Instagram */}
-        <ContactSection />
-      </main>
+          {/* 10. Contact Section: "READY TO FUEL YOUR TRAINING?" with Call, WhatsApp, Instagram */}
+          <ContactSection />
+        </main>
+      )}
 
-      {/* 11. Footer: Tagline, Navigation, Phone, and Instagram */}
-      <Footer />
+      {/* 11. Footer: Tagline, Navigation, Both Phone Lines, and Instagram */}
+      <Footer onOpenLogin={handleOpenLogin} />
 
       {/* Direct Order Modal: "PLACE YOUR COREFUEL ORDER" (Direct Call & WhatsApp Flow) */}
       <DirectOrderModal
@@ -118,11 +206,13 @@ export default function App() {
         onSelectFlavor={(id) => setSelectedFlavorId(id)}
       />
 
-      {/* Mobile Floating Order Pill Bar */}
-      <MobileOrderBar
-        selectedFlavorId={selectedFlavorId}
-        onOpenOrderModal={() => handleOpenOrderModal()}
-      />
+      {/* Mobile Floating Order Pill Bar (only in store view) */}
+      {currentView === 'store' && (
+        <MobileOrderBar
+          selectedFlavorId={selectedFlavorId}
+          onOpenOrderModal={() => handleOpenOrderModal()}
+        />
+      )}
     </div>
   );
 }

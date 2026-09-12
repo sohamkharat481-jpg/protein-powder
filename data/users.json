@@ -1,0 +1,41 @@
+[
+  {
+    "id": "usr_g_1789205044762",
+    "googleId": "gid_1789205044762",
+    "name": "Soham Kharat",
+    "email": "sohamkharat481@gmail.com",
+    "avatarUrl": "https://api.dicebear.com/7.x/initials/svg?seed=Soham%20Kharat&backgroundColor=00d2ff,ff7700",
+    "registeredAt": "2026-09-12T09:24:04.762Z",
+    "lastLoginAt": "2026-09-12T09:24:08.315Z",
+    "authProvider": "Google",
+    "notificationSent": true,
+    "savedAddress": null,
+    "orderHistory": []
+  },
+  {
+    "id": "usr_g_1789205494851",
+    "googleId": "gid_1789205494851",
+    "name": "Rohit Sharma",
+    "email": "rohit.sharma@example.com",
+    "avatarUrl": "https://api.dicebear.com/7.x/initials/svg?seed=Rohit%20Sharma&backgroundColor=00d2ff,ff7700",
+    "registeredAt": "2026-09-12T09:31:34.851Z",
+    "lastLoginAt": "2026-09-12T09:31:38.500Z",
+    "authProvider": "Google",
+    "notificationSent": true,
+    "savedAddress": null,
+    "orderHistory": []
+  },
+  {
+    "id": "usr_g_1789205764498",
+    "googleId": "gid_1789205764498",
+    "name": "Aditi Patil",
+    "email": "aditi.patil@example.com",
+    "avatarUrl": "https://api.dicebear.com/7.x/initials/svg?seed=Aditi%20Patil&backgroundColor=00d2ff,ff7700",
+    "registeredAt": "2026-09-12T09:36:04.498Z",
+    "lastLoginAt": "2026-09-12T09:36:07.693Z",
+    "authProvider": "Google",
+    "notificationSent": true,
+    "savedAddress": null,
+    "orderHistory": []
+  }
+]

@@ -1,0 +1,48 @@
+import React, { useState } from 'react';
+import { PRODUCT_IMAGES } from '../data/productData';
+
+interface ProductImageProps {
+  variant: 'orange' | 'flavorless';
+  alt: string;
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+export const ProductImage: React.FC<ProductImageProps> = ({
+  variant,
+  alt,
+  className = '',
+  style,
+}) => {
+  const isOrange = variant === 'orange';
+  const primarySrc = isOrange ? PRODUCT_IMAGES.orangeTub : PRODUCT_IMAGES.flavorlessTub;
+  const directPath = isOrange ? '/images/corefuel_orange.jpeg' : '/images/corefuel_unflavoured.jpeg';
+  const alternateDirectPath = isOrange ? '/images/Corefuel 3.jpeg' : '/images/Corefuel 2.jpeg';
+
+  const [currentSrc, setCurrentSrc] = useState<string>(primarySrc);
+  const [retryCount, setRetryCount] = useState<number>(0);
+
+  const handleError = () => {
+    if (retryCount === 0) {
+      setRetryCount(1);
+      setCurrentSrc(directPath);
+    } else if (retryCount === 1) {
+      setRetryCount(2);
+      setCurrentSrc(alternateDirectPath);
+    }
+  };
+
+  return (
+    <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+      <img
+        src={currentSrc}
+        alt={alt}
+        referrerPolicy="no-referrer"
+        onError={handleError}
+        className={className}
+        style={style}
+        loading="eager"
+      />
+    </div>
+  );
+};

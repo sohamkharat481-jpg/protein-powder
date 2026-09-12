@@ -4,6 +4,7 @@ import { X, Phone, MessageSquare, Flame, Droplets, CheckCircle2, ShieldCheck, Sp
 import { BRAND_CONFIG, FLAVOR_VARIANTS } from '../data/productData';
 import { FlavorId } from '../types';
 import { BrandLogo } from './BrandLogo';
+import { ProductImage } from './ProductImage';
 
 interface DirectOrderModalProps {
   isOpen: boolean;
@@ -140,11 +141,10 @@ export const DirectOrderModal: React.FC<DirectOrderModalProps> = ({
           {/* Pricing & Product Preview Highlight */}
           <div className="p-4 rounded-2xl bg-gradient-to-r from-[#11141c] to-[#0c0e15] border border-white/10 mb-6 flex items-center gap-4">
             <div className="w-16 h-16 rounded-xl overflow-hidden bg-black/60 border border-white/10 shrink-0 p-1">
-              <img
-                src={currentVariant.image}
+              <ProductImage
+                variant={currentVariant.id === 'orange' ? 'orange' : 'flavorless'}
                 alt={currentVariant.name}
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover rounded-lg"
+                className="w-full h-full object-contain rounded-lg"
               />
             </div>
             <div className="flex-1">
@@ -165,45 +165,95 @@ export const DirectOrderModal: React.FC<DirectOrderModalProps> = ({
             </div>
           </div>
 
-          {/* Owner Details Card with Clickable Phone */}
-          <div className="p-4 rounded-2xl bg-[#141822] border border-white/10 mb-6">
-            <span className="text-xs font-mono-code text-zinc-400 block mb-1 uppercase tracking-wider">
-              COREFUEL OWNER DIRECT CONTACT:
+          {/* Dual Contact Details Card with Clickable Phones */}
+          <div className="p-4 rounded-2xl bg-[#141822] border border-white/10 mb-6 space-y-3">
+            <span className="text-xs font-mono-code text-zinc-400 block uppercase tracking-wider font-semibold">
+              COREFUEL DIRECT ORDER CONTACTS:
             </span>
-            <a
-              href={`tel:${BRAND_CONFIG.ownerPhoneRaw}`}
-              className="font-display text-2xl sm:text-3xl font-bold text-white hover:text-[#00d2ff] transition-colors flex items-center gap-2"
-            >
-              <Phone className="w-5 h-5 text-[#00d2ff]" />
-              <span>{BRAND_CONFIG.ownerPhoneDisplay}</span>
-            </a>
-            <span className="text-[11px] font-mono-code text-zinc-400 block mt-1">
-              Tap the buttons below to call or open a pre-filled WhatsApp message.
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              {/* Line 2: Order Desk */}
+              <div className="p-2.5 rounded-xl bg-black/40 border border-white/10 flex items-center justify-between">
+                <div>
+                  <div className="text-[10px] font-mono-code text-[#00d2ff] uppercase font-bold tracking-wider">
+                    Line 2 (Order Desk)
+                  </div>
+                  <a
+                    href={`tel:${BRAND_CONFIG.secondaryPhoneRaw}`}
+                    className="font-display text-lg font-bold text-white hover:text-[#00d2ff] transition-colors"
+                  >
+                    {BRAND_CONFIG.secondaryPhoneDisplay}
+                  </a>
+                </div>
+                <a
+                  href={`tel:${BRAND_CONFIG.secondaryPhoneRaw}`}
+                  className="p-2 rounded-lg bg-[#00d2ff]/15 text-[#00d2ff] hover:bg-[#00d2ff]/25"
+                  title="Call Line 2"
+                >
+                  <Phone className="w-4 h-4" />
+                </a>
+              </div>
+
+              {/* Line 1: Founder Direct */}
+              <div className="p-2.5 rounded-xl bg-black/40 border border-white/10 flex items-center justify-between">
+                <div>
+                  <div className="text-[10px] font-mono-code text-zinc-400 uppercase font-bold tracking-wider">
+                    Line 1 (Founder)
+                  </div>
+                  <a
+                    href={`tel:${BRAND_CONFIG.ownerPhoneRaw}`}
+                    className="font-display text-lg font-bold text-white hover:text-[#00d2ff] transition-colors"
+                  >
+                    {BRAND_CONFIG.ownerPhoneDisplay}
+                  </a>
+                </div>
+                <a
+                  href={`tel:${BRAND_CONFIG.ownerPhoneRaw}`}
+                  className="p-2 rounded-lg bg-white/10 text-white hover:bg-white/20"
+                  title="Call Line 1"
+                >
+                  <Phone className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+
+            <span className="text-[11px] font-mono-code text-zinc-400 block">
+              Direct customer service, batch verification, and express courier dispatch.
             </span>
           </div>
 
           {/* Action Buttons: CALL TO ORDER & WHATSAPP TO ORDER */}
           <div className="space-y-3">
-            {/* WHATSAPP TO ORDER */}
+            {/* PRIMARY WHATSAPP TO ORDER (Line 2: 91454 78524) */}
             <a
-              href={whatsAppUrl}
+              href={BRAND_CONFIG.generateWhatsAppLink(currentVariant.name, 'secondary')}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-black font-display text-xl font-black tracking-wide py-4 px-6 rounded-2xl transition-all shadow-[0_0_25px_rgba(37,211,102,0.3)] hover:shadow-[0_0_35px_rgba(37,211,102,0.45)] flex items-center justify-center gap-2.5 cursor-pointer active:scale-[0.98]"
+              className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-black font-display text-lg sm:text-xl font-black tracking-wide py-3.5 sm:py-4 px-6 rounded-2xl transition-all shadow-[0_0_25px_rgba(37,211,102,0.3)] hover:shadow-[0_0_35px_rgba(37,211,102,0.45)] flex items-center justify-center gap-2.5 cursor-pointer active:scale-[0.98]"
             >
               <MessageSquare className="w-5 h-5 fill-black" />
-              <span>WHATSAPP TO ORDER</span>
+              <span>WHATSAPP TO ORDER ({BRAND_CONFIG.secondaryPhoneDisplay})</span>
               <ExternalLink className="w-4 h-4" />
             </a>
 
-            {/* CALL TO ORDER */}
-            <a
-              href={`tel:${BRAND_CONFIG.ownerPhoneRaw}`}
-              className="w-full bg-white/10 hover:bg-white/20 text-white font-display text-xl font-black tracking-wide py-4 px-6 rounded-2xl border border-white/20 hover:border-white/40 transition-all flex items-center justify-center gap-2.5 cursor-pointer active:scale-[0.98]"
-            >
-              <Phone className="w-5 h-5 text-[#00d2ff]" />
-              <span>CALL TO ORDER ({BRAND_CONFIG.ownerPhoneDisplay})</span>
-            </a>
+            {/* CALL TO ORDER (Line 2: 91454 78524) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <a
+                href={`tel:${BRAND_CONFIG.secondaryPhoneRaw}`}
+                className="bg-white/10 hover:bg-white/20 text-white font-display text-base font-black tracking-wide py-3 px-4 rounded-xl border border-white/20 hover:border-white/40 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98]"
+              >
+                <Phone className="w-4 h-4 text-[#00d2ff]" />
+                <span>CALL: {BRAND_CONFIG.secondaryPhoneDisplay}</span>
+              </a>
+
+              <a
+                href={`tel:${BRAND_CONFIG.ownerPhoneRaw}`}
+                className="bg-white/10 hover:bg-white/20 text-white font-display text-base font-black tracking-wide py-3 px-4 rounded-xl border border-white/20 hover:border-white/40 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98]"
+              >
+                <Phone className="w-4 h-4 text-zinc-300" />
+                <span>CALL: {BRAND_CONFIG.ownerPhoneDisplay}</span>
+              </a>
+            </div>
           </div>
 
           {/* Pre-filled Message Note */}

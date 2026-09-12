@@ -37,3 +37,30 @@ export interface FaqItem {
   question: string;
   answer: string;
 }
+
+export interface UserProfile {
+  id: string;
+  name: string;
+  email: string;
+  avatarUrl?: string;
+  isMember: boolean;
+  joinedDate: string;
+  phone?: string;
+  savedAddress?: {
+    fullName: string;
+    phone: string;
+    street: string;
+    city: string;
+    state: string;
+    pincode: string;
+  };
+  orderHistory?: {
+    id: string;
+    date: string;
+    flavor: string;
+    servings: string;
+    amount: string;
+    status: 'Confirmed' | 'Dispatched' | 'Delivered';
+    trackingNumber?: string;
+  }[];
+}

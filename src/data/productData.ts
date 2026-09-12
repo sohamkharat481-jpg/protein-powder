@@ -1,8 +1,8 @@
 import { Benefit, FaqItem, FlavorVariant, UsageStep } from '../types';
 
 // Direct ES Module imports for guaranteed production bundling in Vite & Vercel
-import orangeTubImg from '../assets/images/corefuel_creatine_tub_1789060180499.jpg';
-import flavorlessTubImg from '../assets/images/corefuel_flavorless_tub_1789060523404.jpg';
+import orangeTubUploadedImg from '../assets/images/corefuel_orange.jpeg';
+import flavorlessTubUploadedImg from '../assets/images/corefuel_unflavoured.jpeg';
 import heroBannerDuoImg from '../assets/images/corefuel_hero_banner_1789060898239.jpg';
 import duoShowcaseImg from '../assets/images/corefuel_duo_showcase_1789060920236.jpg';
 import cinematicGymDuoImg from '../assets/images/corefuel_cinematic_gym_1789060942971.jpg';
@@ -12,8 +12,11 @@ import corefuelLogoWhiteSvg from '../assets/images/corefuel_logo_white.svg';
 import corefuelSymbolWhiteSvg from '../assets/images/corefuel_symbol_white.svg';
 
 export const PRODUCT_IMAGES = {
-  orangeTub: orangeTubImg || '/images/corefuel_creatine_tub_1789060180499.jpg',
-  flavorlessTub: flavorlessTubImg || '/images/corefuel_flavorless_tub_1789060523404.jpg',
+  // Permanent uploaded product photos for Orange & Unflavoured variants
+  orangeTub: orangeTubUploadedImg || '/images/corefuel_orange.jpeg',
+  flavorlessTub: flavorlessTubUploadedImg || '/images/corefuel_unflavoured.jpeg',
+  orangeTubDirectUrl: '/images/corefuel_orange.jpeg',
+  flavorlessTubDirectUrl: '/images/corefuel_unflavoured.jpeg',
   heroBannerDuo: heroBannerDuoImg || '/images/corefuel_hero_banner_1789060898239.jpg',
   duoShowcase: duoShowcaseImg || '/images/corefuel_duo_showcase_1789060920236.jpg',
   cinematicGymDuo: cinematicGymDuoImg || '/images/corefuel_cinematic_gym_1789060942971.jpg',
@@ -39,16 +42,41 @@ export const BRAND_CONFIG = {
   priceDisplay: '₹549/-',
   shippingNote: '+ shipping charges',
   
-  // Direct Owner Contact Information
+  // Direct Contact Lines (Line 1: 97021 53668, Line 2: 91454 78524)
   ownerPhoneDisplay: '+91 97021 53668',
   ownerPhoneRaw: '+919702153668',
   ownerPhoneNumericOnly: '919702153668',
+  
+  secondaryPhoneDisplay: '+91 91454 78524',
+  secondaryPhoneRaw: '+919145478524',
+  secondaryPhoneNumericOnly: '919145478524',
+
+  phoneLines: [
+    {
+      id: 'primary',
+      title: 'Founder / Line 1',
+      display: '+91 97021 53668',
+      raw: '+919702153668',
+      numeric: '919702153668',
+      badge: 'DIRECT FOUNDER',
+    },
+    {
+      id: 'secondary',
+      title: 'Order Desk / Line 2',
+      display: '+91 91454 78524',
+      raw: '+919145478524',
+      numeric: '919145478524',
+      badge: 'INSTANT DISPATCH',
+    },
+  ],
+
   instagramHandle: '@corefuel_nutrition_official',
   instagramUrl: 'https://www.instagram.com/corefuel_nutrition_official?stkn=MTFxaGJrNGxhNGwxYQ==',
   
-  generateWhatsAppLink: (flavorName: string) => {
-    const text = `Hi CoreFuel, I want to order CoreFuel Creatine Monohydrate. My preferred flavor is ${flavorName}.`;
-    return `https://wa.me/919702153668?text=${encodeURIComponent(text)}`;
+  generateWhatsAppLink: (flavorName: string = 'Orange', targetPhone: string = '9145478524') => {
+    const cleanPhone = targetPhone.replace(/[^0-9]/g, '');
+    const text = `Hi CoreFuel, I want to order CoreFuel Creatine Monohydrate (${flavorName} variant, 100 Servings @ ₹549/-). Please confirm delivery.`;
+    return `https://wa.me/${cleanPhone}?text=${encodeURIComponent(text)}`;
   },
 };
 

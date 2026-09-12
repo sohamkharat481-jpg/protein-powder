@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { Zap, Flame, Droplets, Check, ArrowRight } from 'lucide-react';
 import { BRAND_CONFIG, FLAVOR_VARIANTS, PRODUCT_IMAGES } from '../data/productData';
 import { FlavorId } from '../types';
+import { ProductImage } from './ProductImage';
 
 interface FlavorComparisonSectionProps {
   onOrderFlavor: (flavorId: FlavorId) => void;
@@ -58,11 +59,10 @@ export const FlavorComparisonSection: React.FC<FlavorComparisonSectionProps> = (
 
               {/* Product Visual */}
               <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-black/60 border border-white/10 mb-6 relative flex items-center justify-center p-4">
-                <img
-                  src={PRODUCT_IMAGES.orangeTub}
+                <ProductImage
+                  variant="orange"
                   alt="CoreFuel Creatine Orange"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-contain rounded-xl group-hover:scale-105 transition-transform duration-500 p-2"
                 />
               </div>
 
@@ -133,11 +133,10 @@ export const FlavorComparisonSection: React.FC<FlavorComparisonSectionProps> = (
 
               {/* Product Visual */}
               <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-black/60 border border-white/10 mb-6 relative flex items-center justify-center p-4">
-                <img
-                  src={PRODUCT_IMAGES.flavorlessTub}
+                <ProductImage
+                  variant="flavorless"
                   alt="CoreFuel Creatine Flavorless"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-contain rounded-xl group-hover:scale-105 transition-transform duration-500 p-2"
                 />
               </div>
 

@@ -4,6 +4,7 @@ import { Sparkles, Check, Zap, Flame, Droplets, ArrowRight } from 'lucide-react'
 import { BRAND_CONFIG, FLAVOR_VARIANTS, PRODUCT_INFO_GRID } from '../data/productData';
 import { FlavorId } from '../types';
 import { BrandLogo } from './BrandLogo';
+import { ProductImage } from './ProductImage';
 
 interface ProductSectionProps {
   selectedFlavorId: FlavorId;
@@ -68,11 +69,10 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
               style={{ y: imageY, rotate: imageRotate }}
               className="relative w-full max-w-[480px] aspect-square rounded-3xl overflow-hidden bg-gradient-to-b from-[#12151f] to-[#07090c] border border-white/15 p-4 shadow-[0_30px_80px_rgba(0,0,0,0.85)] group"
             >
-              <img
-                src={currentVariant.image}
+              <ProductImage
+                variant={currentVariant.id === 'orange' ? 'orange' : 'flavorless'}
                 alt={`${BRAND_CONFIG.productName} - ${currentVariant.name}`}
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700"
+                className="w-full h-full object-contain rounded-2xl group-hover:scale-105 transition-transform duration-700 p-2"
               />
 
               <div className="absolute top-6 left-6 bg-black/80 backdrop-blur-md border border-white/10 px-3.5 py-1.5 rounded-full text-xs font-label-pkg flex items-center gap-2">

@@ -10,6 +10,78 @@ function aistudioMediaPlugin(): Plugin {
     name: 'vite-plugin-aistudio-media',
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
+        if (req.url && (req.url.startsWith('/api/upload-photo') || req.url.startsWith('/api/product-photos-status') || req.url.startsWith('/api/auth/'))) {
+          if (req.method === 'POST' && req.url.startsWith('/api/auth/register-or-login')) {
+            let body = '';
+            req.on('data', chunk => body += chunk);
+            req.on('end', async () => {
+              try {
+                const payload = JSON.parse(body);
+                const { authenticateGoogleUser } = await import('./server/userService');
+                const result = await authenticateGoogleUser(payload);
+                res.setHeader('Content-Type', 'application/json');
+                res.end(JSON.stringify(result));
+              } catch (err: any) {
+                res.statusCode = 500;
+                res.setHeader('Content-Type', 'application/json');
+                res.end(JSON.stringify({ success: false, error: err.message }));
+              }
+            });
+            return;
+          }
+          if (req.method === 'POST' && req.url.startsWith('/api/upload-photo')) {
+            let body = '';
+            req.on('data', chunk => body += chunk);
+            req.on('end', () => {
+              try {
+                const { variant, dataUrl } = JSON.parse(body);
+                const base64Data = dataUrl.replace(/^data:image\/\w+;base64,/, '');
+                const buffer = Buffer.from(base64Data, 'base64');
+                const imagesDir = path.resolve(__dirname, 'public', 'images');
+                if (!fs.existsSync(imagesDir)) fs.mkdirSync(imagesDir, { recursive: true });
+                
+                const targetName = variant === 'orange' ? 'Corefuel 3.jpeg' : 'Corefuel 2.jpeg';
+                const aliasName = variant === 'orange' ? 'corefuel_orange.jpeg' : 'corefuel_unflavoured.jpeg';
+                fs.writeFileSync(path.join(imagesDir, targetName), buffer);
+                fs.writeFileSync(path.join(imagesDir, aliasName), buffer);
+                
+                res.setHeader('Content-Type', 'application/json');
+                res.end(JSON.stringify({ success: true, filename: targetName }));
+              } catch (err: any) {
+                res.statusCode = 500;
+                res.end(JSON.stringify({ error: err.message }));
+              }
+            });
+            return;
+          }
+          if (req.method === 'GET' && req.url.startsWith('/api/product-photos-status')) {
+            const imagesDir = path.resolve(__dirname, 'public', 'images');
+            const hasOrange = fs.existsSync(path.join(imagesDir, 'Corefuel 3.jpeg')) || fs.existsSync(path.join(imagesDir, 'corefuel_orange.jpeg'));
+            const hasUnflavoured = fs.existsSync(path.join(imagesDir, 'Corefuel 2.jpeg')) || fs.existsSync(path.join(imagesDir, 'corefuel_unflavoured.jpeg'));
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ hasOrange, hasUnflavoured }));
+            return;
+          }
+        }
+
+        // Dedicated resolver for uploaded product photos (handles URL-encoded spaces and names)
+        if (req.url && (req.url.includes('Corefuel') || req.url.includes('corefuel_orange') || req.url.includes('corefuel_unflavoured'))) {
+          try {
+            const rawPath = req.url.split('?')[0].split('#')[0];
+            const decoded = decodeURIComponent(rawPath).replace(/^\/images\//, '').replace(/^\//, '');
+            const imagesDir = path.resolve(__dirname, 'public', 'images');
+            const filePath = path.join(imagesDir, decoded);
+            if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+              res.setHeader('Content-Type', 'image/jpeg');
+              res.setHeader('Cache-Control', 'no-cache');
+              fs.createReadStream(filePath).pipe(res);
+              return;
+            }
+          } catch {
+            // fallthrough
+          }
+        }
+
         if (req.url && req.url.startsWith('/assets/aistudio/')) {
           const rawPath = req.url.split('?')[0].split('#')[0];
           try {

@@ -41,10 +41,10 @@ export const WhyCoreFuelSection: React.FC = () => {
       {/* Background Cinematic Image with Heavy Dark Atmospheric Overlay */}
       <div className="absolute inset-0 z-0">
         <img
-          src={PRODUCT_IMAGES.cinematicGymDuo}
-          alt="CoreFuel Gym Training Campaign"
+          src={PRODUCT_IMAGES.gymAthlete}
+          alt="CoreFuel Athlete Training"
           referrerPolicy="no-referrer"
-          className="w-full h-full object-cover object-center filter brightness-[0.35] contrast-125 scale-105"
+          className="w-full h-full object-cover object-center filter brightness-[0.32] contrast-125 scale-105"
         />
         {/* Dark Vignette & Gradient Overlays for Guaranteed High Contrast Typography */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#07080a] via-[#07080a]/80 to-[#07080a]/90" />
