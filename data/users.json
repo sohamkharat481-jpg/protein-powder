@@ -37,5 +37,31 @@
     "notificationSent": true,
     "savedAddress": null,
     "orderHistory": []
+  },
+  {
+    "id": "usr_g_1789289099187",
+    "googleId": "gid_1789289099187",
+    "name": "Athlete One",
+    "email": "athlete1@gmail.com",
+    "avatarUrl": "https://api.dicebear.com/7.x/initials/svg?seed=Athlete%20One&backgroundColor=00d2ff,ff7700",
+    "registeredAt": "2026-09-13T08:44:59.187Z",
+    "lastLoginAt": "2026-09-13T08:44:59.187Z",
+    "authProvider": "Google",
+    "notificationSent": true,
+    "savedAddress": null,
+    "orderHistory": []
+  },
+  {
+    "id": "usr_g_1789289104834",
+    "googleId": "gid_1789289104834",
+    "name": "Athlete Two",
+    "email": "athlete2@gmail.com",
+    "avatarUrl": "https://api.dicebear.com/7.x/initials/svg?seed=Athlete%20Two&backgroundColor=00d2ff,ff7700",
+    "registeredAt": "2026-09-13T08:45:04.834Z",
+    "lastLoginAt": "2026-09-13T08:45:04.834Z",
+    "authProvider": "Google",
+    "notificationSent": true,
+    "savedAddress": null,
+    "orderHistory": []
   }
 ]

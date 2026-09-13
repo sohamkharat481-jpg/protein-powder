@@ -56,7 +56,7 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
             YOUR DAILY CREATINE. <span className="text-[#00d2ff]">SIMPLIFIED.</span>
           </h2>
           <p className="font-body text-zinc-400 text-base sm:text-lg leading-relaxed">
-            A transparent, uncompromised formula engineered for lifters and athletes. No fillers, no exaggerated hype. Just 100 pure servings built for your daily training.
+            A transparent, uncompromised formula engineered for lifters and athletes. No fillers, no exaggerated hype. Just 75 pure servings built for 3 months of daily training.
           </p>
         </div>
 
@@ -70,20 +70,20 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
               className="relative w-full max-w-[480px] aspect-square rounded-3xl overflow-hidden bg-gradient-to-b from-[#12151f] to-[#07090c] border border-white/15 p-4 shadow-[0_30px_80px_rgba(0,0,0,0.85)] group"
             >
               <ProductImage
-                variant={currentVariant.id === 'orange' ? 'orange' : 'flavorless'}
+                variant={currentVariant.id === 'orange' ? 'orange' : 'unflavored'}
                 alt={`${BRAND_CONFIG.productName} - ${currentVariant.name}`}
                 className="w-full h-full object-contain rounded-2xl group-hover:scale-105 transition-transform duration-700 p-2"
               />
 
               <div className="absolute top-6 left-6 bg-black/80 backdrop-blur-md border border-white/10 px-3.5 py-1.5 rounded-full text-xs font-label-pkg flex items-center gap-2">
                 <BrandLogo variant="symbol" size="xs" />
-                <span className={isOrange ? 'text-amber-400 font-semibold' : 'text-[#00d2ff] font-semibold'}>
-                  {currentVariant.name.toUpperCase()} VARIANT
+                <span className="text-amber-400 font-semibold">
+                  ORANGE VARIANT
                 </span>
               </div>
 
               <div className="absolute bottom-6 right-6 bg-black/80 backdrop-blur-md border border-white/10 px-3.5 py-1 rounded-full text-xs font-label-pkg text-white tracking-wider">
-                100 SERVINGS • 200-MESH
+                75 SERVINGS (3 MONTHS) • 200-MESH
               </div>
             </motion.div>
           </div>
@@ -101,7 +101,7 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
                 </span>
               </h3>
               <div className="text-xs font-micronized text-zinc-400 tracking-[0.2em] uppercase font-semibold">
-                MICRONIZED • 100 SERVINGS • {BRAND_CONFIG.priceDisplay} ({BRAND_CONFIG.shippingNote})
+                MICRONIZED • 75 SERVINGS (3 MONTHS) • {BRAND_CONFIG.priceDisplay} ({BRAND_CONFIG.shippingNote})
               </div>
             </div>
 
@@ -112,12 +112,12 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
             {/* Packaging and Formula Facts */}
             <div className="space-y-3 pt-2">
               <div className="p-3.5 rounded-xl bg-black/40 border border-white/10 flex items-start gap-3">
-                <div className="w-6 h-6 rounded bg-[#00d2ff]/10 border border-[#00d2ff]/30 flex items-center justify-center shrink-0 mt-0.5">
-                  <Check className="w-3.5 h-3.5 text-[#00d2ff]" />
+                <div className="w-6 h-6 rounded bg-[#ff7700]/10 border border-[#ff7700]/30 flex items-center justify-center shrink-0 mt-0.5">
+                  <Check className="w-3.5 h-3.5 text-[#ff7700]" />
                 </div>
                 <div>
-                  <span className="text-base font-athletic text-white tracking-wide block">100 Full Servings per Container</span>
-                  <span className="text-xs font-body text-zinc-400">Generous pack size giving you over 3 months of consistent daily supplementation.</span>
+                  <span className="text-base font-athletic text-white tracking-wide block">75 Full Servings per Container (3 Months Supply)</span>
+                  <span className="text-xs font-body text-zinc-400">Generous pack size giving you 75 days (3 full months) of consistent daily supplementation.</span>
                 </div>
               </div>
 
@@ -126,18 +126,18 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
                   <Flame className="w-3.5 h-3.5 text-[#ff7700]" />
                 </div>
                 <div>
-                  <span className="text-base font-athletic text-white tracking-wide block">900 mg L-Taurine on Orange Packaging</span>
+                  <span className="text-base font-athletic text-white tracking-wide block">900 mg L-Taurine Formulation</span>
                   <span className="text-xs font-body text-zinc-400">The Orange variant includes 900 mg L-Taurine as shown directly on the product label claim.</span>
                 </div>
               </div>
 
               <div className="p-3.5 rounded-xl bg-black/40 border border-white/10 flex items-start gap-3">
-                <div className="w-6 h-6 rounded bg-white/10 border border-white/20 flex items-center justify-center shrink-0 mt-0.5">
-                  <Droplets className="w-3.5 h-3.5 text-white" />
+                <div className="w-6 h-6 rounded bg-[#ff7700]/10 border border-[#ff7700]/30 flex items-center justify-center shrink-0 mt-0.5">
+                  <Sparkles className="w-3.5 h-3.5 text-[#ff7700]" />
                 </div>
                 <div>
-                  <span className="text-base font-athletic text-white tracking-wide block">Two Distinct Flavors: Orange & Flavorless</span>
-                  <span className="text-xs font-body text-zinc-400">Choose between refreshing citrus orange or 100% pure neutral powder for mixing into whey.</span>
+                  <span className="text-base font-athletic text-white tracking-wide block">Signature Orange Formula</span>
+                  <span className="text-xs font-body text-zinc-400">Crisp, refreshing citrus engineered to mix easily with cold water for pre- or post-workout.</span>
                 </div>
               </div>
             </div>
@@ -149,7 +149,7 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
                 className="inline-flex items-center gap-2.5 bg-[#00d2ff] hover:bg-[#33dbff] text-black font-athletic text-xl tracking-wider py-3.5 px-7 rounded-xl transition-all shadow-[0_0_20px_rgba(0,210,255,0.35)] cursor-pointer active:scale-95"
               >
                 <Zap className="w-5 h-5 fill-black" />
-                <span>ORDER {currentVariant.name.toUpperCase()} NOW — {BRAND_CONFIG.priceDisplay}</span>
+                <span>ORDER ORANGE NOW — {BRAND_CONFIG.priceDisplay}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -159,8 +159,8 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
 
         {/* Premium Information Grid as requested:
             MICRONIZED CREATINE
-            100 SERVINGS
-            2 FLAVORS
+            75 SERVINGS (3 MONTHS)
+            ORANGE FLAVOR
             DAILY TRAINING
         */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">

@@ -106,7 +106,7 @@ export const ContactSection: React.FC = () => {
 
           {/* WHATSAPP TO ORDER (Line 2: 91454 78524) */}
           <a
-            href={BRAND_CONFIG.generateWhatsAppLink('Orange or Flavorless', 'secondary')}
+            href={BRAND_CONFIG.generateWhatsAppLink('Orange', 'secondary')}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:w-auto flex-1 min-w-[220px] bg-[#25D366] hover:bg-[#20bd5a] text-black font-display text-lg sm:text-xl font-black py-4 px-6 rounded-2xl transition-all shadow-[0_0_25px_rgba(37,211,102,0.35)] hover:shadow-[0_0_35px_rgba(37,211,102,0.5)] flex items-center justify-center gap-2.5 cursor-pointer active:scale-95"
@@ -129,7 +129,7 @@ export const ContactSection: React.FC = () => {
 
         {/* Pricing Subtext */}
         <p className="text-xs font-mono-code text-zinc-500 mt-8">
-          CoreFuel Micronized Creatine Monohydrate • {BRAND_CONFIG.priceDisplay} ({BRAND_CONFIG.shippingNote}) • 100 Servings
+          CoreFuel Micronized Creatine Monohydrate • {BRAND_CONFIG.priceDisplay} ({BRAND_CONFIG.shippingNote}) • 75 Servings (3 Months Supply)
         </p>
 
       </div>

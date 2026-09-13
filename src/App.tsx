@@ -8,7 +8,6 @@ import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { ProductSection } from './components/ProductSection';
 import { BenefitsSection } from './components/BenefitsSection';
-import { FlavorComparisonSection } from './components/FlavorComparisonSection';
 import { UsageRoutineSection } from './components/UsageRoutineSection';
 import { WhyCoreFuelSection } from './components/WhyCoreFuelSection';
 import { PricingSection } from './components/PricingSection';
@@ -20,10 +19,8 @@ import { MobileOrderBar } from './components/MobileOrderBar';
 import { GoogleLoginPage } from './components/GoogleLoginPage';
 import { FlavorId, UserProfile } from './types';
 
-const STORAGE_KEY_USER = 'corefuel_athlete_user_v1';
-
 export default function App() {
-  // Global selected flavor state: 'orange' | 'flavorless'
+  // Global selected flavor state: 'orange'
   const [selectedFlavorId, setSelectedFlavorId] = useState<FlavorId>('orange');
   const [isOrderModalOpen, setIsOrderModalOpen] = useState<boolean>(false);
 
@@ -32,15 +29,24 @@ export default function App() {
     return window.location.hash === '#login' ? 'login' : 'store';
   });
 
-  // User state
-  const [currentUser, setCurrentUser] = useState<UserProfile | null>(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY_USER);
-      return saved ? JSON.parse(saved) : null;
-    } catch {
-      return null;
-    }
-  });
+  // User state: isolated per session, verified with server
+  const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
+
+  // Sync session on mount with server
+  useEffect(() => {
+    fetch('/api/auth/me')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.authenticated && data.user) {
+          setCurrentUser(data.user);
+        } else {
+          setCurrentUser(null);
+        }
+      })
+      .catch(() => {
+        setCurrentUser(null);
+      });
+  }, []);
 
   // Desktop subtle cursor-following glow
   const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
@@ -68,20 +74,13 @@ export default function App() {
 
   const handleLoginSuccess = (user: UserProfile) => {
     setCurrentUser(user);
-    try {
-      localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(user));
-    } catch {
-      // ignore storage errors
-    }
   };
 
-  const handleLogout = () => {
-    setCurrentUser(null);
+  const handleLogout = async () => {
     try {
-      localStorage.removeItem(STORAGE_KEY_USER);
-    } catch {
-      // ignore
-    }
+      await fetch('/api/auth/logout', { method: 'POST' });
+    } catch {}
+    setCurrentUser(null);
   };
 
   const handleOpenLogin = () => {
@@ -171,12 +170,7 @@ export default function App() {
           {/* 4. Benefits Section: "BUILT FOR THE WORK." (4 Interactive Cards) */}
           <BenefitsSection />
 
-          {/* 5. "ONE FORMULA. TWO WAYS TO TAKE IT." Comparison Section */}
-          <FlavorComparisonSection
-            onOrderFlavor={(flavorId) => handleOpenOrderModal(flavorId)}
-          />
-
-          {/* 6. How To Use: 01 SCOOP, 02 MIX, 03 TRAIN Animated Timeline */}
+          {/* 5. How To Use: 01 SCOOP, 02 MIX, 03 TRAIN Animated Timeline */}
           <UsageRoutineSection />
 
           {/* 7. Why CoreFuel: "BUILT FOR PEOPLE WHO SHOW UP." with Gym Imagery & 5 Pillars */}

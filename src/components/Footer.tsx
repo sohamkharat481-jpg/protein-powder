@@ -40,7 +40,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLogin }) => {
             </p>
 
             <p className="font-body text-zinc-400 text-xs leading-relaxed max-w-sm">
-              CoreFuel Nutrition supplies pure, micronized creatine monohydrate built for disciplined, everyday training. 100 servings in refreshing Orange and versatile Flavorless.
+              CoreFuel Nutrition supplies pure, micronized creatine monohydrate built for disciplined, everyday training. 75 servings (3 months supply) in refreshing Orange with 900 mg L-Taurine.
             </p>
           </div>
 

@@ -31,5 +31,27 @@
     "authMethod": "Google",
     "status": "skipped_no_smtp_pass",
     "provider": "skipped"
+  },
+  {
+    "id": "notif_1789289099189",
+    "recipient": "prashantgaikwad658@gmail.com",
+    "subject": "New User Registration – CoreFuel",
+    "userEmail": "athlete1@gmail.com",
+    "userName": "Athlete One",
+    "timestamp": "2026-09-13T08:44:59.189Z",
+    "authMethod": "Google",
+    "status": "skipped_no_smtp_pass",
+    "provider": "skipped"
+  },
+  {
+    "id": "notif_1789289104835",
+    "recipient": "prashantgaikwad658@gmail.com",
+    "subject": "New User Registration – CoreFuel",
+    "userEmail": "athlete2@gmail.com",
+    "userName": "Athlete Two",
+    "timestamp": "2026-09-13T08:45:04.835Z",
+    "authMethod": "Google",
+    "status": "skipped_no_smtp_pass",
+    "provider": "skipped"
   }
 ]

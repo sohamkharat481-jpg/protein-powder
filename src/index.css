@@ -9,7 +9,7 @@
    - COREFUEL: Bold condensed athletic font
    - MONOHYDRATE: Medium condensed with increased letter spacing
    - MICRONIZED: Light/medium condensed with wide letter spacing
-   - LABELS: Small technical athletic tags (900mg L-Taurine, 100 Servings, etc.)
+   - LABELS: Small technical athletic tags (900mg L-Taurine, 75 Servings, etc.)
    - BODY: Clean modern sans-serif for high readability
    ========================================================================== */
 
@@ -54,7 +54,7 @@
     letter-spacing: 0.02em;
   }
 
-  /* Small packaging labels (900 mg L-TAURINE, 100 SERVINGS, ORANGE, etc.) */
+  /* Small packaging labels (900 mg L-TAURINE, 75 SERVINGS, ORANGE, etc.) */
   .font-label-pkg {
     font-family: 'Barlow Condensed', 'Oswald', -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 700;

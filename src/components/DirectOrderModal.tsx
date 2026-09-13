@@ -90,51 +90,23 @@ export const DirectOrderModal: React.FC<DirectOrderModalProps> = ({
             </div>
           </div>
 
-          {/* Flavor Selector Inside Modal */}
-          <div className="mb-6">
-            <label className="block text-xs font-mono-code uppercase text-zinc-400 mb-2.5 font-bold tracking-wider">
-              SELECTED FLAVOR:
-            </label>
-            <div className="grid grid-cols-2 gap-3">
-              {/* Orange Option */}
-              <button
-                type="button"
-                onClick={() => onSelectFlavor('orange')}
-                className={`p-3 rounded-2xl border text-left cursor-pointer transition-all flex items-center justify-between ${
-                  isOrange
-                    ? 'border-[#ff7700] bg-[#ff7700]/15 text-white shadow-[0_0_20px_rgba(255,119,0,0.25)]'
-                    : 'border-white/10 bg-black/40 text-zinc-400 hover:border-white/30 hover:text-white'
-                }`}
-              >
-                <div className="flex items-center gap-2">
-                  <div className={`w-3 h-3 rounded-full ${isOrange ? 'bg-[#ff7700]' : 'bg-zinc-600'}`} />
-                  <div>
-                    <div className="font-display text-lg font-bold uppercase leading-none">Orange</div>
-                    <div className="text-[10px] font-mono-code text-amber-300">900mg Taurine</div>
-                  </div>
+          {/* Single Flavor Highlight */}
+          <div className="mb-6 p-3 rounded-2xl bg-black/40 border border-[#ff7700]/30 flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <div className="w-3 h-3 rounded-full bg-[#ff7700] shadow-[0_0_10px_#ff7700]" />
+              <div>
+                <div className="font-display text-lg font-bold uppercase leading-none text-white">
+                  Orange Formula
                 </div>
-                {isOrange && <CheckCircle2 className="w-4 h-4 text-[#ff7700]" />}
-              </button>
-
-              {/* Flavorless Option */}
-              <button
-                type="button"
-                onClick={() => onSelectFlavor('flavorless')}
-                className={`p-3 rounded-2xl border text-left cursor-pointer transition-all flex items-center justify-between ${
-                  !isOrange
-                    ? 'border-white bg-white/15 text-white shadow-[0_0_20px_rgba(255,255,255,0.2)]'
-                    : 'border-white/10 bg-black/40 text-zinc-400 hover:border-white/30 hover:text-white'
-                }`}
-              >
-                <div className="flex items-center gap-2">
-                  <div className={`w-3 h-3 rounded-full ${!isOrange ? 'bg-white' : 'bg-zinc-600'}`} />
-                  <div>
-                    <div className="font-display text-lg font-bold uppercase leading-none">Flavorless</div>
-                    <div className="text-[10px] font-mono-code text-zinc-300">100% Pure</div>
-                  </div>
+                <div className="text-[10px] font-mono-code text-amber-300 mt-0.5">
+                  900mg Taurine • Active Flavor
                 </div>
-                {!isOrange && <CheckCircle2 className="w-4 h-4 text-white" />}
-              </button>
+              </div>
+            </div>
+            <div className="text-right">
+              <span className="text-xs font-mono-code text-zinc-400">
+                75 Servings (3 Mo)
+              </span>
             </div>
           </div>
 
@@ -142,14 +114,14 @@ export const DirectOrderModal: React.FC<DirectOrderModalProps> = ({
           <div className="p-4 rounded-2xl bg-gradient-to-r from-[#11141c] to-[#0c0e15] border border-white/10 mb-6 flex items-center gap-4">
             <div className="w-16 h-16 rounded-xl overflow-hidden bg-black/60 border border-white/10 shrink-0 p-1">
               <ProductImage
-                variant={currentVariant.id === 'orange' ? 'orange' : 'flavorless'}
-                alt={currentVariant.name}
+                variant="orange"
+                alt="CoreFuel Creatine Orange"
                 className="w-full h-full object-contain rounded-lg"
               />
             </div>
             <div className="flex-1">
               <span className="text-xs font-mono-code text-zinc-400 block uppercase tracking-wider">
-                {currentVariant.name} Variant
+                Orange Variant
               </span>
               <span className="font-display text-3xl font-black text-white">
                 {BRAND_CONFIG.priceDisplay}
@@ -160,7 +132,7 @@ export const DirectOrderModal: React.FC<DirectOrderModalProps> = ({
                 {BRAND_CONFIG.shippingNote}
               </span>
               <span className="text-[10px] font-mono-code text-zinc-500 mt-1 block">
-                100 Full Servings
+                75 Full Servings (3 Mo)
               </span>
             </div>
           </div>
@@ -226,7 +198,7 @@ export const DirectOrderModal: React.FC<DirectOrderModalProps> = ({
           <div className="space-y-3">
             {/* PRIMARY WHATSAPP TO ORDER (Line 2: 91454 78524) */}
             <a
-              href={BRAND_CONFIG.generateWhatsAppLink(currentVariant.name, 'secondary')}
+              href={BRAND_CONFIG.generateWhatsAppLink('Orange', 'secondary')}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-black font-display text-lg sm:text-xl font-black tracking-wide py-3.5 sm:py-4 px-6 rounded-2xl transition-all shadow-[0_0_25px_rgba(37,211,102,0.3)] hover:shadow-[0_0_35px_rgba(37,211,102,0.45)] flex items-center justify-center gap-2.5 cursor-pointer active:scale-[0.98]"
@@ -259,7 +231,7 @@ export const DirectOrderModal: React.FC<DirectOrderModalProps> = ({
           {/* Pre-filled Message Note */}
           <div className="mt-4 text-center">
             <span className="text-[11px] font-mono-code text-zinc-500">
-              Pre-filled text: "Hi CoreFuel, I want to order CoreFuel Creatine Monohydrate. My preferred flavor is {currentVariant.name}."
+              Pre-filled text: "Hi CoreFuel, I want to order CoreFuel Creatine Monohydrate (Orange variant, 75 Servings - 3 Months @ ₹549/-). Please confirm delivery."
             </span>
           </div>
         </motion.div>

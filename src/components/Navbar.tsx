@@ -211,8 +211,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Mobile Menu Official Brand Header */}
             <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/10">
               <BrandLogo variant="full" size="xs" showSubtitle />
-              <span className="text-[10px] font-label-pkg text-[#00d2ff] uppercase tracking-widest bg-white/5 px-2.5 py-1 rounded-md border border-white/10">
-                100 SERVINGS
+              <span className="text-[10px] font-label-pkg text-[#ff7700] uppercase tracking-widest bg-white/5 px-2.5 py-1 rounded-md border border-white/10">
+                75 SERVINGS • 3 MONTHS
               </span>
             </div>
 

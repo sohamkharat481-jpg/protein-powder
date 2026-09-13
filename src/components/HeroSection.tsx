@@ -88,7 +88,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             >
               <BrandLogo variant="symbol" size="xs" />
               <span className="font-micronized text-xs uppercase text-zinc-200 font-semibold tracking-[0.25em]">
-                {BRAND_CONFIG.brandName} • 100 SERVINGS
+                {BRAND_CONFIG.brandName} • 75 SERVINGS • 3 MONTHS
               </span>
             </motion.div>
 
@@ -137,78 +137,41 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 </span>
               </div>
               <span className="text-xs font-label-pkg text-zinc-400 tracking-wider hidden sm:inline">
-                • 100 SERVINGS TUB
+                • 75 SERVINGS (3 MONTHS)
               </span>
             </motion.div>
 
-            {/* INTERACTIVE FLAVOR SELECTOR as requested:
-                "CHOOSE YOUR FLAVOR"
-                [ ORANGE ]     [ FLAVORLESS ]
-            */}
+            {/* SINGLE ACTIVE FLAVOR DISPLAY (ORANGE ONLY) */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.75 }}
-              className="p-4 rounded-2xl bg-[#0d0f15] border border-white/15 max-w-xl mb-8 shadow-xl"
+              className="p-4 rounded-2xl bg-[#0d0f15] border border-[#ff7700]/30 max-w-xl mb-8 shadow-xl"
             >
-              <div className="flex items-center justify-between mb-3 text-xs font-label-pkg">
-                <span className="text-zinc-400 uppercase tracking-widest flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-[#00d2ff]" />
-                  CHOOSE YOUR FLAVOR
-                </span>
-                <span className="text-white tracking-wider">
-                  {currentVariant.name}: {BRAND_CONFIG.priceDisplay}
-                </span>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                {/* ORANGE BUTTON */}
-                <button
-                  type="button"
-                  onClick={() => onSelectFlavor('orange')}
-                  className={`p-3.5 rounded-xl border text-left cursor-pointer transition-all duration-300 flex items-center justify-between ${
-                    isOrange
-                      ? 'border-[#ff7700] bg-[#ff7700]/15 text-white shadow-[0_0_20px_rgba(255,119,0,0.25)]'
-                      : 'border-white/10 bg-black/40 text-zinc-400 hover:border-white/30 hover:text-white'
-                  }`}
-                >
-                  <div className="flex items-center gap-2.5">
-                    <div className={`w-3.5 h-3.5 rounded-full ${isOrange ? 'bg-[#ff7700] shadow-[0_0_10px_#ff7700]' : 'bg-zinc-600'}`} />
-                    <div>
-                      <div className="font-athletic text-xl tracking-wider uppercase leading-tight">
-                        ORANGE
-                      </div>
-                      <div className="text-[11px] font-label-pkg text-amber-300 tracking-wider">
-                        900mg TAURINE
-                      </div>
-                    </div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-[#ff7700]/15 border border-[#ff7700]/30 flex items-center justify-center text-[#ff7700]">
+                    <Flame className="w-5 h-5" />
                   </div>
-                  {isOrange && <CheckCircle2 className="w-4 h-4 text-[#ff7700]" />}
-                </button>
-
-                {/* FLAVORLESS BUTTON */}
-                <button
-                  type="button"
-                  onClick={() => onSelectFlavor('flavorless')}
-                  className={`p-3.5 rounded-xl border text-left cursor-pointer transition-all duration-300 flex items-center justify-between ${
-                    !isOrange
-                      ? 'border-white bg-white/15 text-white shadow-[0_0_20px_rgba(255,255,255,0.2)]'
-                      : 'border-white/10 bg-black/40 text-zinc-400 hover:border-white/30 hover:text-white'
-                  }`}
-                >
-                  <div className="flex items-center gap-2.5">
-                    <div className={`w-3.5 h-3.5 rounded-full ${!isOrange ? 'bg-white shadow-[0_0_10px_white]' : 'bg-zinc-600'}`} />
-                    <div>
-                      <div className="font-athletic text-xl tracking-wider uppercase leading-tight">
-                        FLAVORLESS
-                      </div>
-                      <div className="text-[11px] font-label-pkg text-zinc-300 tracking-wider">
-                        100% PURE
-                      </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-athletic text-2xl text-white tracking-wider uppercase leading-none">
+                        ORANGE FLAVOR
+                      </span>
+                      <span className="text-[10px] font-label-pkg text-amber-300 bg-[#ff7700]/20 px-2 py-0.5 rounded border border-[#ff7700]/30 uppercase tracking-wider">
+                        ACTIVE FLAVOR
+                      </span>
                     </div>
+                    <p className="text-xs font-label-pkg text-zinc-400 mt-1">
+                      Formulated with 900 mg L-Taurine • 75 Full Servings (3 Months Supply)
+                    </p>
                   </div>
-                  {!isOrange && <CheckCircle2 className="w-4 h-4 text-white" />}
-                </button>
+                </div>
+                <div className="text-right">
+                  <span className="font-creatine text-2xl text-white tracking-tight">
+                    {BRAND_CONFIG.priceDisplay}
+                  </span>
+                </div>
               </div>
             </motion.div>
 
@@ -281,7 +244,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 }`}
               >
                 {isOrange ? <Flame className="w-3.5 h-3.5 text-[#ff7700]" /> : <Droplets className="w-3.5 h-3.5 text-[#00d2ff]" />}
-                <span>{currentVariant.badge} • 100 SERVINGS</span>
+                <span>{currentVariant.badge} • 75 SERVINGS (3 MONTHS)</span>
               </div>
 
               {/* Product Visual Container with Crossfade & Luxury Transition */}
@@ -296,7 +259,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     className="w-full h-full flex items-center justify-center"
                   >
                     <ProductImage
-                      variant={currentVariant.id === 'orange' ? 'orange' : 'flavorless'}
+                      variant={currentVariant.id === 'orange' ? 'orange' : 'unflavored'}
                       alt={`${BRAND_CONFIG.productName} - ${currentVariant.name}`}
                       className="w-full h-full object-contain object-center p-2 rounded-xl group-hover:scale-105 transition-transform duration-700"
                     />

@@ -3,6 +3,7 @@ dotenv.config();
 
 import express from 'express';
 import path from 'path';
+import cookieParser from 'cookie-parser';
 import { createServer as createViteServer } from 'vite';
 import { apiRouter } from './server/apiRouter';
 
@@ -10,11 +11,15 @@ async function startServer() {
   const app = express();
   const PORT = 3000;
 
-  // Middleware for parsing JSON
+  // Middleware for parsing JSON and cookies
   app.use(express.json());
+  app.use(cookieParser());
 
   // Mount API routes FIRST
   app.use('/api', apiRouter);
+  app.get(['/auth/google/callback', '/auth/google/callback/'], (req, res) => {
+    res.redirect(`/api/auth/google/callback?${new URLSearchParams(req.query as any).toString()}`);
+  });
 
   // Serve static images directly from public/images
   app.use('/images', express.static(path.resolve(process.cwd(), 'public', 'images')));

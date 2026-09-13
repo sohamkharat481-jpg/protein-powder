@@ -32,11 +32,11 @@ export const FlavorComparisonSection: React.FC<FlavorComparisonSectionProps> = (
             </span>
           </h2>
           <p className="font-body text-zinc-400 text-base sm:text-lg leading-relaxed">
-            Both powered by pure micronized creatine monohydrate with 100 full servings. Same performance, two versatile experiences.
+            Both powered by pure micronized creatine monohydrate with 75 full servings (3 months supply). Same performance, two versatile experiences.
           </p>
         </div>
 
-        {/* Comparison Grid: ORANGE on Left, FLAVORLESS on Right */}
+        {/* Comparison Grid: ORANGE on Left, unflavored on Right */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
           
           {/* LEFT: ORANGE */}
@@ -54,7 +54,7 @@ export const FlavorComparisonSection: React.FC<FlavorComparisonSectionProps> = (
                   <Flame className="w-3.5 h-3.5 text-[#ff7700]" />
                   900 MG L-TAURINE
                 </div>
-                <span className="text-xs font-label-pkg text-zinc-500 tracking-wider">100 SERVINGS</span>
+                <span className="text-xs font-label-pkg text-zinc-500 tracking-wider">75 SERVINGS (3 MO)</span>
               </div>
 
               {/* Product Visual */}
@@ -113,7 +113,7 @@ export const FlavorComparisonSection: React.FC<FlavorComparisonSectionProps> = (
             </div>
           </motion.div>
 
-          {/* RIGHT: FLAVORLESS */}
+          {/* RIGHT: unflavored */}
           <motion.div
             initial={{ opacity: 0, x: 25 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -128,21 +128,21 @@ export const FlavorComparisonSection: React.FC<FlavorComparisonSectionProps> = (
                   <Droplets className="w-3.5 h-3.5 text-[#00d2ff]" />
                   100% UNFLAVORED
                 </div>
-                <span className="text-xs font-label-pkg text-zinc-500 tracking-wider">100 SERVINGS</span>
+                <span className="text-xs font-label-pkg text-zinc-500 tracking-wider">75 SERVINGS (3 MO)</span>
               </div>
 
               {/* Product Visual */}
               <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-black/60 border border-white/10 mb-6 relative flex items-center justify-center p-4">
                 <ProductImage
-                  variant="flavorless"
-                  alt="CoreFuel Creatine Flavorless"
+                  variant="unflavored"
+                  alt="CoreFuel Creatine unflavored"
                   className="w-full h-full object-contain rounded-xl group-hover:scale-105 transition-transform duration-500 p-2"
                 />
               </div>
 
               {/* Title & Copy as requested */}
               <h3 className="font-creatine text-4xl sm:text-5xl text-white tracking-tight mb-2">
-                FLAVORLESS
+                UNFLAVORED
               </h3>
               <p className="font-body text-zinc-300 text-base leading-relaxed mb-6">
                 Simple and versatile for your preferred drink or shake.
@@ -178,10 +178,10 @@ export const FlavorComparisonSection: React.FC<FlavorComparisonSectionProps> = (
               </div>
 
               <button
-                onClick={() => onOrderFlavor('flavorless')}
+                onClick={() => onOrderFlavor('unflavored')}
                 className="bg-[#00d2ff] hover:bg-[#33dbff] text-black font-athletic text-lg tracking-wider px-6 py-3.5 rounded-xl transition-all shadow-[0_0_20px_rgba(0,210,255,0.35)] cursor-pointer flex items-center gap-2 active:scale-95"
               >
-                <span>ORDER FLAVORLESS</span>
+                <span>ORDER UNFLAVORED</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
