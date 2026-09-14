@@ -1,4 +1,4 @@
-export type FlavorId = 'orange' | 'unflavored' | 'Unflavored';
+export type FlavorId = 'orange' | 'unflavored' | 'flavorless';
 
 export interface FlavorVariant {
   id: FlavorId;
@@ -7,7 +7,7 @@ export interface FlavorVariant {
   badge: string;
   description: string;
   image: string;
-  accentColor: string; // '#ff7700' for orange, '#00d2ff' for Unflavored
+  accentColor: string;
   themeClass: string;
   servings: string;
   servingCount: number;
@@ -45,6 +45,8 @@ export interface UserProfile {
   avatarUrl?: string;
   isMember: boolean;
   joinedDate: string;
+  createdAt?: string;
+  updatedAt?: string;
   phone?: string;
   savedAddress?: {
     fullName: string;

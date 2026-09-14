@@ -12,7 +12,7 @@ const PILLARS = [
   },
   {
     title: 'CONSISTENCY',
-    desc: '75 full servings engineered for 3 months of uninterrupted training.',
+    desc: '75 full servings engineered for uninterrupted daily training.',
     icon: Clock,
   },
   {

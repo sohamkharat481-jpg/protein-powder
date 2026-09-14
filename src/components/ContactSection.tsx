@@ -129,7 +129,7 @@ export const ContactSection: React.FC = () => {
 
         {/* Pricing Subtext */}
         <p className="text-xs font-mono-code text-zinc-500 mt-8">
-          CoreFuel Micronized Creatine Monohydrate • {BRAND_CONFIG.priceDisplay} ({BRAND_CONFIG.shippingNote}) • 75 Servings (3 Months Supply)
+          CoreFuel Micronized Creatine Monohydrate • {BRAND_CONFIG.priceDisplay} ({BRAND_CONFIG.shippingNote}) • 75 Servings
         </p>
 
       </div>

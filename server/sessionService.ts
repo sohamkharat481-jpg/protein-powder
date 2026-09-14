@@ -10,23 +10,44 @@ export interface SessionData {
   expiresAt: number;
 }
 
-const SESSION_FILE = path.resolve(process.cwd(), 'data', 'sessions.json');
+function resolveSessionFilePath(): string {
+  const localDir = path.resolve(process.cwd(), 'data');
+  const localFile = path.join(localDir, 'sessions.json');
+
+  try {
+    if (!fs.existsSync(localDir)) {
+      fs.mkdirSync(localDir, { recursive: true });
+    }
+    const testFile = path.join(localDir, '.session_test');
+    fs.writeFileSync(testFile, 'test');
+    fs.unlinkSync(testFile);
+    return localFile;
+  } catch {
+    const tmpDir = path.resolve('/tmp', 'corefuel_data');
+    if (!fs.existsSync(tmpDir)) {
+      fs.mkdirSync(tmpDir, { recursive: true });
+    }
+    return path.join(tmpDir, 'sessions.json');
+  }
+}
+
+let sessionFilePath = resolveSessionFilePath();
 const SESSION_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
 
 function ensureSessionStorage(): void {
-  const dir = path.dirname(SESSION_FILE);
+  const dir = path.dirname(sessionFilePath);
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
-  if (!fs.existsSync(SESSION_FILE)) {
-    fs.writeFileSync(SESSION_FILE, JSON.stringify([], null, 2), 'utf-8');
+  if (!fs.existsSync(sessionFilePath)) {
+    fs.writeFileSync(sessionFilePath, JSON.stringify([], null, 2), 'utf-8');
   }
 }
 
 function loadSessions(): SessionData[] {
   ensureSessionStorage();
   try {
-    const data = fs.readFileSync(SESSION_FILE, 'utf-8');
+    const data = fs.readFileSync(sessionFilePath, 'utf-8');
     const list: SessionData[] = JSON.parse(data);
     const now = Date.now();
     return list.filter((s) => s.expiresAt > now);
@@ -39,9 +60,14 @@ function loadSessions(): SessionData[] {
 function saveSessions(sessions: SessionData[]): void {
   ensureSessionStorage();
   try {
-    fs.writeFileSync(SESSION_FILE, JSON.stringify(sessions, null, 2), 'utf-8');
+    fs.writeFileSync(sessionFilePath, JSON.stringify(sessions, null, 2), 'utf-8');
   } catch (err) {
     console.error('[SESSION_WRITE_ERROR]', err);
+    try {
+      sessionFilePath = path.resolve('/tmp', 'corefuel_data', 'sessions.json');
+      ensureSessionStorage();
+      fs.writeFileSync(sessionFilePath, JSON.stringify(sessions, null, 2), 'utf-8');
+    } catch {}
   }
 }
 

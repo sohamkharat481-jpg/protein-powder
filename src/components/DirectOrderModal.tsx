@@ -105,7 +105,7 @@ export const DirectOrderModal: React.FC<DirectOrderModalProps> = ({
             </div>
             <div className="text-right">
               <span className="text-xs font-mono-code text-zinc-400">
-                75 Servings (3 Mo)
+                75 Servings
               </span>
             </div>
           </div>
@@ -132,7 +132,7 @@ export const DirectOrderModal: React.FC<DirectOrderModalProps> = ({
                 {BRAND_CONFIG.shippingNote}
               </span>
               <span className="text-[10px] font-mono-code text-zinc-500 mt-1 block">
-                75 Full Servings (3 Mo)
+                75 Full Servings
               </span>
             </div>
           </div>
@@ -231,7 +231,7 @@ export const DirectOrderModal: React.FC<DirectOrderModalProps> = ({
           {/* Pre-filled Message Note */}
           <div className="mt-4 text-center">
             <span className="text-[11px] font-mono-code text-zinc-500">
-              Pre-filled text: "Hi CoreFuel, I want to order CoreFuel Creatine Monohydrate (Orange variant, 75 Servings - 3 Months @ ₹549/-). Please confirm delivery."
+              Pre-filled text: "Hi CoreFuel, I want to order CoreFuel Creatine Monohydrate (Orange variant, 75 Servings @ ₹549/-). Please confirm delivery."
             </span>
           </div>
         </motion.div>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { PRODUCT_IMAGES } from '../data/productData';
 
 interface ProductImageProps {
-  variant: 'orange' | 'flavorless';
+  variant: 'orange' | 'flavorless' | 'unflavored';
   alt: string;
   className?: string;
   style?: React.CSSProperties;

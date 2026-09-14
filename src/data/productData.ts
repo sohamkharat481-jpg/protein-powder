@@ -34,8 +34,8 @@ export const BRAND_CONFIG = {
   headline: 'POWER EVERY REP.',
   subheadline: 'Micronized Creatine Monohydrate built for your daily training.',
   brandTagline: 'Fuel your consistency.',
-  servings: '100 Servings',
-  servingCount: 100,
+  servings: '75 Servings',
+  servingCount: 75,
   
   // Exact Pricing as specified
   priceNumeric: 549,
@@ -75,7 +75,7 @@ export const BRAND_CONFIG = {
   
   generateWhatsAppLink: (flavorName: string = 'Orange', targetPhone: string = '9145478524') => {
     const cleanPhone = targetPhone.replace(/[^0-9]/g, '');
-    const text = `Hi CoreFuel, I want to order CoreFuel Creatine Monohydrate (${flavorName} variant, 100 Servings @ ₹549/-). Please confirm delivery.`;
+    const text = `Hi CoreFuel, I want to order CoreFuel Creatine Monohydrate (${flavorName} variant, 75 Servings @ ₹549/-). Please confirm delivery.`;
     return `https://wa.me/${cleanPhone}?text=${encodeURIComponent(text)}`;
   },
 };
@@ -85,13 +85,13 @@ export const FLAVOR_VARIANTS: Record<'orange' | 'flavorless', FlavorVariant> = {
     id: 'orange',
     name: 'Orange',
     tagline: 'Bold orange flavor for a refreshing creatine routine.',
-    badge: 'REFRESHING CITRUS',
+    badge: 'ACTIVE FLAVOR',
     description: 'Crisp, thirst-quenching citrus profile designed to break the monotony of unflavored powders. Formulated with 900 mg L-Taurine for daily training.',
     image: PRODUCT_IMAGES.orangeTub,
     accentColor: '#ff7700',
     themeClass: 'text-[#ff7700] border-[#ff7700]',
-    servings: '100 Servings',
-    servingCount: 100,
+    servings: '75 Servings',
+    servingCount: 75,
     highlightText: '900 mg L-Taurine',
     bestFor: 'Refreshing standalone drink with cold water or ice',
     mixGuidance: 'Mix 1 scoop with 250–300ml cold water.',
@@ -105,14 +105,14 @@ export const FLAVOR_VARIANTS: Record<'orange' | 'flavorless', FlavorVariant> = {
     id: 'flavorless',
     name: 'Flavorless',
     tagline: 'Simple and versatile for your preferred drink or shake.',
-    badge: '100% UNFLAVORED',
+    badge: 'UNFLAVORED',
     description: 'Pure micronized creatine monohydrate with zero added flavorings or sweeteners. Blends seamlessly into whey protein, smoothies, juice, or water.',
     image: PRODUCT_IMAGES.flavorlessTub,
     accentColor: '#00d2ff',
     themeClass: 'text-[#00d2ff] border-[#00d2ff]',
-    servings: '100 Servings',
-    servingCount: 100,
-    highlightText: 'Zero Flavorings • Pure Micronized',
+    servings: '75 Servings',
+    servingCount: 75,
+    highlightText: 'Pure Micronized 200-Mesh',
     bestFor: 'Versatile daily stacking with your protein shake or pre-workout',
     mixGuidance: 'Add 1 scoop to your protein shake, juice, or favorite beverage.',
     price: 549,
@@ -130,14 +130,14 @@ export const PRODUCT_INFO_GRID = [
     subtext: 'Ultra-fine 200-mesh powder for easy mixing',
   },
   {
-    kicker: '100',
+    kicker: '75',
     label: 'SERVINGS',
-    subtext: 'Built for over 3 months of daily training',
+    subtext: '75 full servings of daily training supply',
   },
   {
-    kicker: '2',
-    label: 'FLAVORS',
-    subtext: 'Refreshing Orange or pure Flavorless',
+    kicker: 'ORANGE',
+    label: 'FLAVOR',
+    subtext: 'Refreshing citrus formulated with 900 mg L-Taurine',
   },
   {
     kicker: 'DAILY',
@@ -178,7 +178,7 @@ export const ROUTINE_STEPS: UsageStep[] = [
   {
     stepNumber: '02',
     title: 'MIX',
-    description: 'Mix with your preferred beverage.',
+    description: 'Mix with your preferred beverage or cold water.',
   },
   {
     stepNumber: '03',
@@ -193,8 +193,8 @@ export const FAQ_ITEMS: FaqItem[] = [
     answer: 'Creatine monohydrate is a thoroughly studied sports nutrition ingredient that aids in replenishing cellular ATP (adenosine triphosphate). It supports muscular power, explosive performance, and intracellular hydration during resistance exercise.',
   },
   {
-    question: 'What is the difference between Orange and Flavorless?',
-    answer: 'Both provide pure micronized creatine monohydrate with 100 full servings. The Orange variant has a crisp, thirst-quenching citrus profile and 900 mg L-Taurine as shown on the packaging. The Flavorless variant contains zero sweeteners or flavorings, making it versatile to blend invisibly into your protein shake or smoothie.',
+    question: 'What flavor is currently available?',
+    answer: 'CoreFuel Creatine Monohydrate is currently available in an active Orange flavor. It features a crisp, thirst-quenching citrus profile and 900 mg L-Taurine as indicated on the packaging, mixing easily with cold water.',
   },
   {
     question: 'How do I use CoreFuel Creatine?',
@@ -202,11 +202,11 @@ export const FAQ_ITEMS: FaqItem[] = [
   },
   {
     question: 'How many servings are included?',
-    answer: 'Every container of CoreFuel Creatine Monohydrate contains 100 full servings, designed to support your daily training over a multi-month cycle.',
+    answer: 'Every container of CoreFuel Creatine Monohydrate contains exactly 75 full servings, designed to support your daily training over consistent workout cycles.',
   },
   {
-    question: 'Can Flavorless be mixed with other drinks?',
-    answer: 'Yes. The Flavorless variant is specifically unflavored and micronized to dissolve smoothly into whey protein shakes, juices, pre-workouts, or water without altering taste or sweetness.',
+    question: 'How should I mix CoreFuel Orange Creatine?',
+    answer: 'Mix 1 scoop with 250–300ml cold water or ice. It dissolves smoothly for a crisp, refreshing citrus pre- or post-workout drink.',
   },
   {
     question: 'How should I store the product?',

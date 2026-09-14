@@ -16,7 +16,7 @@ import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { DirectOrderModal } from './components/DirectOrderModal';
 import { MobileOrderBar } from './components/MobileOrderBar';
-import { GoogleLoginPage } from './components/GoogleLoginPage';
+import { LoginPage } from './components/LoginPage';
 import { FlavorId, UserProfile } from './types';
 
 export default function App() {
@@ -34,12 +34,22 @@ export default function App() {
 
   // Sync session on mount with server
   useEffect(() => {
-    fetch('/api/auth/me')
+    const sessionId = localStorage.getItem('corefuel_session_id');
+    const headers: Record<string, string> = {};
+    if (sessionId) {
+      headers['Authorization'] = `Bearer ${sessionId}`;
+    }
+
+    fetch('/api/auth/me', {
+      credentials: 'include',
+      headers,
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.authenticated && data.user) {
           setCurrentUser(data.user);
         } else {
+          localStorage.removeItem('corefuel_session_id');
           setCurrentUser(null);
         }
       })
@@ -72,14 +82,28 @@ export default function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, [currentView]);
 
-  const handleLoginSuccess = (user: UserProfile) => {
+  const handleLoginSuccess = (user: UserProfile, sessionId?: string) => {
+    if (sessionId) {
+      localStorage.setItem('corefuel_session_id', sessionId);
+    }
     setCurrentUser(user);
   };
 
   const handleLogout = async () => {
+    const sessionId = localStorage.getItem('corefuel_session_id');
+    const headers: Record<string, string> = {};
+    if (sessionId) {
+      headers['Authorization'] = `Bearer ${sessionId}`;
+    }
+
     try {
-      await fetch('/api/auth/logout', { method: 'POST' });
+      await fetch('/api/auth/logout', {
+        method: 'POST',
+        credentials: 'include',
+        headers,
+      });
     } catch {}
+    localStorage.removeItem('corefuel_session_id');
     setCurrentUser(null);
   };
 
@@ -140,7 +164,7 @@ export default function App() {
 
       {/* Conditional View Rendering */}
       {currentView === 'login' ? (
-        <GoogleLoginPage
+        <LoginPage
           onBackToStore={handleBackToStore}
           currentUser={currentUser}
           onLoginSuccess={handleLoginSuccess}

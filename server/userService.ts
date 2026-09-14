@@ -3,57 +3,91 @@ import path from 'path';
 import { sendNewUserRegistrationEmail } from './emailService';
 
 export interface StoredUser {
-  id: string;
-  googleId?: string;
+  id: string; // unique internal account ID
   name: string;
   email: string;
   avatarUrl?: string;
+  createdAt: string;
+  updatedAt: string;
   registeredAt: string;
   lastLoginAt: string;
-  authProvider: 'Google';
+  authProvider: 'Email';
   notificationSent: boolean;
   savedAddress?: any;
   orderHistory?: any[];
 }
 
-const DB_FILE = path.resolve(process.cwd(), 'data', 'users.json');
+function resolveDbFilePath(): string {
+  const localDir = path.resolve(process.cwd(), 'data');
+  const localFile = path.join(localDir, 'users.json');
+
+  try {
+    if (!fs.existsSync(localDir)) {
+      fs.mkdirSync(localDir, { recursive: true });
+    }
+    // Test write permission
+    const testFile = path.join(localDir, '.write_test');
+    fs.writeFileSync(testFile, 'test');
+    fs.unlinkSync(testFile);
+    return localFile;
+  } catch {
+    // Read-only filesystem fallback to /tmp
+    const tmpDir = path.resolve('/tmp', 'corefuel_data');
+    if (!fs.existsSync(tmpDir)) {
+      fs.mkdirSync(tmpDir, { recursive: true });
+    }
+    return path.join(tmpDir, 'users.json');
+  }
+}
+
+let dbFilePath = resolveDbFilePath();
 
 function ensureDataDirectory() {
-  const dir = path.dirname(DB_FILE);
+  const dir = path.dirname(dbFilePath);
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
-  if (!fs.existsSync(DB_FILE)) {
-    fs.writeFileSync(DB_FILE, JSON.stringify([], null, 2), 'utf-8');
+  if (!fs.existsSync(dbFilePath)) {
+    fs.writeFileSync(dbFilePath, JSON.stringify([], null, 2), 'utf-8');
   }
 }
 
 export function getAllUsers(): StoredUser[] {
-  ensureDataDirectory();
   try {
-    const raw = fs.readFileSync(DB_FILE, 'utf-8');
+    ensureDataDirectory();
+    const raw = fs.readFileSync(dbFilePath, 'utf-8');
     return JSON.parse(raw);
   } catch (err) {
-    console.error('[DATABASE_READ_ERROR] Error reading users.json:', err);
+    console.error('[DATABASE_READ_ERROR] Error reading users database:', err);
     return [];
   }
 }
 
 export function saveAllUsers(users: StoredUser[]): void {
-  ensureDataDirectory();
   try {
-    fs.writeFileSync(DB_FILE, JSON.stringify(users, null, 2), 'utf-8');
+    ensureDataDirectory();
+    fs.writeFileSync(dbFilePath, JSON.stringify(users, null, 2), 'utf-8');
   } catch (err) {
-    console.error('[DATABASE_WRITE_ERROR] Error writing users.json:', err);
-    throw err;
+    console.error('[DATABASE_WRITE_ERROR] Error writing users database:', err);
+    try {
+      dbFilePath = path.resolve('/tmp', 'corefuel_data', 'users.json');
+      ensureDataDirectory();
+      fs.writeFileSync(dbFilePath, JSON.stringify(users, null, 2), 'utf-8');
+    } catch (fallbackErr) {
+      throw fallbackErr;
+    }
   }
 }
 
-export async function authenticateGoogleUser(payload: {
+export function getUserByEmail(email: string): StoredUser | null {
+  const normalized = email.trim().toLowerCase();
+  const users = getAllUsers();
+  return users.find((u) => u.email.toLowerCase() === normalized) || null;
+}
+
+export async function authenticateCustomer(payload: {
   email: string;
   name?: string;
-  avatarUrl?: string;
-  googleId?: string;
   savedAddress?: any;
 }): Promise<{
   success: boolean;
@@ -62,27 +96,27 @@ export async function authenticateGoogleUser(payload: {
   notificationStatus?: any;
 }> {
   if (!payload.email || typeof payload.email !== 'string') {
-    throw new Error('Valid user email address is required');
+    throw new Error('Valid customer email address is required');
   }
 
   const normalizedEmail = payload.email.trim().toLowerCase();
+  if (!normalizedEmail.includes('@') || !normalizedEmail.includes('.')) {
+    throw new Error('Please provide a valid email format');
+  }
+
   const users = getAllUsers();
-
-  const existingIndex = users.findIndex(
-    (u) => u.email.toLowerCase() === normalizedEmail || (payload.googleId && u.googleId === payload.googleId)
-  );
-
   const now = new Date().toISOString();
 
+  // Multi-user matching: match by unique customer email
+  const existingIndex = users.findIndex((u) => u.email.toLowerCase() === normalizedEmail);
+
   if (existingIndex !== -1) {
-    // Existing user logging in again
+    // Existing user logging in
     const existing = users[existingIndex];
     existing.lastLoginAt = now;
+    existing.updatedAt = now;
     if (payload.name && payload.name.trim()) {
       existing.name = payload.name.trim();
-    }
-    if (payload.avatarUrl) {
-      existing.avatarUrl = payload.avatarUrl;
     }
     if (payload.savedAddress) {
       existing.savedAddress = payload.savedAddress;
@@ -91,7 +125,7 @@ export async function authenticateGoogleUser(payload: {
     users[existingIndex] = existing;
     saveAllUsers(users);
 
-    console.log(`[AUTH_LOGIN] Existing user logged in: ${existing.email} (ID: ${existing.id}). No notification sent.`);
+    console.log(`[AUTH_LOGIN] Existing customer signed in: ${existing.email} (ID: ${existing.id})`);
 
     return {
       success: true,
@@ -100,29 +134,30 @@ export async function authenticateGoogleUser(payload: {
     };
   }
 
-  // Brand New User Registration
+  // Brand New Customer Registration
+  const assignedName = payload.name?.trim() || 'CoreFuel Athlete';
+  const newUserId = `usr_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
   const newUser: StoredUser = {
-    id: `usr_g_${Date.now()}`,
-    googleId: payload.googleId || `gid_${Date.now()}`,
-    name: payload.name?.trim() || 'CoreFuel Athlete',
+    id: newUserId,
+    name: assignedName,
     email: normalizedEmail,
-    avatarUrl:
-      payload.avatarUrl ||
-      `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(
-        payload.name || 'CoreFuel'
-      )}&backgroundColor=00d2ff,ff7700`,
+    avatarUrl: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(
+      assignedName
+    )}&backgroundColor=00d2ff,ff7700`,
+    createdAt: now,
+    updatedAt: now,
     registeredAt: now,
     lastLoginAt: now,
-    authProvider: 'Google',
+    authProvider: 'Email',
     notificationSent: false,
     savedAddress: payload.savedAddress || null,
     orderHistory: [],
   };
 
-  // 1. SAVE NEW USER RECORD FIRST (Rule 6: notification ONLY after registered)
+  // 1. SAVE NEW USER RECORD FIRST
   users.push(newUser);
   saveAllUsers(users);
-  console.log(`[AUTH_REGISTER] New user registered and saved in database: ${newUser.email} (ID: ${newUser.id})`);
+  console.log(`[AUTH_REGISTER] New customer registered and saved in database: ${newUser.email} (ID: ${newUser.id})`);
 
   // 2. TRIGGER SERVER-SIDE NOTIFICATION EMAIL TO FOUNDER
   let notificationStatus: any = null;
@@ -131,7 +166,7 @@ export async function authenticateGoogleUser(payload: {
       name: newUser.name,
       email: newUser.email,
       registeredAt: newUser.registeredAt,
-      authMethod: 'Google',
+      authMethod: 'CoreFuel Account',
     });
 
     // 3. UPDATE NOTIFICATION FLAG IN DATABASE
@@ -160,6 +195,7 @@ export function updateUserAddress(userId: string, savedAddress: any): StoredUser
   if (idx === -1) return null;
 
   users[idx].savedAddress = savedAddress;
+  users[idx].updatedAt = new Date().toISOString();
   saveAllUsers(users);
   return users[idx];
 }

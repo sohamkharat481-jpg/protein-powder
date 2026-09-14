@@ -1,6 +1,6 @@
 {
   "name": "CoreFuel Nutrition",
-  "description": "CoreFuel Nutrition – Micronized Creatine Monohydrate (Orange, 75 Servings, 3 Months Supply). Built for your daily training. Direct order available.",
+  "description": "CoreFuel Nutrition – Micronized Creatine Monohydrate (Orange, 75 Servings). Built for your daily training. Direct order available.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

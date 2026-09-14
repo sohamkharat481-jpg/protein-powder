@@ -86,7 +86,7 @@ User Details:
 ----------------------------------------
 \u2022 User Name:                  ${user.name}
 \u2022 User Email:                 ${user.email}
-\u2022 Sign-in Method:             Google
+\u2022 Sign-in Method:             ${user.authMethod || 'CoreFuel Account'}
 \u2022 Registration Date and Time: ${formattedDate} (${user.registeredAt})
 
 ----------------------------------------
@@ -122,7 +122,7 @@ Recipient: ${recipient}
         New User Registration \u2013 CoreFuel
       </h1>
       <p style="margin: 4px 0 0 0; font-size: 13px; color: #8c93a0;">
-        Founder Alert: A new athlete has completed account creation via Google Sign-In.
+        Founder Alert: A new athlete has completed account registration.
       </p>
     </div>
 
@@ -141,9 +141,9 @@ Recipient: ${recipient}
         </tr>
         <tr>
           <td style="padding: 12px 16px; font-size: 13px; color: #8c93a0; border-bottom: 1px solid #1f2430;">Sign-in Method</td>
-          <td style="padding: 12px 16px; font-size: 13px; font-weight: 700; color: #34A853; border-bottom: 1px solid #1f2430;">
-            <span style="display: inline-block; padding: 2px 8px; background-color: rgba(52, 168, 83, 0.1); border: 1px solid rgba(52, 168, 83, 0.3); border-radius: 4px;">
-              Google
+          <td style="padding: 12px 16px; font-size: 13px; font-weight: 700; color: #00d2ff; border-bottom: 1px solid #1f2430;">
+            <span style="display: inline-block; padding: 2px 8px; background-color: rgba(0, 210, 255, 0.1); border: 1px solid rgba(0, 210, 255, 0.3); border-radius: 4px;">
+              ${user.authMethod || 'CoreFuel Account'}
             </span>
           </td>
         </tr>
@@ -184,7 +184,7 @@ Recipient: ${recipient}
     userEmail: user.email,
     userName: user.name,
     timestamp: new Date().toISOString(),
-    authMethod: 'Google',
+    authMethod: user.authMethod || 'CoreFuel Account',
     status: 'pending',
     provider: 'unconfigured',
   };

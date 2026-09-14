@@ -88,7 +88,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             >
               <BrandLogo variant="symbol" size="xs" />
               <span className="font-micronized text-xs uppercase text-zinc-200 font-semibold tracking-[0.25em]">
-                {BRAND_CONFIG.brandName} • 75 SERVINGS • 3 MONTHS
+                {BRAND_CONFIG.brandName} • 75 SERVINGS
               </span>
             </motion.div>
 
@@ -137,7 +137,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 </span>
               </div>
               <span className="text-xs font-label-pkg text-zinc-400 tracking-wider hidden sm:inline">
-                • 75 SERVINGS (3 MONTHS)
+                • 75 SERVINGS
               </span>
             </motion.div>
 
@@ -163,7 +163,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                       </span>
                     </div>
                     <p className="text-xs font-label-pkg text-zinc-400 mt-1">
-                      Formulated with 900 mg L-Taurine • 75 Full Servings (3 Months Supply)
+                      Formulated with 900 mg L-Taurine • 75 Full Servings
                     </p>
                   </div>
                 </div>
@@ -237,21 +237,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             >
               {/* Floating Badge */}
               <div
-                className={`absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 px-4 py-1 rounded-full text-xs font-label-pkg tracking-widest uppercase shadow-lg flex items-center gap-1.5 border transition-all ${
-                  isOrange
-                    ? 'bg-[#090b10] border-[#ff7700]/60 text-amber-400'
-                    : 'bg-[#090b10] border-[#00d2ff]/60 text-[#00d2ff]'
-                }`}
+                className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 px-4 py-1 rounded-full text-xs font-label-pkg tracking-widest uppercase shadow-lg flex items-center gap-1.5 border bg-[#090b10] border-[#ff7700]/60 text-amber-400"
               >
-                {isOrange ? <Flame className="w-3.5 h-3.5 text-[#ff7700]" /> : <Droplets className="w-3.5 h-3.5 text-[#00d2ff]" />}
-                <span>{currentVariant.badge} • 75 SERVINGS (3 MONTHS)</span>
+                <Flame className="w-3.5 h-3.5 text-[#ff7700]" />
+                <span>ACTIVE FLAVOR • 75 SERVINGS</span>
               </div>
 
               {/* Product Visual Container with Crossfade & Luxury Transition */}
               <div className="w-full h-full rounded-2xl overflow-hidden bg-[#07090c] relative flex items-center justify-center p-2">
                 <AnimatePresence mode="wait">
                   <motion.div
-                    key={currentVariant.id}
+                    key="orange-variant"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 1.05 }}
@@ -259,8 +255,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     className="w-full h-full flex items-center justify-center"
                   >
                     <ProductImage
-                      variant={currentVariant.id === 'orange' ? 'orange' : 'unflavored'}
-                      alt={`${BRAND_CONFIG.productName} - ${currentVariant.name}`}
+                      variant="orange"
+                      alt={`${BRAND_CONFIG.productName} - Orange Variant`}
                       className="w-full h-full object-contain object-center p-2 rounded-xl group-hover:scale-105 transition-transform duration-700"
                     />
                   </motion.div>
@@ -273,12 +269,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 <div className="absolute bottom-3 left-3 right-3 bg-[#0c0e14]/90 backdrop-blur-md border border-white/15 p-3 rounded-xl shadow-2xl flex items-center justify-between">
                   <div>
                     <div className="text-[10px] font-micronized text-zinc-400 uppercase tracking-widest">
-                      SELECTED VARIANT
+                      ACTIVE FORMULA
                     </div>
                     <div className="text-lg font-creatine text-white tracking-tight flex items-center gap-1.5">
                       <span>COREFUEL</span>
-                      <span className={isOrange ? 'text-amber-400' : 'text-[#00d2ff]'}>
-                        {currentVariant.name.toUpperCase()}
+                      <span className="text-amber-400">
+                        ORANGE
                       </span>
                     </div>
                   </div>

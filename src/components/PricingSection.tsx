@@ -30,7 +30,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onPlaceOrder }) 
           </p>
         </div>
 
-        {/* Single Prominent Pricing Card (ORANGE - 75 SERVINGS - 3 MONTHS) */}
+        {/* Single Prominent Pricing Card (ORANGE - 75 SERVINGS) */}
         <div className="max-w-xl mx-auto mb-12">
           <motion.div
             initial={{ opacity: 0, y: 25 }}
@@ -48,7 +48,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onPlaceOrder }) 
                   <Flame className="w-3.5 h-3.5" />
                   CITRUS ORANGE • ACTIVE FLAVOR
                 </div>
-                <span className="text-xs font-label-pkg text-amber-400 font-semibold tracking-wider">75 SERVINGS • 3 MONTHS</span>
+                <span className="text-xs font-label-pkg text-amber-400 font-semibold tracking-wider">75 SERVINGS</span>
               </div>
 
               <h3 className="font-creatine text-4xl sm:text-5xl text-white tracking-tight mb-4">
@@ -69,7 +69,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onPlaceOrder }) 
               <ul className="space-y-3 mb-8 text-sm text-zinc-300 font-body">
                 <li className="flex items-center gap-2.5">
                   <Check className="w-4 h-4 text-[#ff7700]" />
-                  <span>75 full servings (3 months supply) of micronized creatine monohydrate</span>
+                  <span>75 full servings of micronized creatine monohydrate</span>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <Check className="w-4 h-4 text-[#ff7700]" />

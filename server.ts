@@ -17,9 +17,6 @@ async function startServer() {
 
   // Mount API routes FIRST
   app.use('/api', apiRouter);
-  app.get(['/auth/google/callback', '/auth/google/callback/'], (req, res) => {
-    res.redirect(`/api/auth/google/callback?${new URLSearchParams(req.query as any).toString()}`);
-  });
 
   // Serve static images directly from public/images
   app.use('/images', express.static(path.resolve(process.cwd(), 'public', 'images')));

@@ -56,7 +56,7 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
             YOUR DAILY CREATINE. <span className="text-[#00d2ff]">SIMPLIFIED.</span>
           </h2>
           <p className="font-body text-zinc-400 text-base sm:text-lg leading-relaxed">
-            A transparent, uncompromised formula engineered for lifters and athletes. No fillers, no exaggerated hype. Just 75 pure servings built for 3 months of daily training.
+            A transparent, uncompromised formula engineered for lifters and athletes. No fillers, no exaggerated hype. Just 75 pure servings built for daily training.
           </p>
         </div>
 
@@ -70,8 +70,8 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
               className="relative w-full max-w-[480px] aspect-square rounded-3xl overflow-hidden bg-gradient-to-b from-[#12151f] to-[#07090c] border border-white/15 p-4 shadow-[0_30px_80px_rgba(0,0,0,0.85)] group"
             >
               <ProductImage
-                variant={currentVariant.id === 'orange' ? 'orange' : 'unflavored'}
-                alt={`${BRAND_CONFIG.productName} - ${currentVariant.name}`}
+                variant="orange"
+                alt={`${BRAND_CONFIG.productName} - Orange Variant`}
                 className="w-full h-full object-contain rounded-2xl group-hover:scale-105 transition-transform duration-700 p-2"
               />
 
@@ -83,7 +83,7 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
               </div>
 
               <div className="absolute bottom-6 right-6 bg-black/80 backdrop-blur-md border border-white/10 px-3.5 py-1 rounded-full text-xs font-label-pkg text-white tracking-wider">
-                75 SERVINGS (3 MONTHS) • 200-MESH
+                75 SERVINGS • 200-MESH
               </div>
             </motion.div>
           </div>
@@ -101,7 +101,7 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
                 </span>
               </h3>
               <div className="text-xs font-micronized text-zinc-400 tracking-[0.2em] uppercase font-semibold">
-                MICRONIZED • 75 SERVINGS (3 MONTHS) • {BRAND_CONFIG.priceDisplay} ({BRAND_CONFIG.shippingNote})
+                MICRONIZED • 75 SERVINGS • {BRAND_CONFIG.priceDisplay} ({BRAND_CONFIG.shippingNote})
               </div>
             </div>
 
@@ -116,8 +116,8 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
                   <Check className="w-3.5 h-3.5 text-[#ff7700]" />
                 </div>
                 <div>
-                  <span className="text-base font-athletic text-white tracking-wide block">75 Full Servings per Container (3 Months Supply)</span>
-                  <span className="text-xs font-body text-zinc-400">Generous pack size giving you 75 days (3 full months) of consistent daily supplementation.</span>
+                  <span className="text-base font-athletic text-white tracking-wide block">75 Full Servings per Container</span>
+                  <span className="text-xs font-body text-zinc-400">Generous pack size giving you 75 days of consistent daily supplementation.</span>
                 </div>
               </div>
 
@@ -145,7 +145,7 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
             {/* Quick Order Button */}
             <div className="pt-3">
               <button
-                onClick={() => onOrderNow(selectedFlavorId)}
+                onClick={() => onOrderNow('orange')}
                 className="inline-flex items-center gap-2.5 bg-[#00d2ff] hover:bg-[#33dbff] text-black font-athletic text-xl tracking-wider py-3.5 px-7 rounded-xl transition-all shadow-[0_0_20px_rgba(0,210,255,0.35)] cursor-pointer active:scale-95"
               >
                 <Zap className="w-5 h-5 fill-black" />
@@ -159,7 +159,7 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
 
         {/* Premium Information Grid as requested:
             MICRONIZED CREATINE
-            75 SERVINGS (3 MONTHS)
+            75 SERVINGS
             ORANGE FLAVOR
             DAILY TRAINING
         */}

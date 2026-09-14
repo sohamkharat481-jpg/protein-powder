@@ -11,14 +11,14 @@ function aistudioMediaPlugin(): Plugin {
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
         if (req.url && (req.url.startsWith('/api/upload-photo') || req.url.startsWith('/api/product-photos-status') || req.url.startsWith('/api/auth/'))) {
-          if (req.method === 'POST' && req.url.startsWith('/api/auth/register-or-login')) {
+          if (req.method === 'POST' && (req.url.startsWith('/api/auth/login') || req.url.startsWith('/api/auth/register-or-login'))) {
             let body = '';
             req.on('data', chunk => body += chunk);
             req.on('end', async () => {
               try {
                 const payload = JSON.parse(body);
-                const { authenticateGoogleUser } = await import('./server/userService');
-                const result = await authenticateGoogleUser(payload);
+                const { authenticateCustomer } = await import('./server/userService');
+                const result = await authenticateCustomer(payload);
                 res.setHeader('Content-Type', 'application/json');
                 res.end(JSON.stringify(result));
               } catch (err: any) {
