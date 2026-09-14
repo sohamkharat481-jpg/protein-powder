@@ -98,10 +98,20 @@ export const LoginPage: React.FC<LoginPageProps> = ({
         }),
       });
 
-      const data = await res.json();
+      const rawText = await res.text();
+      let data: any = null;
+      try {
+        data = rawText ? JSON.parse(rawText) : null;
+      } catch {
+        throw new Error(
+          res.ok
+            ? 'Authentication response was not valid JSON.'
+            : `Authentication service returned status ${res.status}. Please try again shortly.`
+        );
+      }
 
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || 'Unable to sign in. Please try again.');
+      if (!res.ok || !data?.success) {
+        throw new Error(data?.error || 'Unable to sign in. Please try again.');
       }
 
       if (data.sessionId) {
@@ -138,19 +148,24 @@ export const LoginPage: React.FC<LoginPageProps> = ({
         }),
       });
 
-      if (res.ok) {
-        const data = await res.json();
-        if (data.user) {
-          onLoginSuccess(data.user, sessionId || undefined);
-        }
+      const rawText = await res.text();
+      let data: any = null;
+      try {
+        data = rawText ? JSON.parse(rawText) : null;
+      } catch {
+        data = null;
+      }
+
+      if (res.ok && data?.success && data?.user) {
+        onLoginSuccess(data.user, sessionId || undefined);
         setAddressSavedNotification(true);
         setTimeout(() => setAddressSavedNotification(false), 3000);
       } else {
-        const errData = await res.json().catch(() => ({}));
-        setErrorMessage(errData.error || 'Failed to save address');
+        setErrorMessage(data?.error || `Failed to save address (${res.status})`);
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error('Failed to update address:', err);
+      setErrorMessage(err.message || 'Failed to update address');
     }
   };
 

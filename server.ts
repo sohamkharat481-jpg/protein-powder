@@ -3,20 +3,11 @@ dotenv.config();
 
 import express from 'express';
 import path from 'path';
-import cookieParser from 'cookie-parser';
 import { createServer as createViteServer } from 'vite';
-import { apiRouter } from './server/apiRouter';
+import { app } from './server/app.js';
 
 async function startServer() {
-  const app = express();
   const PORT = 3000;
-
-  // Middleware for parsing JSON and cookies
-  app.use(express.json());
-  app.use(cookieParser());
-
-  // Mount API routes FIRST
-  app.use('/api', apiRouter);
 
   // Serve static images directly from public/images
   app.use('/images', express.static(path.resolve(process.cwd(), 'public', 'images')));
@@ -45,3 +36,4 @@ startServer().catch((err) => {
   console.error('Failed to start CoreFuel server:', err);
   process.exit(1);
 });
+

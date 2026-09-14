@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { sendNewUserRegistrationEmail } from './emailService';
+import { sendNewUserRegistrationEmail } from './emailService.js';
 
 export interface StoredUser {
   id: string; // unique internal account ID
@@ -17,7 +17,19 @@ export interface StoredUser {
   orderHistory?: any[];
 }
 
+let memoryUsers: StoredUser[] = [];
+
 function resolveDbFilePath(): string {
+  if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
+    const tmpDir = path.resolve('/tmp', 'corefuel_data');
+    if (!fs.existsSync(tmpDir)) {
+      try {
+        fs.mkdirSync(tmpDir, { recursive: true });
+      } catch {}
+    }
+    return path.join(tmpDir, 'users.json');
+  }
+
   const localDir = path.resolve(process.cwd(), 'data');
   const localFile = path.join(localDir, 'users.json');
 
@@ -34,7 +46,9 @@ function resolveDbFilePath(): string {
     // Read-only filesystem fallback to /tmp
     const tmpDir = path.resolve('/tmp', 'corefuel_data');
     if (!fs.existsSync(tmpDir)) {
-      fs.mkdirSync(tmpDir, { recursive: true });
+      try {
+        fs.mkdirSync(tmpDir, { recursive: true });
+      } catch {}
     }
     return path.join(tmpDir, 'users.json');
   }
@@ -45,36 +59,55 @@ let dbFilePath = resolveDbFilePath();
 function ensureDataDirectory() {
   const dir = path.dirname(dbFilePath);
   if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
+    try {
+      fs.mkdirSync(dir, { recursive: true });
+    } catch {}
   }
   if (!fs.existsSync(dbFilePath)) {
-    fs.writeFileSync(dbFilePath, JSON.stringify([], null, 2), 'utf-8');
+    const seedFile = path.resolve(process.cwd(), 'data', 'users.json');
+    if (fs.existsSync(seedFile) && seedFile !== dbFilePath) {
+      try {
+        fs.copyFileSync(seedFile, dbFilePath);
+        return;
+      } catch {}
+    }
+    try {
+      fs.writeFileSync(dbFilePath, JSON.stringify([], null, 2), 'utf-8');
+    } catch {}
   }
 }
 
 export function getAllUsers(): StoredUser[] {
   try {
     ensureDataDirectory();
-    const raw = fs.readFileSync(dbFilePath, 'utf-8');
-    return JSON.parse(raw);
+    if (fs.existsSync(dbFilePath)) {
+      const raw = fs.readFileSync(dbFilePath, 'utf-8');
+      const parsed: StoredUser[] = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        memoryUsers = parsed;
+        return parsed;
+      }
+    }
+    return memoryUsers;
   } catch (err) {
     console.error('[DATABASE_READ_ERROR] Error reading users database:', err);
-    return [];
+    return memoryUsers;
   }
 }
 
 export function saveAllUsers(users: StoredUser[]): void {
+  memoryUsers = [...users];
   try {
     ensureDataDirectory();
     fs.writeFileSync(dbFilePath, JSON.stringify(users, null, 2), 'utf-8');
   } catch (err) {
-    console.error('[DATABASE_WRITE_ERROR] Error writing users database:', err);
+    console.error('[DATABASE_WRITE_ERROR] Error writing users database, trying /tmp fallback:', err);
     try {
       dbFilePath = path.resolve('/tmp', 'corefuel_data', 'users.json');
       ensureDataDirectory();
       fs.writeFileSync(dbFilePath, JSON.stringify(users, null, 2), 'utf-8');
     } catch (fallbackErr) {
-      throw fallbackErr;
+      console.error('[DATABASE_WRITE_FATAL] Memory state preserved:', fallbackErr);
     }
   }
 }

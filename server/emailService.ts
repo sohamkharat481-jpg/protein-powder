@@ -12,7 +12,22 @@ export interface UserRegistrationInfo {
   authMethod: string;
 }
 
-const LOG_FILE = path.resolve(process.cwd(), 'data', 'email_notifications.json');
+let memoryLogs: any[] = [];
+
+function resolveLogFilePath(): string {
+  if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
+    const tmpDir = path.resolve('/tmp', 'corefuel_data');
+    if (!fs.existsSync(tmpDir)) {
+      try {
+        fs.mkdirSync(tmpDir, { recursive: true });
+      } catch {}
+    }
+    return path.join(tmpDir, 'email_notifications.json');
+  }
+  return path.resolve(process.cwd(), 'data', 'email_notifications.json');
+}
+
+let LOG_FILE = resolveLogFilePath();
 
 export function getRecipientEmail(): string {
   return process.env.FOUNDER_NOTIFICATION || 'prashantgaikwad658@gmail.com';
@@ -29,6 +44,7 @@ export function getSmtpConfig() {
 }
 
 function appendNotificationLog(logEntry: any) {
+  memoryLogs.push(logEntry);
   try {
     const dir = path.dirname(LOG_FILE);
     if (!fs.existsSync(dir)) {
@@ -45,19 +61,27 @@ function appendNotificationLog(logEntry: any) {
     logs.push(logEntry);
     fs.writeFileSync(LOG_FILE, JSON.stringify(logs, null, 2), 'utf-8');
   } catch (err) {
-    console.error('[EMAIL_LOG_ERROR] Failed to save email log to file:', err);
+    try {
+      LOG_FILE = path.resolve('/tmp', 'corefuel_data', 'email_notifications.json');
+      const dir = path.dirname(LOG_FILE);
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
+      fs.writeFileSync(LOG_FILE, JSON.stringify(memoryLogs, null, 2), 'utf-8');
+    } catch {}
   }
 }
 
 export function getNotificationLogs(): any[] {
   try {
     if (fs.existsSync(LOG_FILE)) {
-      return JSON.parse(fs.readFileSync(LOG_FILE, 'utf-8'));
+      const diskLogs = JSON.parse(fs.readFileSync(LOG_FILE, 'utf-8'));
+      if (Array.isArray(diskLogs) && diskLogs.length > 0) {
+        return diskLogs;
+      }
     }
-  } catch {
-    // fallback
-  }
-  return [];
+  } catch {}
+  return memoryLogs;
 }
 
 export async function sendNewUserRegistrationEmail(user: UserRegistrationInfo): Promise<{

@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
-import { authenticateCustomer, updateUserAddress, StoredUser } from './userService';
-import { getRecipientEmail, getSmtpConfig, getNotificationLogs } from './emailService';
-import { createSession, getSessionUser, destroySession } from './sessionService';
+import { authenticateCustomer, updateUserAddress, StoredUser } from './userService.js';
+import { getRecipientEmail, getSmtpConfig, getNotificationLogs } from './emailService.js';
+import { createSession, getSessionUser, destroySession } from './sessionService.js';
 
 export const apiRouter = express.Router();
 

@@ -44,9 +44,15 @@ export default function App() {
       credentials: 'include',
       headers,
     })
-      .then((res) => res.json())
+      .then(async (res) => {
+        try {
+          return await res.json();
+        } catch {
+          return { authenticated: false };
+        }
+      })
       .then((data) => {
-        if (data.authenticated && data.user) {
+        if (data && data.authenticated && data.user) {
           setCurrentUser(data.user);
         } else {
           localStorage.removeItem('corefuel_session_id');
