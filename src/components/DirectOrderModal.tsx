@@ -21,9 +21,10 @@ export const DirectOrderModal: React.FC<DirectOrderModalProps> = ({
 }) => {
   if (!isOpen) return null;
 
-  const currentVariant = FLAVOR_VARIANTS[selectedFlavorId];
   const isOrange = selectedFlavorId === 'orange';
-  const whatsAppUrl = BRAND_CONFIG.generateWhatsAppLink(currentVariant.name);
+  const currentVariant = isOrange ? FLAVOR_VARIANTS.orange : FLAVOR_VARIANTS.flavorless;
+  const currentFlavorName = isOrange ? 'Orange' : 'Unflavoured';
+  const whatsAppUrl = BRAND_CONFIG.generateWhatsAppLink(currentFlavorName, BRAND_CONFIG.secondaryPhoneNumericOnly);
 
   return (
     <AnimatePresence>
@@ -76,7 +77,7 @@ export const DirectOrderModal: React.FC<DirectOrderModalProps> = ({
           </div>
 
           {/* Notice Message */}
-          <div className="p-4 rounded-2xl bg-black/40 border border-white/10 mb-6 text-sm text-zinc-300 leading-relaxed flex items-start gap-3">
+          <div className="p-4 rounded-2xl bg-black/40 border border-white/10 mb-5 text-sm text-zinc-300 leading-relaxed flex items-start gap-3">
             <div className="w-8 h-8 rounded-lg bg-[#00d2ff]/10 border border-[#00d2ff]/30 flex items-center justify-center shrink-0 mt-0.5">
               <ShieldCheck className="w-4 h-4 text-[#00d2ff]" />
             </div>
@@ -90,23 +91,43 @@ export const DirectOrderModal: React.FC<DirectOrderModalProps> = ({
             </div>
           </div>
 
-          {/* Single Flavor Highlight */}
-          <div className="mb-6 p-3 rounded-2xl bg-black/40 border border-[#ff7700]/30 flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <div className="w-3 h-3 rounded-full bg-[#ff7700] shadow-[0_0_10px_#ff7700]" />
-              <div>
-                <div className="font-display text-lg font-bold uppercase leading-none text-white">
-                  Orange Formula
+          {/* Flavor Selection Switcher */}
+          <div className="mb-5">
+            <span className="text-[11px] font-mono-code text-zinc-400 block uppercase tracking-wider mb-2">
+              Selected Flavor:
+            </span>
+            <div className="grid grid-cols-2 gap-2.5">
+              <button
+                type="button"
+                onClick={() => onSelectFlavor('orange')}
+                className={`p-3 rounded-xl border flex items-center gap-2.5 transition-all cursor-pointer ${
+                  isOrange
+                    ? 'bg-[#ff7700]/15 border-[#ff7700] text-white shadow-[0_0_15px_rgba(255,119,0,0.2)]'
+                    : 'bg-black/40 border-white/10 text-zinc-400 hover:border-white/30'
+                }`}
+              >
+                <div className={`w-3 h-3 rounded-full bg-[#ff7700] ${isOrange ? 'shadow-[0_0_8px_#ff7700]' : 'opacity-40'}`} />
+                <div className="text-left">
+                  <div className="font-athletic text-base tracking-wider leading-none">ORANGE</div>
+                  <div className="text-[10px] text-zinc-400 mt-0.5">900mg Taurine</div>
                 </div>
-                <div className="text-[10px] font-mono-code text-amber-300 mt-0.5">
-                  900mg Taurine • Active Flavor
+              </button>
+
+              <button
+                type="button"
+                onClick={() => onSelectFlavor('flavorless')}
+                className={`p-3 rounded-xl border flex items-center gap-2.5 transition-all cursor-pointer ${
+                  !isOrange
+                    ? 'bg-[#00d2ff]/15 border-[#00d2ff] text-white shadow-[0_0_15px_rgba(0,210,255,0.2)]'
+                    : 'bg-black/40 border-white/10 text-zinc-400 hover:border-white/30'
+                }`}
+              >
+                <div className={`w-3 h-3 rounded-full bg-[#00d2ff] ${!isOrange ? 'shadow-[0_0_8px_#00d2ff]' : 'opacity-40'}`} />
+                <div className="text-left">
+                  <div className="font-athletic text-base tracking-wider leading-none">UNFLAVOURED</div>
+                  <div className="text-[10px] text-zinc-400 mt-0.5">Pure 200-Mesh</div>
                 </div>
-              </div>
-            </div>
-            <div className="text-right">
-              <span className="text-xs font-mono-code text-zinc-400">
-                75 Servings
-              </span>
+              </button>
             </div>
           </div>
 
@@ -114,14 +135,15 @@ export const DirectOrderModal: React.FC<DirectOrderModalProps> = ({
           <div className="p-4 rounded-2xl bg-gradient-to-r from-[#11141c] to-[#0c0e15] border border-white/10 mb-6 flex items-center gap-4">
             <div className="w-16 h-16 rounded-xl overflow-hidden bg-black/60 border border-white/10 shrink-0 p-1">
               <ProductImage
-                variant="orange"
-                alt="CoreFuel Creatine Orange"
+                key={selectedFlavorId}
+                variant={isOrange ? 'orange' : 'flavorless'}
+                alt={`CoreFuel Creatine ${currentFlavorName}`}
                 className="w-full h-full object-contain rounded-lg"
               />
             </div>
             <div className="flex-1">
               <span className="text-xs font-mono-code text-zinc-400 block uppercase tracking-wider">
-                Orange Variant
+                {currentFlavorName} Variant
               </span>
               <span className="font-display text-3xl font-black text-white">
                 {BRAND_CONFIG.priceDisplay}
@@ -198,7 +220,7 @@ export const DirectOrderModal: React.FC<DirectOrderModalProps> = ({
           <div className="space-y-3">
             {/* PRIMARY WHATSAPP TO ORDER (Line 2: 91454 78524) */}
             <a
-              href={BRAND_CONFIG.generateWhatsAppLink('Orange', 'secondary')}
+              href={whatsAppUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-black font-display text-lg sm:text-xl font-black tracking-wide py-3.5 sm:py-4 px-6 rounded-2xl transition-all shadow-[0_0_25px_rgba(37,211,102,0.3)] hover:shadow-[0_0_35px_rgba(37,211,102,0.45)] flex items-center justify-center gap-2.5 cursor-pointer active:scale-[0.98]"
@@ -231,7 +253,7 @@ export const DirectOrderModal: React.FC<DirectOrderModalProps> = ({
           {/* Pre-filled Message Note */}
           <div className="mt-4 text-center">
             <span className="text-[11px] font-mono-code text-zinc-500">
-              Pre-filled text: "Hi CoreFuel, I want to order CoreFuel Creatine Monohydrate (Orange variant, 75 Servings @ ₹549/-). Please confirm delivery."
+              Pre-filled text: "Hi CoreFuel, I want to order CoreFuel Creatine Monohydrate ({currentFlavorName} variant, 75 Servings @ ₹549/-). Please confirm delivery."
             </span>
           </div>
         </motion.div>

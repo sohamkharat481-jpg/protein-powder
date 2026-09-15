@@ -12,8 +12,9 @@ export const MobileOrderBar: React.FC<MobileOrderBarProps> = ({
   selectedFlavorId,
   onOpenOrderModal,
 }) => {
-  const currentVariant = FLAVOR_VARIANTS[selectedFlavorId];
-  const whatsAppUrl = BRAND_CONFIG.generateWhatsAppLink('Orange', 'secondary');
+  const isOrange = selectedFlavorId === 'orange';
+  const currentFlavorName = isOrange ? 'Orange' : 'Unflavoured';
+  const whatsAppUrl = BRAND_CONFIG.generateWhatsAppLink(currentFlavorName, BRAND_CONFIG.secondaryPhoneNumericOnly);
 
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 p-3 bg-[#07080a]/90 backdrop-blur-xl border-t border-white/10 shadow-[0_-10px_30px_rgba(0,0,0,0.9)]">

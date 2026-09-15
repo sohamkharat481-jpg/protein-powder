@@ -142,35 +142,65 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </motion.div>
 
             {/* SINGLE ACTIVE FLAVOR DISPLAY (ORANGE ONLY) */}
+            {/* Quick Flavor Selector in Hero */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.75 }}
-              className="p-4 rounded-2xl bg-[#0d0f15] border border-[#ff7700]/30 max-w-xl mb-8 shadow-xl"
+              className="p-3 sm:p-4 rounded-2xl bg-[#0d0f15] border border-white/15 max-w-xl mb-8 shadow-xl"
             >
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#ff7700]/15 border border-[#ff7700]/30 flex items-center justify-center text-[#ff7700]">
-                    <Flame className="w-5 h-5" />
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                    isOrange ? 'bg-[#ff7700]/15 border border-[#ff7700]/30 text-[#ff7700]' : 'bg-[#00d2ff]/15 border border-[#00d2ff]/30 text-[#00d2ff]'
+                  }`}>
+                    {isOrange ? <Flame className="w-5 h-5" /> : <Sparkles className="w-5 h-5" />}
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
                       <span className="font-athletic text-2xl text-white tracking-wider uppercase leading-none">
-                        ORANGE FLAVOR
+                        {isOrange ? 'ORANGE FLAVOR' : 'UNFLAVOURED'}
                       </span>
-                      <span className="text-[10px] font-label-pkg text-amber-300 bg-[#ff7700]/20 px-2 py-0.5 rounded border border-[#ff7700]/30 uppercase tracking-wider">
-                        ACTIVE FLAVOR
+                      <span className={`text-[10px] font-label-pkg px-2 py-0.5 rounded border uppercase tracking-wider ${
+                        isOrange
+                          ? 'text-amber-300 bg-[#ff7700]/20 border-[#ff7700]/30'
+                          : 'text-[#00d2ff] bg-[#00d2ff]/20 border-[#00d2ff]/30'
+                      }`}>
+                        {currentVariant.badge}
                       </span>
                     </div>
                     <p className="text-xs font-label-pkg text-zinc-400 mt-1">
-                      Formulated with 900 mg L-Taurine • 75 Full Servings
+                      {isOrange ? 'Formulated with 900 mg L-Taurine • 75 Full Servings' : 'Pure 200-Mesh Micronized • 75 Full Servings'}
                     </p>
                   </div>
                 </div>
-                <div className="text-right">
-                  <span className="font-creatine text-2xl text-white tracking-tight">
-                    {BRAND_CONFIG.priceDisplay}
-                  </span>
+
+                {/* 2-flavor quick switch buttons */}
+                <div className="flex items-center gap-2 shrink-0">
+                  <button
+                    id="hero-select-orange"
+                    type="button"
+                    onClick={() => onSelectFlavor('orange')}
+                    className={`px-3 py-1.5 rounded-lg font-athletic text-xs tracking-wider transition-all cursor-pointer ${
+                      isOrange
+                        ? 'bg-[#ff7700] text-black font-bold shadow-[0_0_12px_rgba(255,119,0,0.4)]'
+                        : 'bg-black/50 text-zinc-400 border border-white/10 hover:text-white'
+                    }`}
+                  >
+                    ORANGE
+                  </button>
+                  <button
+                    id="hero-select-unflavoured"
+                    type="button"
+                    onClick={() => onSelectFlavor('flavorless')}
+                    className={`px-3 py-1.5 rounded-lg font-athletic text-xs tracking-wider transition-all cursor-pointer ${
+                      !isOrange
+                        ? 'bg-[#00d2ff] text-black font-bold shadow-[0_0_12px_rgba(0,210,255,0.4)]'
+                        : 'bg-black/50 text-zinc-400 border border-white/10 hover:text-white'
+                    }`}
+                  >
+                    UNFLAVOURED
+                  </button>
                 </div>
               </div>
             </motion.div>
@@ -237,17 +267,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             >
               {/* Floating Badge */}
               <div
-                className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 px-4 py-1 rounded-full text-xs font-label-pkg tracking-widest uppercase shadow-lg flex items-center gap-1.5 border bg-[#090b10] border-[#ff7700]/60 text-amber-400"
+                className={`absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 px-4 py-1 rounded-full text-xs font-label-pkg tracking-widest uppercase shadow-lg flex items-center gap-1.5 border bg-[#090b10] ${
+                  isOrange ? 'border-[#ff7700]/60 text-amber-400' : 'border-[#00d2ff]/60 text-[#00d2ff]'
+                }`}
               >
-                <Flame className="w-3.5 h-3.5 text-[#ff7700]" />
-                <span>ACTIVE FLAVOR • 75 SERVINGS</span>
+                {isOrange ? <Flame className="w-3.5 h-3.5 text-[#ff7700]" /> : <Sparkles className="w-3.5 h-3.5 text-[#00d2ff]" />}
+                <span>{isOrange ? 'ACTIVE FLAVOR • 75 SERVINGS' : 'UNFLAVOURED • 75 SERVINGS'}</span>
               </div>
 
               {/* Product Visual Container with Crossfade & Luxury Transition */}
               <div className="w-full h-full rounded-2xl overflow-hidden bg-[#07090c] relative flex items-center justify-center p-2">
                 <AnimatePresence mode="wait">
                   <motion.div
-                    key="orange-variant"
+                    key={selectedFlavorId}
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 1.05 }}
@@ -255,8 +287,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     className="w-full h-full flex items-center justify-center"
                   >
                     <ProductImage
-                      variant="orange"
-                      alt={`${BRAND_CONFIG.productName} - Orange Variant`}
+                      variant={isOrange ? 'orange' : 'flavorless'}
+                      alt={`${BRAND_CONFIG.productName} - ${isOrange ? 'Orange' : 'Unflavoured'} Variant`}
                       className="w-full h-full object-contain object-center p-2 rounded-xl group-hover:scale-105 transition-transform duration-700"
                     />
                   </motion.div>
@@ -269,12 +301,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 <div className="absolute bottom-3 left-3 right-3 bg-[#0c0e14]/90 backdrop-blur-md border border-white/15 p-3 rounded-xl shadow-2xl flex items-center justify-between">
                   <div>
                     <div className="text-[10px] font-micronized text-zinc-400 uppercase tracking-widest">
-                      ACTIVE FORMULA
+                      {isOrange ? 'ACTIVE FORMULA' : 'PURE FORMULA'}
                     </div>
                     <div className="text-lg font-creatine text-white tracking-tight flex items-center gap-1.5">
                       <span>COREFUEL</span>
-                      <span className="text-amber-400">
-                        ORANGE
+                      <span className={isOrange ? 'text-amber-400' : 'text-[#00d2ff]'}>
+                        {isOrange ? 'ORANGE' : 'UNFLAVOURED'}
                       </span>
                     </div>
                   </div>

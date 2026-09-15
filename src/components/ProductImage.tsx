@@ -22,6 +22,11 @@ export const ProductImage: React.FC<ProductImageProps> = ({
   const [currentSrc, setCurrentSrc] = useState<string>(primarySrc);
   const [retryCount, setRetryCount] = useState<number>(0);
 
+  React.useEffect(() => {
+    setCurrentSrc(primarySrc);
+    setRetryCount(0);
+  }, [primarySrc, variant]);
+
   const handleError = () => {
     if (retryCount === 0) {
       setRetryCount(1);

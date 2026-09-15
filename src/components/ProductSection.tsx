@@ -27,8 +27,8 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
   const imageY = useTransform(scrollYProgress, [0, 1], [-20, 20]);
   const imageRotate = useTransform(scrollYProgress, [0, 1], [-1.5, 1.5]);
 
-  const currentVariant = FLAVOR_VARIANTS[selectedFlavorId];
   const isOrange = selectedFlavorId === 'orange';
+  const currentVariant = isOrange ? FLAVOR_VARIANTS.orange : FLAVOR_VARIANTS.flavorless;
 
   return (
     <section
@@ -47,7 +47,7 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Headline */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#00d2ff]/10 border border-[#00d2ff]/30 text-[#00d2ff] text-xs font-label-pkg uppercase tracking-widest mb-4">
             <Sparkles className="w-3.5 h-3.5" />
             PURE PERFORMANCE SPECIFICATION
@@ -60,6 +60,48 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
           </p>
         </div>
 
+        {/* Prominent Variant Selector Bar */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12">
+          <span className="text-xs font-label-pkg text-zinc-400 uppercase tracking-widest font-semibold flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-[#00d2ff]" />
+            CHOOSE VARIANT:
+          </span>
+          <div className="inline-flex p-1.5 rounded-2xl bg-black/70 border border-white/15 backdrop-blur-md shadow-lg">
+            <button
+              id="product-variant-orange"
+              type="button"
+              onClick={() => onSelectFlavor('orange')}
+              className={`px-6 py-2.5 rounded-xl font-athletic tracking-wider text-base transition-all cursor-pointer flex items-center gap-2.5 ${
+                isOrange
+                  ? 'bg-[#ff7700] text-black shadow-[0_0_20px_rgba(255,119,0,0.4)] font-bold'
+                  : 'text-zinc-400 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              <span className={`w-2.5 h-2.5 rounded-full ${isOrange ? 'bg-black' : 'bg-[#ff7700]'}`} />
+              <span>ORANGE</span>
+              <span className={`text-[10px] px-1.5 py-0.5 rounded font-label-pkg ${isOrange ? 'bg-black/20 text-black font-semibold' : 'bg-white/10 text-zinc-400'}`}>
+                TAURINE
+              </span>
+            </button>
+            <button
+              id="product-variant-unflavoured"
+              type="button"
+              onClick={() => onSelectFlavor('flavorless')}
+              className={`px-6 py-2.5 rounded-xl font-athletic tracking-wider text-base transition-all cursor-pointer flex items-center gap-2.5 ${
+                !isOrange
+                  ? 'bg-[#00d2ff] text-black shadow-[0_0_20px_rgba(0,210,255,0.4)] font-bold'
+                  : 'text-zinc-400 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              <span className={`w-2.5 h-2.5 rounded-full ${!isOrange ? 'bg-black' : 'bg-[#00d2ff]'}`} />
+              <span>UNFLAVOURED</span>
+              <span className={`text-[10px] px-1.5 py-0.5 rounded font-label-pkg ${!isOrange ? 'bg-black/20 text-black font-semibold' : 'bg-white/10 text-zinc-400'}`}>
+                PURE
+              </span>
+            </button>
+          </div>
+        </div>
+
         {/* Large Detailed Product Display with Parallax */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
           
@@ -70,15 +112,20 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
               className="relative w-full max-w-[480px] aspect-square rounded-3xl overflow-hidden bg-gradient-to-b from-[#12151f] to-[#07090c] border border-white/15 p-4 shadow-[0_30px_80px_rgba(0,0,0,0.85)] group"
             >
               <ProductImage
-                variant="orange"
-                alt={`${BRAND_CONFIG.productName} - Orange Variant`}
+                key={selectedFlavorId}
+                variant={isOrange ? 'orange' : 'flavorless'}
+                alt={`${BRAND_CONFIG.productName} - ${isOrange ? 'Orange' : 'Unflavoured'} Variant`}
                 className="w-full h-full object-contain rounded-2xl group-hover:scale-105 transition-transform duration-700 p-2"
               />
 
               <div className="absolute top-6 left-6 bg-black/80 backdrop-blur-md border border-white/10 px-3.5 py-1.5 rounded-full text-xs font-label-pkg flex items-center gap-2">
                 <BrandLogo variant="symbol" size="xs" />
-                <span className="text-amber-400 font-semibold">
-                  ORANGE VARIANT
+                <span
+                  className={`font-semibold ${
+                    isOrange ? 'text-amber-400' : 'text-[#00d2ff]'
+                  }`}
+                >
+                  {isOrange ? 'ORANGE VARIANT' : 'UNFLAVOURED'}
                 </span>
               </div>
 
@@ -100,44 +147,100 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
                   MONOHYDRATE
                 </span>
               </h3>
-              <div className="text-xs font-micronized text-zinc-400 tracking-[0.2em] uppercase font-semibold">
-                MICRONIZED • 75 SERVINGS • {BRAND_CONFIG.priceDisplay} ({BRAND_CONFIG.shippingNote})
+
+              {/* Flavor Selector in Spec Column */}
+              <div className="pt-2">
+                <span className="text-xs font-label-pkg text-zinc-400 uppercase tracking-widest block mb-2 font-semibold">
+                  SELECT FLAVOR:
+                </span>
+                <div className="grid grid-cols-2 gap-3">
+                  {(['orange', 'flavorless'] as const).map((flavorKey) => {
+                    const isSelected = selectedFlavorId === flavorKey;
+                    const isItemOrange = flavorKey === 'orange';
+                    const displayName = isItemOrange ? 'Orange' : 'Unflavoured';
+
+                    return (
+                      <button
+                        key={flavorKey}
+                        id={`product-flavor-${flavorKey}`}
+                        type="button"
+                        onClick={() => onSelectFlavor(flavorKey)}
+                        className={`p-3 rounded-xl border font-athletic tracking-wider text-base transition-all cursor-pointer flex items-center justify-center gap-2.5 ${
+                          isSelected
+                            ? isItemOrange
+                              ? 'bg-[#ff7700] text-black border-[#ff7700] shadow-[0_0_18px_rgba(255,119,0,0.35)] font-bold'
+                              : 'bg-[#00d2ff] text-black border-[#00d2ff] shadow-[0_0_18px_rgba(0,210,255,0.35)] font-bold'
+                            : 'bg-black/50 text-zinc-300 border-white/15 hover:border-white/40'
+                        }`}
+                      >
+                        <span
+                          className={`w-2.5 h-2.5 rounded-full ${
+                            isItemOrange ? 'bg-[#ff7700]' : 'bg-[#00d2ff]'
+                          } ${isSelected ? 'ring-2 ring-black' : ''}`}
+                        />
+                        <span>{displayName.toUpperCase()}</span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
 
             <p className="font-body text-zinc-300 text-base leading-relaxed">
-              CoreFuel Creatine Monohydrate is micronized to an ultra-fine 200-mesh powder for rapid dispersion in liquid. Designed specifically to replenish cellular ATP stores during high-intensity training.
+              {currentVariant.description}
             </p>
 
             {/* Packaging and Formula Facts */}
             <div className="space-y-3 pt-2">
               <div className="p-3.5 rounded-xl bg-black/40 border border-white/10 flex items-start gap-3">
-                <div className="w-6 h-6 rounded bg-[#ff7700]/10 border border-[#ff7700]/30 flex items-center justify-center shrink-0 mt-0.5">
-                  <Check className="w-3.5 h-3.5 text-[#ff7700]" />
+                <div className={`w-6 h-6 rounded flex items-center justify-center shrink-0 mt-0.5 ${
+                  isOrange ? 'bg-[#ff7700]/10 border border-[#ff7700]/30' : 'bg-[#00d2ff]/10 border border-[#00d2ff]/30'
+                }`}>
+                  <Check className={`w-3.5 h-3.5 ${isOrange ? 'text-[#ff7700]' : 'text-[#00d2ff]'}`} />
                 </div>
                 <div>
-                  <span className="text-base font-athletic text-white tracking-wide block">75 Full Servings per Container</span>
-                  <span className="text-xs font-body text-zinc-400">Generous pack size giving you 75 days of consistent daily supplementation.</span>
+                  <span className="text-base font-athletic text-white tracking-wide block">
+                    75 Full Servings per Container
+                  </span>
+                  <span className="text-xs font-body text-zinc-400">
+                    Generous pack size giving you 75 days of consistent daily supplementation.
+                  </span>
                 </div>
               </div>
 
               <div className="p-3.5 rounded-xl bg-black/40 border border-white/10 flex items-start gap-3">
-                <div className="w-6 h-6 rounded bg-[#ff7700]/10 border border-[#ff7700]/30 flex items-center justify-center shrink-0 mt-0.5">
-                  <Flame className="w-3.5 h-3.5 text-[#ff7700]" />
+                <div className={`w-6 h-6 rounded flex items-center justify-center shrink-0 mt-0.5 ${
+                  isOrange ? 'bg-[#ff7700]/10 border border-[#ff7700]/30' : 'bg-[#00d2ff]/10 border border-[#00d2ff]/30'
+                }`}>
+                  <Flame className={`w-3.5 h-3.5 ${isOrange ? 'text-[#ff7700]' : 'text-[#00d2ff]'}`} />
                 </div>
                 <div>
-                  <span className="text-base font-athletic text-white tracking-wide block">900 mg L-Taurine Formulation</span>
-                  <span className="text-xs font-body text-zinc-400">The Orange variant includes 900 mg L-Taurine as shown directly on the product label claim.</span>
+                  <span className="text-base font-athletic text-white tracking-wide block">
+                    {isOrange ? '900 mg L-Taurine Formulation' : currentVariant.highlightText}
+                  </span>
+                  <span className="text-xs font-body text-zinc-400">
+                    {isOrange
+                      ? 'The Orange variant includes 900 mg L-Taurine as shown directly on the product label claim.'
+                      : 'Pure micronized creatine monohydrate with zero added flavorings, sweeteners, or fillers.'}
+                  </span>
                 </div>
               </div>
 
               <div className="p-3.5 rounded-xl bg-black/40 border border-white/10 flex items-start gap-3">
-                <div className="w-6 h-6 rounded bg-[#ff7700]/10 border border-[#ff7700]/30 flex items-center justify-center shrink-0 mt-0.5">
-                  <Sparkles className="w-3.5 h-3.5 text-[#ff7700]" />
+                <div className={`w-6 h-6 rounded flex items-center justify-center shrink-0 mt-0.5 ${
+                  isOrange ? 'bg-[#ff7700]/10 border border-[#ff7700]/30' : 'bg-[#00d2ff]/10 border border-[#00d2ff]/30'
+                }`}>
+                  <Sparkles className={`w-3.5 h-3.5 ${isOrange ? 'text-[#ff7700]' : 'text-[#00d2ff]'}`} />
                 </div>
                 <div>
-                  <span className="text-base font-athletic text-white tracking-wide block">Signature Orange Formula</span>
-                  <span className="text-xs font-body text-zinc-400">Crisp, refreshing citrus engineered to mix easily with cold water for pre- or post-workout.</span>
+                  <span className="text-base font-athletic text-white tracking-wide block">
+                    {isOrange ? 'Signature Orange Formula' : 'Unflavoured Pure Formula'}
+                  </span>
+                  <span className="text-xs font-body text-zinc-400">
+                    {isOrange
+                      ? 'Crisp, refreshing citrus engineered to mix easily with cold water for pre- or post-workout.'
+                      : currentVariant.bestFor}
+                  </span>
                 </div>
               </div>
             </div>
@@ -145,11 +248,18 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
             {/* Quick Order Button */}
             <div className="pt-3">
               <button
-                onClick={() => onOrderNow('orange')}
-                className="inline-flex items-center gap-2.5 bg-[#00d2ff] hover:bg-[#33dbff] text-black font-athletic text-xl tracking-wider py-3.5 px-7 rounded-xl transition-all shadow-[0_0_20px_rgba(0,210,255,0.35)] cursor-pointer active:scale-95"
+                id="product-order-cta-btn"
+                onClick={() => onOrderNow(selectedFlavorId)}
+                className={`inline-flex items-center gap-2.5 font-athletic text-xl tracking-wider py-3.5 px-7 rounded-xl transition-all cursor-pointer active:scale-95 ${
+                  isOrange
+                    ? 'bg-[#ff7700] hover:bg-[#ff8c26] text-black shadow-[0_0_20px_rgba(255,119,0,0.35)]'
+                    : 'bg-[#00d2ff] hover:bg-[#33dbff] text-black shadow-[0_0_20px_rgba(0,210,255,0.35)]'
+                }`}
               >
                 <Zap className="w-5 h-5 fill-black" />
-                <span>ORDER ORANGE NOW — {BRAND_CONFIG.priceDisplay}</span>
+                <span>
+                  {isOrange ? `ORDER NOW — ${currentVariant.formattedPrice}` : 'ORDER UNFLAVOURED NOW — ₹549/-'}
+                </span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -160,11 +270,34 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
         {/* Premium Information Grid as requested:
             MICRONIZED CREATINE
             75 SERVINGS
-            ORANGE FLAVOR
+            ORANGE / UNFLAVOURED FLAVOR
             DAILY TRAINING
         */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-          {PRODUCT_INFO_GRID.map((item, idx) => (
+          {[
+            {
+              kicker: 'MICRONIZED',
+              label: 'CREATINE',
+              subtext: 'Ultra-fine 200-mesh powder for easy mixing',
+            },
+            {
+              kicker: '75',
+              label: 'SERVINGS',
+              subtext: '75 full servings of daily training supply',
+            },
+            {
+              kicker: isOrange ? 'ORANGE' : 'UNFLAVOURED',
+              label: 'FLAVOR',
+              subtext: isOrange
+                ? 'Refreshing citrus formulated with 900 mg L-Taurine'
+                : 'Pure 200-mesh powder with zero added flavorings',
+            },
+            {
+              kicker: 'DAILY',
+              label: 'TRAINING',
+              subtext: 'Replenish cellular ATP stores consistently',
+            },
+          ].map((item, idx) => (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 20 }}

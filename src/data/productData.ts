@@ -13,8 +13,8 @@ import corefuelSymbolWhiteSvg from '../assets/images/corefuel_symbol_white.svg';
 
 export const PRODUCT_IMAGES = {
   // Permanent uploaded product photos for Orange & Unflavoured variants
-  orangeTub: orangeTubUploadedImg || '/images/corefuel_orange.jpeg',
-  flavorlessTub: flavorlessTubUploadedImg || '/images/corefuel_unflavoured.png',
+  orangeTub: '/images/corefuel_orange.jpeg',
+  flavorlessTub: '/images/corefuel_unflavoured.png',
   orangeTubDirectUrl: '/images/corefuel_orange.jpeg',
   flavorlessTubDirectUrl: '/images/corefuel_unflavoured.png',
   heroBannerDuo: heroBannerDuoImg || '/images/corefuel_hero_banner_1789060898239.jpg',
@@ -103,9 +103,9 @@ export const FLAVOR_VARIANTS: Record<'orange' | 'flavorless', FlavorVariant> = {
   },
   flavorless: {
     id: 'flavorless',
-    name: 'Flavorless',
+    name: 'Unflavoured',
     tagline: 'Simple and versatile for your preferred drink or shake.',
-    badge: 'UNFLAVORED',
+    badge: 'UNFLAVOURED',
     description: 'Pure micronized creatine monohydrate with zero added flavorings or sweeteners. Blends seamlessly into whey protein, smoothies, juice, or water.',
     image: PRODUCT_IMAGES.flavorlessTub,
     accentColor: '#00d2ff',
