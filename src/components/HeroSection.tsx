@@ -88,7 +88,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             >
               <BrandLogo variant="symbol" size="xs" />
               <span className="font-micronized text-xs uppercase text-zinc-200 font-semibold tracking-[0.25em]">
-                {BRAND_CONFIG.brandName} • 75 SERVINGS
+                {BRAND_CONFIG.brandName} • 25 SERVINGS
               </span>
             </motion.div>
 
@@ -137,7 +137,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 </span>
               </div>
               <span className="text-xs font-label-pkg text-zinc-400 tracking-wider hidden sm:inline">
-                • 75 SERVINGS
+                • 25 SERVINGS
               </span>
             </motion.div>
 
@@ -170,7 +170,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                       </span>
                     </div>
                     <p className="text-xs font-label-pkg text-zinc-400 mt-1">
-                      {isOrange ? 'Formulated with 900 mg L-Taurine • 75 Full Servings' : 'Pure 200-Mesh Micronized • 75 Full Servings'}
+                      {isOrange ? 'Formulated with 900 mg L-Taurine • 25 Full Servings' : 'Pure 200-Mesh Micronized • 25 Full Servings'}
                     </p>
                   </div>
                 </div>
@@ -272,7 +272,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 }`}
               >
                 {isOrange ? <Flame className="w-3.5 h-3.5 text-[#ff7700]" /> : <Sparkles className="w-3.5 h-3.5 text-[#00d2ff]" />}
-                <span>{isOrange ? 'ACTIVE FLAVOR • 75 SERVINGS' : 'UNFLAVOURED • 75 SERVINGS'}</span>
+                <span>{isOrange ? 'ACTIVE FLAVOR • 25 SERVINGS' : 'UNFLAVOURED • 25 SERVINGS'}</span>
               </div>
 
               {/* Product Visual Container with Crossfade & Luxury Transition */}

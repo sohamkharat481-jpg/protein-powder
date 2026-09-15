@@ -185,7 +185,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
       ? `\n\nDelivery Address:\n${address.fullName}\nPhone: ${address.phone}\n${address.street}, ${address.city} - ${address.pincode}`
       : '';
 
-    const message = `Hi CoreFuel, I am placing my member order for CoreFuel Creatine Monohydrate (Orange variant, 75 Servings @ ₹549/-).\nMember: ${currentUser?.name} (${currentUser?.email})\nPromo Applied: CORE5 (5% Member Discount)${addressDetails}`;
+    const message = `Hi CoreFuel, I am placing my member order for CoreFuel Creatine Monohydrate (Orange variant, 25 Servings @ ₹549/-).\nMember: ${currentUser?.name} (${currentUser?.email})\nPromo Applied: CORE5 (5% Member Discount)${addressDetails}`;
 
     window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(message)}`, '_blank');
   };
@@ -498,7 +498,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                   ORANGE FORMULA
                 </div>
                 <p className="text-zinc-400 text-xs leading-relaxed mb-3">
-                  Micronized 200 Mesh Grade with 900 mg Taurine. 75 full servings at ₹549/- ({BRAND_CONFIG.shippingNote}).
+                  Micronized 200 Mesh Grade with 900 mg Taurine. 25 full servings at ₹549/- ({BRAND_CONFIG.shippingNote}).
                 </p>
                 <div className="text-[11px] font-label-pkg text-emerald-400 flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5" />
@@ -533,7 +533,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                         Orange Formula
                       </div>
                       <div className="text-[11px] font-mono-code text-amber-300 mt-0.5">
-                        900mg Taurine • 75 Full Servings
+                        900mg Taurine • 25 Full Servings
                       </div>
                     </div>
                   </div>
@@ -587,7 +587,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                 </button>
 
                 <div className="mt-3 text-center text-[11px] text-zinc-400 font-label-pkg">
-                  Includes 75 Servings • Direct Owner Tracking
+                  Includes 25 Servings • Direct Owner Tracking
                 </div>
               </div>
 

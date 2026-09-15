@@ -206,7 +206,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/10">
               <BrandLogo variant="full" size="xs" showSubtitle />
               <span className="text-[10px] font-label-pkg text-[#ff7700] uppercase tracking-widest bg-white/5 px-2.5 py-1 rounded-md border border-white/10">
-                75 SERVINGS • ACTIVE ORANGE
+                25 SERVINGS • ACTIVE ORANGE
               </span>
             </div>
 

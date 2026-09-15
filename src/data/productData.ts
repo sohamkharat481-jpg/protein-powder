@@ -34,8 +34,8 @@ export const BRAND_CONFIG = {
   headline: 'POWER EVERY REP.',
   subheadline: 'Micronized Creatine Monohydrate built for your daily training.',
   brandTagline: 'Fuel your consistency.',
-  servings: '75 Servings',
-  servingCount: 75,
+  servings: '25 Servings',
+  servingCount: 25,
   
   // Exact Pricing as specified
   priceNumeric: 549,
@@ -75,7 +75,7 @@ export const BRAND_CONFIG = {
   
   generateWhatsAppLink: (flavorName: string = 'Orange', targetPhone: string = '9145478524') => {
     const cleanPhone = targetPhone.replace(/[^0-9]/g, '');
-    const text = `Hi CoreFuel, I want to order CoreFuel Creatine Monohydrate (${flavorName} variant, 75 Servings @ ₹549/-). Please confirm delivery.`;
+    const text = `Hi CoreFuel, I want to order CoreFuel Creatine Monohydrate (${flavorName} variant, 25 Servings @ ₹549/-). Please confirm delivery.`;
     return `https://wa.me/${cleanPhone}?text=${encodeURIComponent(text)}`;
   },
 };
@@ -90,8 +90,8 @@ export const FLAVOR_VARIANTS: Record<'orange' | 'flavorless', FlavorVariant> = {
     image: PRODUCT_IMAGES.orangeTub,
     accentColor: '#ff7700',
     themeClass: 'text-[#ff7700] border-[#ff7700]',
-    servings: '75 Servings',
-    servingCount: 75,
+    servings: '25 Servings',
+    servingCount: 25,
     highlightText: '900 mg L-Taurine',
     bestFor: 'Refreshing standalone drink with cold water or ice',
     mixGuidance: 'Mix 1 scoop with 250–300ml cold water.',
@@ -110,8 +110,8 @@ export const FLAVOR_VARIANTS: Record<'orange' | 'flavorless', FlavorVariant> = {
     image: PRODUCT_IMAGES.flavorlessTub,
     accentColor: '#00d2ff',
     themeClass: 'text-[#00d2ff] border-[#00d2ff]',
-    servings: '75 Servings',
-    servingCount: 75,
+    servings: '25 Servings',
+    servingCount: 25,
     highlightText: 'Pure Micronized 200-Mesh',
     bestFor: 'Versatile daily stacking with your protein shake or pre-workout',
     mixGuidance: 'Add 1 scoop to your protein shake, juice, or favorite beverage.',
@@ -130,9 +130,9 @@ export const PRODUCT_INFO_GRID = [
     subtext: 'Ultra-fine 200-mesh powder for easy mixing',
   },
   {
-    kicker: '75',
+    kicker: '25',
     label: 'SERVINGS',
-    subtext: '75 full servings of daily training supply',
+    subtext: '25 full servings of daily training supply',
   },
   {
     kicker: 'ORANGE',
@@ -202,7 +202,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   },
   {
     question: 'How many servings are included?',
-    answer: 'Every container of CoreFuel Creatine Monohydrate contains exactly 75 full servings, designed to support your daily training over consistent workout cycles.',
+    answer: 'Every container of CoreFuel Creatine Monohydrate contains exactly 25 full servings, designed to support your daily training over consistent workout cycles.',
   },
   {
     question: 'How should I mix CoreFuel Orange Creatine?',

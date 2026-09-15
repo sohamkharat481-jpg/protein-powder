@@ -56,7 +56,7 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
             YOUR DAILY CREATINE. <span className="text-[#00d2ff]">SIMPLIFIED.</span>
           </h2>
           <p className="font-body text-zinc-400 text-base sm:text-lg leading-relaxed">
-            A transparent, uncompromised formula engineered for lifters and athletes. No fillers, no exaggerated hype. Just 75 pure servings built for daily training.
+            A transparent, uncompromised formula engineered for lifters and athletes. No fillers, no exaggerated hype. Just 25 pure servings built for daily training.
           </p>
         </div>
 
@@ -130,7 +130,7 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
               </div>
 
               <div className="absolute bottom-6 right-6 bg-black/80 backdrop-blur-md border border-white/10 px-3.5 py-1 rounded-full text-xs font-label-pkg text-white tracking-wider">
-                75 SERVINGS • 200-MESH
+                25 SERVINGS • 200-MESH
               </div>
             </motion.div>
           </div>
@@ -200,10 +200,10 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
                 </div>
                 <div>
                   <span className="text-base font-athletic text-white tracking-wide block">
-                    75 Full Servings per Container
+                    25 Full Servings per Container
                   </span>
                   <span className="text-xs font-body text-zinc-400">
-                    Generous pack size giving you 75 days of consistent daily supplementation.
+                    Generous pack size giving you 25 days of consistent daily supplementation.
                   </span>
                 </div>
               </div>
@@ -269,7 +269,7 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
 
         {/* Premium Information Grid as requested:
             MICRONIZED CREATINE
-            75 SERVINGS
+            25 SERVINGS
             ORANGE / UNFLAVOURED FLAVOR
             DAILY TRAINING
         */}
@@ -281,9 +281,9 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
               subtext: 'Ultra-fine 200-mesh powder for easy mixing',
             },
             {
-              kicker: '75',
+              kicker: '25',
               label: 'SERVINGS',
-              subtext: '75 full servings of daily training supply',
+              subtext: '25 full servings of daily training supply',
             },
             {
               kicker: isOrange ? 'ORANGE' : 'UNFLAVOURED',
